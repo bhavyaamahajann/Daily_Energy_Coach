@@ -1,3 +1,8 @@
+# Figma Make Package Configuration
+
+This file preserves the package dependencies configuration template generated from the Figma prototype workspace.
+
+```json
 {
   "name": "@figma/my-make-file",
   "private": true,
@@ -87,3 +92,5 @@
     }
   }
 }
+```
+
