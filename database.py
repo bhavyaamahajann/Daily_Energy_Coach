@@ -41,10 +41,15 @@ class SomaticDB:
                     id TEXT PRIMARY KEY,
                     date TEXT NOT NULL UNIQUE,
                     sleep_duration_seconds INTEGER,
+                    resting_heart_rate INTEGER,
                     hrv_ms INTEGER,
                     battery_percentage INTEGER
                 )
             """)
+            try:
+                cursor.execute("SELECT resting_heart_rate FROM biometrics_log LIMIT 1")
+            except sqlite3.OperationalError:
+                cursor.execute("ALTER TABLE biometrics_log ADD COLUMN resting_heart_rate INTEGER")
             
             # Calendar cache table
             cursor.execute("""
