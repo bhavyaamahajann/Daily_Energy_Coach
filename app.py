@@ -70,13 +70,6 @@ if "telemetry_cache" not in st.session_state:
 def click_telemetry_event():
     st.session_state.telemetry_cache += 1
 
-# Active Sensor Caching System & flush
-col_t1, col_t2 = st.sidebar.columns(2)
-with col_t1:
-    st.button("🖱️ Mouse Log", on_click=click_telemetry_event, key="btn_mouse_telemetry", use_container_width=True)
-with col_t2:
-    st.button("⌨️ Key Log", on_click=click_telemetry_event, key="btn_key_telemetry", use_container_width=True)
-
 # Weekly Baseline survey modal setup
 if "survey_open" not in st.session_state:
     st.session_state.survey_open = False
