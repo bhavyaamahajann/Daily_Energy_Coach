@@ -1,0 +1,105 @@
+PRODUCT MANAGER ASSIGNMENT
+Design a Daily Energy Coach
+An open-ended product exercise
+Time expected 4 to 6 hours
+Submission A working prototype, plus a short written walkthrough. The prototype
+can be built in any tool you like (v0, Figma Make, Lovable, Bolt, Cursor,
+plain HTML, Replit, or anything else). It does not need to be production
+code. It does need to be clickable and demo-able.
+Discussion 60 minute walkthrough with the product team
+The Problem
+Most people working ‘knowledge jobs’ today are running on borrowed energy. They wake
+up tired, stack their hardest work into their worst hours, eat lunch at their desk, push
+through an afternoon crash with caffeine, and end the day too wired to sleep well, only to
+start the cycle again tomorrow.
+They have access to more data about themselves than any generation in history. Their
+phones know their step count, their watches know their heart rate, their calendars know
+their meeting load, their laptops know when they were typing and when they were idle. But
+none of this data tells them the one thing they actually want to know: what should I do
+today, right now, to feel better and do better work?
+Existing tools fail this person in predictable ways. Calendar apps schedule time but ignore
+biology. Wearables show charts but never tell you what to do. Wellness apps ask you to log
+everything manually, then quietly die when you stop. Productivity apps optimise tasks
+without knowing whether you have any energy left to do them.
+There is a real gap here. Someone needs to build a product that closes it.
+Your Assignment
+Design that product, then build a working prototype of it.
+You have full creative freedom. You decide what it is called, what it does, what it looks like,
+who it is for, and how it makes money. You decide what data it uses and how it gets that
+data. You decide what the user opens on day one, what keeps them coming back on day
+thirty, and what makes them tell a friend on day ninety.
+The end output we want to see is a clickable prototype we can actually open and move
+through, paired with a short written walkthrough explaining the choices behind it. The
+prototype can be built in any tool you are fluent in. Use AI builders, no-code tools, design
+tools, or write the code yourself. We do not care how it was made. We care that we can
+experience it.
+We are not looking for the right answer. There are many possible right answers. We are
+looking for the quality of your thinking, the choices you make, and the things you choose to
+leave out.
+What to Submit
+Two things: the prototype itself, and a short written walkthrough (no more than two pages)
+covering the five areas below. How you structure the walkthrough is up to you.
+1. The user and the moment
+Who is this product for? Be specific. Pick one real person you can describe in concrete
+detail, including what their Tuesday morning actually looks like and where in that morning
+your product enters their life. Tell us why they would care enough to install it, and what
+they are using today instead.
+2. The product itself
+What does the product actually do? Your prototype should show the core experience: what
+a user sees when they open it, the one moment that defines the product, and the loop that
+brings them back. The written walkthrough should call out the single interaction that
+matters most and explain why.
+Be explicit about three things: what data the product uses, how it gets that data, and what
+the user has to do versus what happens automatically. The line between active input and
+passive sensing is the most important design decision in this space. Tell us where you draw
+it and why.
+3. The hero metric
+Pick one number that this product centres itself around. One number the user sees every
+day and starts to care about over time. Something that summarises whether today is a
+good day or a bad day in this product's worldview.
+Tell us what the number is, how it is calculated at a conceptual level, why this number and
+not a different one, and what could go wrong if a user starts optimising for it in unhealthy
+ways.
+4. The retention problem
+Most products in this category lose more than 80 percent of users inside 90 days. The
+pattern is consistent across wellness apps, productivity tools, and habit trackers. People
+install them on a Sunday full of intent and stop opening them by the second Wednesday.
+Tell us why your product will not die that way. What is the specific reason a real human will
+still be opening it on day thirty when their initial motivation has worn off? Do not give us a
+list of features. Give us the one mechanism, behavioural or structural, that breaks the
+pattern.
+5. What you would build first
+If you were given one engineer and twelve weeks to ship a v1 of this product, what would
+you cut and what would you keep? What is the smallest version of this product that still
+proves the core idea is real? What would you measure in week thirteen to know whether to
+keep going or kill it?
+How We Will Evaluate Your Response
+Imagination Did you build something interesting, or did you describe a slightly
+better version of something that already exists? The brief is
+deliberately open. We want to see what you do with that space.
+Product instinct Do your decisions feel like they come from someone who has
+actually watched users abandon products and understands why?
+Can you predict how a real human will behave with what you have
+designed?
+Depth When we push on any one of your choices in the discussion, will
+there be a real reason underneath? Or will we hit air? We are looking
+for ideas you have actually thought through to the second and third
+level.
+Communication Can you explain a complicated product simply? Could a senior leader
+skim your submission in five minutes and walk away knowing exactly
+what you would build and why?
+Honesty Are you willing to name the parts of your idea that are weak, the
+assumptions you are making, and the things you would not build?
+We hire people who can disagree with themselves.
+A Few Notes
+• Use any tools you want, including AI builders, design tools, and code assistants. We
+assume you will. We are interested in how you use them, not whether.
+• The prototype does not need to be polished or fully functional. It needs to
+communicate the idea clearly enough that we can experience it. One well-executed
+flow beats five half-built screens.
+• Do not let the prototype eat all your time. The thinking matters more than the pixels.
+If your written walkthrough is weak, no amount of UI polish will save it.
+• If you think we are asking the wrong question, answer the question you think we
+should have asked instead. Be explicit about the swap.
+• If something is unclear, email us before you start. Asking nothing is not a virtue here.
+We look forward to reading what you make.

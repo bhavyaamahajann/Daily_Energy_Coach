@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ebb Tray Widget</title>
+  <style>
+    :root {
+      --bg-color: rgba(18, 18, 22, 0.85);
+      --card-bg: rgba(30, 30, 40, 0.45);
+      --border-color: rgba(255, 255, 255, 0.1);
+      --text-color: #f0f0f7;
+      --text-muted: #a0a0b0;
+      --accent-color: #a855f7; /* Purple */
+      --font-family: 'Outfit', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 16px;
+      font-family: var(--font-family);
+      background: var(--bg-color);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      color: var(--text-color);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: calc(100vh - 32px);
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+    }
+
+    .header {
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .battery-ring-container {
+      position: relative;
+      width: 140px;
+      height: 140px;
+      margin-bottom: 24px;
+    }
+
+    .battery-ring {
+      transform: rotate(-90deg);
+    }
+
+    .ring-bg {
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.05);
+      stroke-width: 10;
+    }
+
+    .ring-progress {
+      fill: none;
+      stroke: var(--accent-color);
+      stroke-width: 10;
+      stroke-linecap: round;
+      stroke-dasharray: 377; /* 2 * PI * 60 */
+      stroke-dashoffset: 377;
+      transition: stroke-dashoffset 1s ease;
+    }
+
+    .battery-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    .battery-percentage {
+      font-size: 28px;
+      font-weight: 700;
+    }
+
+    .battery-label {
+      font-size: 10px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 2px;
+    }
+
+    .recommendation-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 16px;
+      width: calc(100% - 32px);
+      text-align: center;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .recommendation-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent-color);
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .recommendation-text {
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 1.4;
+      margin-bottom: 4px;
+    }
+
+    .recommendation-desc {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="header">Ebb Energy Coach</div>
+
+  <div class="battery-ring-container">
+    <svg class="battery-ring" width="140" height="140">
+      <circle class="ring-bg" cx="70" cy="70" r="60"></circle>
+      <circle class="ring-progress" id="progress" cx="70" cy="70" r="60"></circle>
+    </svg>
+    <div class="battery-text">
+      <div class="battery-percentage" id="percentage">45%</div>
+      <div class="battery-label" id="label">Cortisol Red</div>
+    </div>
+  </div>
+
+  <div class="recommendation-card">
+    <div class="recommendation-title">What to do right now</div>
+    <div class="recommendation-text" id="action-title">Somatic Recovery Walk</div>
+    <div class="recommendation-desc" id="action-desc">Low energy detected. Replace standard workouts with somatic resets.</div>
+  </div>
+
+  <script>
+    function updateTrayUI(battery, stateLabel, nextAction, actionDesc) {
+      document.getElementById('percentage').innerText = battery + '%';
+      document.getElementById('label').innerText = stateLabel;
+      document.getElementById('action-title').innerText = nextAction;
+      document.getElementById('action-desc').innerText = actionDesc;
+
+      const circle = document.getElementById('progress');
+      const circumference = 2 * Math.PI * 60; // radius is 60
+      
+      const offset = circumference - (battery / 100) * circumference;
+      circle.style.strokeDashoffset = offset;
+
+      let color = '#a855f7'; // Purple
+      if (battery > 70) {
+        color = '#10b981'; // Green
+      } else if (battery > 40) {
+        color = '#f59e0b'; // Amber
+      } else {
+        color = '#ef4444'; // Red
+      }
+      circle.style.stroke = color;
+      
+      // Update recommendation title color to match status ring
+      document.querySelector('.recommendation-title').style.color = color;
+    }
+
+    // Initialize with default standard low energy state
+    updateTrayUI(45, 'Cortisol Red', 'Somatic Recovery Walk', 'Low energy detected. Step away and restore somatic balance.');
+  </script>
+</body>
+</html>

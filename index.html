@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ebb — The Somatic Energy Coach</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-theme">
+    <div class="app-container">
+        
+        <!-- Sidebar Navigation & Scenario Controller -->
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="logo-glow"></div>
+                <i class="fa-solid fa-wind brand-icon"></i>
+                <span class="brand-name">ebb</span>
+            </div>
+            
+            <!-- Simulation Hub Card -->
+            <div class="sim-card">
+                <h3><i class="fa-solid fa-sliders"></i> SIMULATION HUB</h3>
+                <p class="sim-instructions">Toggle biological states and times of day to watch Ebb automatically adjust the calendar and recommendations.</p>
+                
+                <div class="sim-section">
+                    <label class="section-label">Biological State (Anya)</label>
+                    <div class="toggle-group">
+                        <button id="btn-high-energy" class="btn-toggle active" onclick="setScenario('high')">
+                            <i class="fa-solid fa-battery-full"></i>
+                            <span>Stable Recovery (HRV 78)</span>
+                        </button>
+                        <button id="btn-low-energy" class="btn-toggle" onclick="setScenario('low')">
+                            <i class="fa-solid fa-battery-quarter warning-glow"></i>
+                            <span>Cortisol Red-line (HRV 24)</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="sim-section">
+                    <label class="section-label">Time of Day Simulator</label>
+                    <div class="time-switches">
+                        <button id="time-morning" class="btn-time active" onclick="setTimeOfDay('morning')">
+                            <i class="fa-regular fa-sun"></i> 9:30 AM
+                        </button>
+                        <button id="time-afternoon" class="btn-time" onclick="setTimeOfDay('afternoon')">
+                            <i class="fa-solid fa-cloud-sun"></i> 2:00 PM
+                        </button>
+                        <button id="time-evening" class="btn-time" onclick="setTimeOfDay('evening')">
+                            <i class="fa-regular fa-moon"></i> 8:00 PM
+                        </button>
+                    </div>
+                </div>
+
+                <div class="sim-section">
+                    <label class="section-label">Override Switch</label>
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="override-toggle" onchange="toggleOverride(this)">
+                        <label for="override-toggle">
+                            <span>Force "Push Through"</span>
+                            <span class="subtext">Ignores somatic DND recommendations</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Passive Sensors Card -->
+            <div class="integrations-card">
+                <h3><i class="fa-solid fa-circle-nodes"></i> PASSIVE SENSORS</h3>
+                <ul class="sensor-list">
+                    <li class="sensor-item active">
+                        <div class="sensor-info">
+                            <i class="fa-solid fa-cloud sensor-icon"></i>
+                            <span>Oura Cloud Ingress</span>
+                        </div>
+                        <span class="status-badge">Connected</span>
+                    </li>
+                    <li class="sensor-item active">
+                        <div class="sensor-info">
+                            <i class="fa-solid fa-calendar-days sensor-icon"></i>
+                            <span>Google Calendar</span>
+                        </div>
+                        <span class="status-badge">Connected</span>
+                    </li>
+                    <li class="sensor-item active">
+                        <div class="sensor-info">
+                            <i class="fa-solid fa-keyboard sensor-icon"></i>
+                            <span>Desktop Telemetry</span>
+                        </div>
+                        <span class="status-badge">Active</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-footer">
+                <span class="tagline">Work with biology, not calendars.</span>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            
+            <!-- Global Header -->
+            <header class="header">
+                <div class="tab-navigation">
+                    <button id="tab-dashboard" class="tab-btn active" onclick="switchTab('dashboard')">
+                        <i class="fa-solid fa-chart-line"></i> Interactive Dashboard
+                    </button>
+                    <button id="tab-walkthrough" class="tab-btn" onclick="switchTab('walkthrough')">
+                        <i class="fa-solid fa-file-invoice"></i> Written Walkthrough
+                    </button>
+                </div>
+                
+                <div class="user-profile">
+                    <div class="persona-badge">
+                        <span class="persona-name">Anya</span>
+                        <span class="persona-role">Staff AI Engineer (San Francisco)</span>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=100&h=100" alt="Anya Profile" class="avatar">
+                </div>
+            </header>
+
+            <!-- Dashboard Tab -->
+            <section id="content-dashboard" class="tab-content active">
+                
+                <!-- Metrics Bar -->
+                <div class="metrics-row">
+                    <div class="metric-box">
+                        <div class="metric-header">
+                            <span class="metric-title">Somatic Stress Load</span>
+                            <i class="fa-solid fa-face-grimace"></i>
+                        </div>
+                        <div class="metric-value-container">
+                            <span id="metric-alertness" class="metric-value">Elevated</span>
+                            <span id="metric-alertness-desc" class="metric-sub">Skin flaring active</span>
+                        </div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-header">
+                            <span class="metric-title">Biometric Recovery</span>
+                            <i class="fa-solid fa-heart-pulse"></i>
+                        </div>
+                        <div class="metric-value-container">
+                            <span id="metric-hrv" class="metric-value">24 <span class="unit">ms</span></span>
+                            <span id="metric-sleep" class="metric-sub">Temp: +0.4°C (Sleep Debt)</span>
+                        </div>
+                    </div>
+                    <div class="metric-box hero-metric-box">
+                        <div class="metric-header">
+                            <span class="metric-title">Cognitive Alignment (CAS)</span>
+                            <i class="fa-solid fa-bullseye"></i>
+                        </div>
+                        <div class="metric-value-container">
+                            <span id="metric-cas" class="metric-value alignment-glowing">95%</span>
+                            <span id="metric-cas-desc" class="metric-sub">Perfect scheduling match</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Grid Layout -->
+                <div class="dashboard-grid">
+                    
+                    <!-- LEFT COLUMN: Biological Focus Coach -->
+                    <div class="grid-card coach-card">
+                        <div class="card-header">
+                            <h2>SOMATIC GOVERNOR</h2>
+                            <span class="badge" id="recom-time-indicator">9:30 AM</span>
+                        </div>
+                        
+                        <div class="coach-body">
+                            <!-- Battery Ring -->
+                            <div class="battery-outer">
+                                <div class="battery-progress-svg">
+                                    <svg width="220" height="220" viewBox="0 0 220 220">
+                                        <circle cx="110" cy="110" r="95" class="bg-ring" />
+                                        <circle cx="110" cy="110" r="95" class="progress-ring" id="battery-indicator" />
+                                    </svg>
+                                    <div class="battery-text">
+                                        <span id="battery-value" class="value">85%</span>
+                                        <span id="battery-status" class="label">High Alertness</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Recommendation Card -->
+                            <div id="recom-card" class="recom-card-container focus-theme">
+                                <div class="recom-header">
+                                    <i id="recom-icon" class="fa-solid fa-bolt"></i>
+                                    <span id="recom-type">PEAK FOCUS</span>
+                                </div>
+                                <h3 id="recom-title">Deep Work: Security Specification</h3>
+                                <p id="recom-description">Your morning cognitive capacity is stable. Focus on independent PRD drafting. The automatic calendar protection is currently active.</p>
+                                
+                                <div class="recom-action-area">
+                                    <button class="btn-primary" id="recom-action-btn" onclick="triggerAction()">
+                                        <i class="fa-solid fa-play"></i> Start 45m Block
+                                    </button>
+                                    <span id="recom-action-helper">Protected Focus Block</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT COLUMN: Interactive Calendar & Timeline -->
+                    <div class="grid-card timeline-card">
+                        <div class="card-header">
+                            <h2>DYNAMIC CALENDAR SHIFTER</h2>
+                            <div class="legend">
+                                <span class="legend-item"><span class="color-dot focus"></span> Focus (Alone)</span>
+                                <span class="legend-item"><span class="color-dot meeting"></span> Meetings (Locked)</span>
+                                <span class="legend-item"><span class="color-dot recovery"></span> Recovery</span>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-body">
+                            <!-- Live Indicator -->
+                            <div id="timeline-time-indicator" class="time-marker">
+                                <span class="time-tag">9:30 AM</span>
+                                <div class="marker-line"></div>
+                            </div>
+
+                            <!-- Energy Curve Chart Canvas Container -->
+                            <div class="energy-chart-container">
+                                <div class="energy-y-axis">
+                                    <span>High</span>
+                                    <span>Mid</span>
+                                    <span>Low</span>
+                                </div>
+                                <div class="canvas-wrapper">
+                                    <canvas id="energy-chart-canvas"></canvas>
+                                </div>
+                            </div>
+
+                            <!-- Calendar Columns (Timeline Blocks) -->
+                            <div class="calendar-list" id="calendar-list">
+                                <!-- Calendar Items will be inserted here dynamically by JS -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Strategic Callouts / PM Highlights -->
+                <div class="pm-insights-bar">
+                    <div class="insight-badge"><i class="fa-solid fa-lightbulb"></i> PM INSIGHT</div>
+                    <p id="pm-insight-text">Anya has stable biometrics today. Ebb schedules a standard morning creative focus block and keeps the scheduled team meeting at 10:00 AM because alertness is high.</p>
+                </div>
+
+            </section>
+
+            <!-- Walkthrough Tab -->
+            <section id="content-walkthrough" class="tab-content">
+                <div class="walkthrough-container">
+                    <div class="walkthrough-header">
+                        <h1>Product Strategy & Walkthrough</h1>
+                        <p class="subtitle">Ebb: Restructuring corporate calendars around physical & aesthetic stress indicators</p>
+                    </div>
+
+                    <div class="walkthrough-grid">
+                        
+                        <!-- 1. The User & The Moment -->
+                        <div class="walkthrough-card">
+                            <div class="number-bubble">1</div>
+                            <h2>The User & The Moment</h2>
+                            <div class="card-content">
+                                <h3>Target Persona: Anya (29)</h3>
+                                <p>Anya is a Staff AI Engineer at a high-growth San Francisco scale-up. She is highly ambitious and treats her physical body like a high-performance machine to be bio-hacked and optimized. Her raw pain point is that the **sheer cognitive overhead of trying to have it all is the root cause of her biological breakdown**—specifically stress-induced hair loss (telogen effluvium) and cortisol-driven adult cystic acne.</p>
+                                
+                                <div class="comparison-block">
+                                    <h4>A Typical Tuesday Morning without Ebb</h4>
+                                    <ul>
+                                        <li><strong>7:30 AM</strong>: Wakes up physically exhausted (HRV 24ms). Finds a clump of hair on her pillow, checks forehead cystic breakout, and begins to spiral.</li>
+                                        <li><strong>8:15 AM</strong>: Forces herself onto Peloton to "stay active," but feels lightheaded and stops. Grabs espresso to force alertness, spiking cortisol.</li>
+                                        <li><strong>8:45 AM</strong>: Calendar has Daily Scrum, Architecture Review (20 people, locked), and Security Spec Drafting.</li>
+                                        <li><strong>2:00 PM</strong>: Slump hits. She tries to write the security spec on 15% battery but gets distracted. Feels guilty and "unprofessional."</li>
+                                        <li><strong>10:00 PM</strong>: Apple Watch buzzes to "finish her stand goal," and she vents to ChatGPT.</li>
+                                    </ul>
+                                </div>
+
+                                <div class="ebb-impact-block">
+                                    <h4>Where Ebb Enters Anya's Life</h4>
+                                    <p>At 8:30 AM, after detecting poor wearable recovery, Ebb auto-adjusts her calendar. It leaves heavy multiplayer meetings (scrum standup, review) locked in place as they cannot be rescheduled easily, but slides her alone spec writing block earlier to capture her peak, deletes her intense Peloton session, and inserts a 30-minute recovery buffer right after the architecture review to let her nervous system recover.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 2. The Product Itself -->
+                        <div class="walkthrough-card">
+                            <div class="number-bubble">2</div>
+                            <h2>The Product Itself</h2>
+                            <div class="card-content">
+                                <h3>Core Value: Passive Sensing & Zero-Log Ledger</h3>
+                                <p>Ebb operates on **90% passive sensing and 10% active input** (morning voice slider). It recognizes that manual logging is the first thing that dies when a user is exhausted. She speaks naturally for 20 seconds to her Luna Ring, and an LLM structures and updates all 8 dimensions of her life ledger.</p>
+                                
+                                <div class="table-container">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Data Type</th>
+                                                <th>How We Get It</th>
+                                                <th>Active/Passive</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Sleep & HRV</td>
+                                                <td>Wearables (Oura Ingestion)</td>
+                                                <td><span class="tag passive">Passive</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Calendar Metadata</td>
+                                                <td>Google Calendar / Outlook Sync</td>
+                                                <td><span class="tag passive">Passive</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Telemetry</td>
+                                                <td>Desktop client keyboard/idle sensor</td>
+                                                <td><span class="tag passive">Passive</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Subjective Health</td>
+                                                <td>3-second morning voice check-in</td>
+                                                <td><span class="tag active">Active</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <h3>The Key Interaction: Multi-Person Locked Calendar Shifter</h3>
+                                <p>Ebb respects corporate scheduling constraints. Unilateral calendar moves only apply to **alone working hours** (writing specs, admin triage). Multiplayer meetings are locked in place to avoid team conflicts, and Ebb instead injects **Active Recovery buffers** immediately after these intense sessions to let her recharge.</p>
+                            </div>
+                        </div>
+
+                        <!-- 3. The Hero Metric -->
+                        <div class="walkthrough-card">
+                            <div class="number-bubble">3</div>
+                            <h2>The Hero Metric</h2>
+                            <div class="card-content">
+                                <h3>Cognitive Alignment Score (CAS)</h3>
+                                <p>CAS measures how successfully Anya aligns the complexity of her tasks with her biological capacity, rewarding her for resting when depleted.</p>
+                                
+                                <div class="formula-box">
+                                    <div class="formula">
+                                        $$\text{CAS} = \frac{\text{Time in Focus (Peak State) + Time in Recovery/Admin (Slump State)}}{\text{Total Working Hours}} \times 100$$
+                                    </div>
+                                </div>
+
+                                <div class="key-callout">
+                                    <h4>Why CAS Matters</h4>
+                                    <p>Traditional tools measure volume (hours worked). CAS measures decision quality in the context of biology. Anya can earn a 100% CAS on a low-energy day if she reschedules alone deep-work blocks, attends locked meetings, and takes recovery walks during her slumps.</p>
+                                </div>
+
+                                <div class="warning-callout">
+                                    <h4>Unhealthy Gamification & Mitigation</h4>
+                                    <p><strong>The Risk:</strong> Anya might avoid challenging tasks on low-energy days or decline critical group meetings to keep her CAS perfect.</p>
+                                    <p><strong>The Fix:</strong> Locked team reviews are excluded from CAS penalties, and Ebb caps focus-time scores to reward consistent effort.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 4. The Retention Problem -->
+                        <div class="walkthrough-card">
+                            <div class="number-bubble">4</div>
+                            <h2>The Retention Problem</h2>
+                            <div class="card-content">
+                                <h3>Breaking the 90-Day Churn Cliff</h3>
+                                <p>Most wellness apps lose 80% of users by Day 90. Ebb survives because it operates as a **structural workflow utility, not a tracking habit**.</p>
+                                
+                                <div class="mechanism-block">
+                                    <i class="fa-solid fa-lock mechanism-icon"></i>
+                                    <div class="mechanism-text">
+                                        <h4>Workflow Integration vs. Manual Habits</h4>
+                                        <p>Ebb integrates directly with Google Calendar. When Anya wakes up with a cortisol crash, Ebb automatically reschedules her alone blocks and creates recovery slots. She doesn't need to open Ebb to get value. Removing Ebb means losing her calendar assistant and taking back the cognitive load of scheduling, which creates immediate friction.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 5. What We Would Build First -->
+                        <div class="walkthrough-card full-width">
+                            <div class="number-bubble">5</div>
+                            <h2>What We Would Build First (v1 MVP)</h2>
+                            <div class="card-content v1-grid">
+                                <div>
+                                    <h3>12-Week Roadmap Scope</h3>
+                                    <p>To prove the concept with 1 engineer and 12 weeks, we build the core schedule blocker widget.</p>
+                                    <ul>
+                                        <li><strong>Keep:</strong> A macOS/Windows menu bar app that integrates with Google Calendar and prompts a 3-question morning slider (Sleep quality, Fatigue, HRV mock). It blocks out 90 minutes of "Protected Focus" automatically based on morning inputs.</li>
+                                        <li><strong>Cut:</strong> Live Apple Watch API, keystroke activity tracker, team-wide scheduling sync dashboard, and user analytics.</li>
+                                    </ul>
+                                </div>
+                                <div class="mvp-validation-box">
+                                    <h4>Week 13 Success Metric</h4>
+                                    <div class="large-metric">Focus Block Adherence</div>
+                                    <p>The percentage of Ebb-created calendar blocks and recovery buffers that users keep (do not delete or schedule over) over a 4-week trial.</p>
+                                    <div class="target-badge">Target: >70% Adherence</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Core App Logic -->
+    <script src="app.js"></script>
+</body>
+</html>
