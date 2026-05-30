@@ -5,6 +5,7 @@ import json
 import sqlite3
 from database import SomaticDB
 import scheduler
+import textwrap
 
 # Initialize database
 db = SomaticDB()
@@ -457,7 +458,7 @@ if st.sidebar.button("📝 Weekly Baseline Survey", key="btn_survey_trigger", us
 # ---------------------------------------------------------
 # Layout Rendering - Header
 # ---------------------------------------------------------
-st.markdown(f"""
+st.markdown(textwrap.dedent(f"""
     <div class="header-bar">
         <div style="display: flex; gap: 16px; align-items: center;">
             <div style="background: linear-gradient(135deg, #00f2fe 0%, #a855f7 100%); padding: 8px 16px; border-radius: 8px; font-weight: 700; color: #07090e; font-family: Outfit; font-size: 0.9rem; display: flex; align-items: center; gap: 6px; box-shadow: 0 4px 10px rgba(0,242,254,0.15);">
@@ -478,7 +479,7 @@ st.markdown(f"""
             <div style="color: #9ca3af; font-size: 1.2rem; cursor: pointer;"><i class="fa-solid fa-sun"></i></div>
         </div>
     </div>
-""", unsafe_allow_html=True)
+"""), unsafe_allow_html=True)
 
 # Survey Modal logic
 if st.session_state.survey_open:
@@ -537,7 +538,7 @@ with col1:
         </div>
     </div>
     """
-    st.markdown(card1_html, unsafe_allow_html=True)
+    st.markdown(textwrap.dedent(card1_html), unsafe_allow_html=True)
 
 # 2. Battery Ring Card
 with col2:
@@ -564,7 +565,7 @@ with col2:
         </div>
     </div>
     """
-    st.markdown(card2_html, unsafe_allow_html=True)
+    st.markdown(textwrap.dedent(card2_html), unsafe_allow_html=True)
 
 # 3. Circadian Curves Card
 with col3:
@@ -601,7 +602,7 @@ with col3:
         </div>
     </div>
     """
-    st.markdown(card3_html, unsafe_allow_html=True)
+    st.markdown(textwrap.dedent(card3_html), unsafe_allow_html=True)
 
 # ---------------------------------------------------------
 # Dynamic Adaptive Coach Recommendations
@@ -618,7 +619,7 @@ recom_html = f"""
     <p style="margin-bottom: 10px; font-size: 0.9rem; color: #9ca3af; line-height: 1.5; font-family: Inter;">{recom_desc}</p>
 </div>
 """
-st.markdown(recom_html, unsafe_allow_html=True)
+st.markdown(textwrap.dedent(recom_html), unsafe_allow_html=True)
 
 # Confirmation Action buttons
 is_low_state = state in ["compressed", "redline"]
@@ -694,18 +695,12 @@ with st.container(border=True):
     elif time_of_day == "Evening":
         highlighted_time = "5:00"
         
-    time_markers_html = f"""
-    <div style="display: flex; gap: 8px; margin-bottom: 20px; overflow-x: auto; padding-bottom: 8px; font-family: Inter;">
-    """
+    time_markers_html = '<div style="display: flex; gap: 8px; margin-bottom: 20px; overflow-x: auto; padding-bottom: 8px; font-family: Inter;">'
     for t in ["9:00", "10:00", "11:00", "12:00", "1:00", "2:00", "3:00", "4:00", "5:00"]:
         if t == highlighted_time:
-            time_markers_html += f"""
-            <div style="background: {theme_gradient}; border: 1px solid {theme_color}; padding: 6px 16px; border-radius: 8px; font-size: 0.75rem; color: #07090e; font-weight: 700; box-shadow: 0 0 10px {theme_color}55;">{t}</div>
-            """
+            time_markers_html += f'<div style="background: {theme_gradient}; border: 1px solid {theme_color}; padding: 6px 16px; border-radius: 8px; font-size: 0.75rem; color: #07090e; font-weight: 700; box-shadow: 0 0 10px {theme_color}55;">{t}</div>'
         else:
-            time_markers_html += f"""
-            <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); padding: 6px 16px; border-radius: 8px; font-size: 0.75rem; color: #9ca3af; font-weight: 500;">{t}</div>
-            """
+            time_markers_html += f'<div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); padding: 6px 16px; border-radius: 8px; font-size: 0.75rem; color: #9ca3af; font-weight: 500;">{t}</div>'
     time_markers_html += "</div>"
     st.markdown(time_markers_html, unsafe_allow_html=True)
 
@@ -773,7 +768,7 @@ with st.container(border=True):
             badge_text = "#00f2fe"
             status_label = "PROTECTED"
 
-        st.markdown(f"""
+        st.markdown(textwrap.dedent(f"""
             <div class="gcal-timeline-item" style="border-left: 4px {border_style} {border_color}; background: {item_bg} !important; display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-radius: 10px; margin-bottom: 10px; border-top: 1px solid rgba(255,255,255,0.02); border-right: 1px solid rgba(255,255,255,0.02); border-bottom: 1px solid rgba(255,255,255,0.02); font-family: Inter;">
                 <div>
                     <strong style="color: #ffffff; font-size: 0.95rem;">{title}</strong><br/>
@@ -781,4 +776,4 @@ with st.container(border=True):
                 </div>
                 <span class="badge-status" style="background: {badge_bg}; color: {badge_text}; border: 1px solid {border_color}33; font-weight: 600; font-family: Inter;">{status_label}</span>
             </div>
-        """, unsafe_allow_html=True)
+        """), unsafe_allow_html=True)
