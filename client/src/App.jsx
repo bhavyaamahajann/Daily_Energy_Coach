@@ -991,26 +991,6 @@ export default function App() {
               <span>CAS Score</span> <strong>55%</strong> <i className="fa-solid fa-arrow-trend-down"></i>
             </div>
 
-            {/* Draft Card */}
-            <div className="draft-card" style={{ borderLeft: '4px solid #F59E0B' }}>
-              <div style={{ fontFamily: 'DM Serif Display, Georgia, serif', fontSize: '1.15rem', color: '#1C1917', fontWeight: 700 }}>Alert drafted for #product</div>
-              
-              <textarea 
-                ref={overriddenDraftRef}
-                className="draft-quote" 
-                rows="4" 
-                value={overriddenDraft}
-                onChange={(e) => setOverriddenDraft(e.target.value)}
-              />
-              
-              <button className="btn-green-link" style={{ padding: '0.8rem', fontSize: '0.88rem', background: '#D4443F' }} onClick={() => alert('Alert broadcasted to team!')}>
-                <i className="fa-solid fa-tower-broadcast"></i> Broadcast Alert
-              </button>
-              <button className="draft-btn-outline" style={{ color: '#D4443F' }} onClick={() => overriddenDraftRef.current?.focus()}>
-                <i className="fa-regular fa-edit"></i> Edit Alert
-              </button>
-            </div>
-
             {/* Flow Card */}
             <div className="flow-card">
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', marginBottom: '0.75rem' }}>

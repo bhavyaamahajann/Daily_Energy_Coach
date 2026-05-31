@@ -494,20 +494,6 @@ html, body { height:100%; width:100%; background:#F4F4F6; font-family:'Inter',sa
                 <span>CAS Score</span> <strong>55%</strong> <i class="fa-solid fa-arrow-trend-down"></i>
             </div>
 
-            <!-- Draft Card -->
-            <div class="draft-card" style="border-left: 4px solid #F59E0B;">
-                <div style="font-family:'DM Serif Display',Georgia,serif; font-size:1.15rem; color:#1C1917; font-weight:700;">Alert drafted for #product</div>
-                
-                <textarea id="overridden-draft-text" class="draft-quote" rows="4">"Hey team, just an update: I am operating at 31% energy today. I'm pushing through to complete the spec drafting at 2 PM, but responses will be delayed."</textarea>
-                
-                <button class="btn-green-link" style="padding:0.8rem; font-size:0.88rem; background:#D4443F;" onclick="alert('Alert broadcasted to team!')">
-                    <i class="fa-solid fa-tower-broadcast"></i> Broadcast Alert
-                </button>
-                <button class="draft-btn-outline" style="color:#D4443F;" onclick="focusDraftText('overridden-draft-text')">
-                    <i class="fa-regular fa-edit"></i> Edit Alert
-                </button>
-            </div>
-
             <!-- Flow Card -->
             <div class="flow-card">
                 <div style="display:flex; justify-content:space-between; align-items:center; width:100%; margin-bottom:0.75rem;">
