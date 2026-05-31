@@ -599,6 +599,18 @@ html, body { height:100%; width:100%; background:#F4F4F6; font-family:'Inter',sa
                 </div>
             </div>
 
+            <!-- Energy-Matched Completion Rate Card -->
+            <div class="report-card" style="margin-bottom:1.5rem; background:#EDF4EE; border:1px solid #DCEFE0; padding:1.25rem;">
+                <div style="font-size:0.82rem; color:#366A4E; margin-bottom:0.25rem; font-weight:700; text-transform:uppercase; letter-spacing:0.03em;">Energy-Matched Completion</div>
+                <div style="display:flex; align-items:baseline; gap:0.5rem; margin-bottom:0.4rem;">
+                    <span style="font-family:'DM Serif Display',Georgia,serif; font-size:2rem; color:#366A4E; font-weight:700;">84%</span>
+                    <span style="font-size:0.75rem; color:#366A4E; font-weight:700; background:#FFFFFF; padding:0.25rem 0.65rem; border-radius:1rem; border:1px solid rgba(54, 106, 78, 0.15);">Optimal</span>
+                </div>
+                <div style="font-size:0.82rem; line-height:1.45; color:#2E553F;">
+                    <strong>You balanced work and body.</strong> You completed your hardest, high-cognitive tasks during your peak somatic flow windows.
+                </div>
+            </div>
+
             <!-- Approvals & Overrides row -->
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.85rem; margin-bottom:1.5rem;">
                 <div class="report-subcard" style="background:#DCEFE0;">

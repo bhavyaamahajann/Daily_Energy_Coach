@@ -1057,11 +1057,11 @@ export default function App() {
               <i className="fa-solid fa-arrow-left"></i>
             </button>
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.75rem', fontWeight: 700, color: '#8C7853', letterSpacing: '0.05em', transform: 'uppercase', marginBottom: '0.5rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.75rem', fontWeight: 700, color: '#8C7853', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
               <i className="fa-regular fa-calendar"></i> MAY REVIEW
             </div>
 
-            <h1 className="title-serif" style={{ fontSize: '2.2rem', color: '#366A4E', lineHeight: 1.2, marginBottom: '1.5rem', textAlign: 'left' }}>You found your rhythm this month.</h1>
+            <h1 class="title-serif" style={{ fontSize: '2.2rem', color: '#366A4E', lineHeight: 1.2, marginBottom: '1.5rem', textAlign: 'left' }}>You found your rhythm this month.</h1>
 
             {/* Score Graph Card */}
             <div className="report-card" style={{ marginBottom: '1.5rem' }}>
@@ -1076,7 +1076,7 @@ export default function App() {
                 <svg viewBox="0 0 300 100" style={{ width: '100%', height: '100%' }}>
                   <line x1="0" y1="20" x2="300" y2="20" stroke="#F5F1E9" strokeDasharray="4" />
                   <line x1="0" y1="50" x2="300" y2="50" stroke="#F5F1E9" strokeDasharray="4" />
-                  <line x1="0" y1="80" x2="300" y2="80" stroke="#F5F1E9" stroke-dasharray="4" />
+                  <line x1="0" y1="80" x2="300" y2="80" stroke="#F5F1E9" strokeDasharray="4" />
                   
                   <defs>
                     <linearGradient id="grad" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -1099,6 +1099,18 @@ export default function App() {
                 <span>May 1</span>
                 <span>May 15</span>
                 <span>May 31</span>
+              </div>
+            </div>
+
+            {/* Energy-Matched Completion Rate Card */}
+            <div className="report-card" style={{ marginBottom: '1.5rem', background: '#EDF4EE', border: '1px solid #DCEFE0', padding: '1.25rem' }}>
+              <div style={{ fontSize: '0.82rem', color: '#366A4E', marginBottom: '0.25rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.03em' }}>Energy-Matched Completion</div>
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem', marginBottom: '0.4rem' }}>
+                <span style={{ fontFamily: 'DM Serif Display, Georgia, serif', fontSize: '2rem', color: '#366A4E', fontWeight: 700 }}>84%</span>
+                <span style={{ fontSize: '0.75rem', color: '#366A4E', fontWeight: 700, background: '#FFFFFF', padding: '0.25rem 0.65rem', borderRadius: '1rem', border: '1px solid rgba(54, 106, 78, 0.15)' }}>Optimal</span>
+              </div>
+              <div style={{ fontSize: '0.82rem', lineStyle: 'normal', lineHeight: '1.45', color: '#2E553F', textAlign: 'left' }}>
+                <strong>You balanced work and body.</strong> You completed your hardest, high-cognitive tasks during your peak somatic flow windows.
               </div>
             </div>
 
