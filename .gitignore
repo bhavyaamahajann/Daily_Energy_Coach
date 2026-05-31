@@ -13,6 +13,14 @@ client/.DS_Store
 .system_generated/
 scratch/
 
+# Environment secrets
+.env
+
+# Python artifacts
+__pycache__/
+*.pyc
+*.pyo
+
 # Build files
 dist/
 client/dist/
