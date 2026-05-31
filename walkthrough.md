@@ -266,5 +266,14 @@ We rebuilt the Ebb React client interface in [App.jsx](file:///Users/apple/Deskt
 *   **GCAL Local SQL Cache Layout**: Implemented the vertical list of GCal events with colored timeline borders (Protected, Locked, Recovery Buffer, Shifted, Recovery Activity) and a custom flex time markers bar.
 *   **Bespoke Written Walkthrough Reader**: Configured the navigation tabs to seamlessly toggle between the Interactive Dashboard viewport and the product strategy document, including clean, formatted fraction box layouts.
 
+---
+
+## 14. Production HTML/SVG Markdown Parser Fix
+
+We resolved a rendering bug in the Streamlit production dashboard that caused SVG tags (in the Battery and Circadian Waves charts) to display as raw text on the UI:
+*   **The Cause**: In Streamlit's markdown parser, inline HTML/SVG elements (such as `<linearGradient>` stops or `<circle>` elements) can be broken if there are blank lines (`\n\n`) within the string passed to `st.markdown(..., unsafe_allow_html=True)`. The parser treats a blank line as the termination of the HTML block and tries to parse subsequent tags as raw markdown text.
+*   **The Fix**: Updated the custom `st_html` wrapper in `app.py` to strip out all empty/blank lines from the HTML strings before passing them to the rendering engine. This guarantees a single continuous HTML block, ensuring the entire component renders natively in the DOM.
+
+
 
 
