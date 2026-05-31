@@ -8,6 +8,8 @@ const state = {
     timeOfDay: 'morning', // 'morning' (9:30 AM), 'afternoon' (2:00 PM), 'evening' (8:00 PM)
     overrideActive: false, // User forces "push through" ignoring recommendations
     activeTab: 'dashboard', // 'dashboard' vs 'walkthrough'
+    activeView: 'onboarding', // 'onboarding' vs 'dashboard'
+    activeStep: 1,
     timerRunning: false,
     timerSeconds: 45 * 60 // 45 minutes
 };
@@ -15,21 +17,116 @@ const state = {
 // Canvas Configuration
 let canvas, ctx;
 
+// ==========================================================================
+// VIEW SYSTEM — switch between onboarding flow and dashboard
+// ==========================================================================
+function switchView(view) {
+    state.activeView = view;
+
+    document.querySelectorAll('.view').forEach(el => el.classList.remove('active-view'));
+
+    if (view === 'dashboard') {
+        document.getElementById('view-dashboard').classList.add('active-view');
+        // Initialize or re-render canvas after view becomes visible
+        setTimeout(() => {
+            canvas = document.getElementById('energy-chart-canvas');
+            if (canvas) {
+                ctx = canvas.getContext('2d');
+                resizeCanvas();
+                updateAppView();
+            }
+        }, 50);
+    } else {
+        document.getElementById('view-onboarding').classList.add('active-view');
+    }
+
+    // Close nav dropdown if open
+    closeNavDropdown();
+}
+
+// ==========================================================================
+// ONBOARDING STEPS
+// ==========================================================================
+function goToStep(step) {
+    state.activeStep = step;
+
+    // Deactivate all screens
+    document.querySelectorAll('.phone-screen').forEach(s => s.classList.remove('active-screen'));
+    // Activate chosen screen
+    const screen = document.getElementById(`screen-${step}`);
+    if (screen) screen.classList.add('active-screen');
+}
+
+// ==========================================================================
+// NAV DROPDOWN
+// ==========================================================================
+function toggleNavDropdown() {
+    const menu = document.getElementById('nav-dropdown-menu');
+    const chevron = document.getElementById('nav-chevron');
+    const btn = document.getElementById('nav-dropdown-btn');
+    const isOpen = menu.classList.contains('open');
+
+    if (isOpen) {
+        closeNavDropdown();
+    } else {
+        menu.classList.add('open');
+        chevron.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+    }
+}
+
+function closeNavDropdown() {
+    const menu = document.getElementById('nav-dropdown-menu');
+    const chevron = document.getElementById('nav-chevron');
+    const btn = document.getElementById('nav-dropdown-btn');
+    if (menu) {
+        menu.classList.remove('open');
+        chevron && chevron.classList.remove('open');
+        btn && btn.setAttribute('aria-expanded', 'false');
+    }
+}
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function(e) {
+    const dropdown = document.getElementById('nav-dropdown');
+    if (dropdown && !dropdown.contains(e.target)) {
+        closeNavDropdown();
+    }
+});
+
+// ==========================================================================
+// AUTH HANDLERS (simulated)
+// ==========================================================================
+function handleSignup(e) {
+    e.preventDefault();
+    const name = document.getElementById('inp-name')?.value.trim();
+    if (!name) {
+        document.getElementById('inp-name')?.focus();
+        return;
+    }
+    // Simulate success → go to step 3
+    goToStep(3);
+}
+
+function handleOAuth(provider) {
+    // Simulate OAuth → go to preview
+    goToStep(3);
+}
+
 // Initialize Application
 window.addEventListener('DOMContentLoaded', () => {
-    canvas = document.getElementById('energy-chart-canvas');
-    ctx = canvas.getContext('2d');
-    
-    // Set Canvas scale for retina displays
-    resizeCanvas();
-    window.addEventListener('resize', () => {
-        resizeCanvas();
-        renderEnergyCurve();
-    });
+    // Start on onboarding view
+    switchView('onboarding');
 
-    // Initial render
-    updateAppView();
+    // Canvas init deferred to when dashboard view is activated
+    window.addEventListener('resize', () => {
+        if (state.activeView === 'dashboard' && canvas) {
+            resizeCanvas();
+            renderEnergyCurve();
+        }
+    });
 });
+
 
 // Resize Canvas context
 function resizeCanvas() {

@@ -3,32 +3,309 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ebb — The Somatic Energy Coach</title>
+    <title>Ebb — Protect your cognitive load</title>
+    <meta name="description" content="Ebb learns your natural rhythm and shields your focus before urgency strikes.">
+    <meta name="author" content="Ebb">
+    <meta property="og:title" content="Ebb — Daily Energy Coach">
+    <meta property="og:description" content="Ebb learns your natural rhythm and shields your focus before urgency strikes.">
+    <meta property="og:type" content="website">
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- FontAwesome for Premium Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Custom Stylesheet -->
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="dark-theme">
+<body>
+
+<!-- ============================================================
+     GLOBAL NAV BAR (always visible)
+     ============================================================ -->
+<nav class="ebb-nav" id="ebb-nav">
+    <div class="ebb-nav-logo" onclick="switchView('onboarding')">
+        <svg width="28" height="28" viewBox="0 0 40 40" fill="none" aria-hidden="true" class="ebb-nav-wave">
+            <path d="M4 14 Q12 8 20 14 T36 14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" fill="none" opacity="0.5"/>
+            <path d="M4 21 Q12 15 20 21 T36 21" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" fill="none" opacity="0.75"/>
+            <path d="M4 28 Q12 22 20 28 T36 28" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+        </svg>
+        <span class="ebb-nav-wordmark">ebb</span>
+    </div>
+
+    <div class="ebb-nav-right">
+        <!-- Dashboard Dropdown -->
+        <div class="nav-dropdown" id="nav-dropdown">
+            <button class="nav-dropdown-trigger" id="nav-dropdown-btn" onclick="toggleNavDropdown()" aria-haspopup="true" aria-expanded="false">
+                <i class="fa-solid fa-grid-2" style="font-size:0.8rem;"></i>
+                <span>Dashboard</span>
+                <i class="fa-solid fa-chevron-down nav-chevron" id="nav-chevron"></i>
+            </button>
+            <div class="nav-dropdown-menu" id="nav-dropdown-menu" role="menu">
+                <button class="nav-dropdown-item" onclick="switchView('dashboard'); toggleNavDropdown()" role="menuitem">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <div>
+                        <div class="nav-item-label">Interactive Dashboard</div>
+                        <div class="nav-item-sub">Anya's live energy view</div>
+                    </div>
+                </button>
+                <button class="nav-dropdown-item" onclick="switchView('onboarding'); toggleNavDropdown()" role="menuitem">
+                    <i class="fa-solid fa-mobile-screen"></i>
+                    <div>
+                        <div class="nav-item-label">Onboarding Flow</div>
+                        <div class="nav-item-sub">App landing experience</div>
+                    </div>
+                </button>
+            </div>
+        </div>
+        <!-- Sign in pill -->
+        <button class="nav-signin-btn" onclick="goToStep(2)">Get started</button>
+    </div>
+</nav>
+
+<!-- ============================================================
+     VIEW 1: ONBOARDING FLOW (Lovable-style)
+     ============================================================ -->
+<div id="view-onboarding" class="view view-onboarding active-view">
+
+    <!-- Dark full-bleed background with ambient blobs -->
+    <div class="onb-bg">
+        <div class="onb-blob onb-blob-1"></div>
+        <div class="onb-blob onb-blob-2"></div>
+    </div>
+
+    <!-- Centered Phone Frame -->
+    <div class="phone-frame-wrapper">
+        <div class="phone-frame">
+
+            <!-- ── STEP 1: WELCOME ── -->
+            <div class="phone-screen active-screen" id="screen-1">
+                <main class="phone-main">
+
+                    <!-- Logo -->
+                    <div class="onb-logo-lockup">
+                        <svg width="52" height="52" viewBox="0 0 40 40" fill="none" class="onb-wave-icon" aria-hidden="true">
+                            <path d="M4 14 Q12 8 20 14 T36 14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" fill="none" opacity="0.5"/>
+                            <path d="M4 21 Q12 15 20 21 T36 21" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" fill="none" opacity="0.78"/>
+                            <path d="M4 28 Q12 22 20 28 T36 28" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+                        </svg>
+                        <span class="onb-wordmark">ebb</span>
+                    </div>
+
+                    <!-- Headline -->
+                    <h1 class="onb-h1">Welcome to Ebb</h1>
+                    <p class="onb-tagline">Let's start by understanding your natural rhythm.</p>
+
+                    <!-- Calendar Sync Card -->
+                    <section class="onb-card" aria-label="Calendar sync">
+                        <div class="onb-card-icon-wrap">
+                            <i class="fa-regular fa-calendar onb-card-icon"></i>
+                        </div>
+                        <h2 class="onb-card-h2">Sync Your Calendar</h2>
+
+                        <button class="onb-primary-btn" id="btn-signup" onclick="goToStep(2)">
+                            <i class="fa-regular fa-calendar"></i>
+                            Sign up with email or phone
+                        </button>
+
+                        <!-- Privacy note -->
+                        <div class="onb-privacy-note">
+                            <i class="fa-solid fa-lock onb-lock-icon"></i>
+                            <div>
+                                <p class="onb-privacy-title">Privacy First</p>
+                                <p class="onb-privacy-body">Ebb only analyzes timing and attendee counts to gauge your energy load. We <strong>never</strong> read or store meeting titles, descriptions, or sensitive data.</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Dashboard preview link -->
+                    <button class="onb-preview-link" onclick="switchView('dashboard')">
+                        <i class="fa-solid fa-layout-dashboard" style="font-size:0.8rem;"></i>
+                        Preview the dashboard
+                    </button>
+
+                </main>
+
+                <!-- Step indicators -->
+                <div class="step-dots-wrap">
+                    <div class="step-dots">
+                        <div class="step-dot active" onclick="goToStep(1)" aria-label="Step 1"></div>
+                        <div class="step-dot" onclick="goToStep(2)" aria-label="Step 2"></div>
+                        <div class="step-dot" onclick="goToStep(3)" aria-label="Step 3"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── STEP 2: AUTH / SIGN UP ── -->
+            <div class="phone-screen" id="screen-2">
+                <main class="phone-main">
+
+                    <!-- Back button -->
+                    <button class="onb-back-btn" onclick="goToStep(1)">
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </button>
+
+                    <div class="onb-logo-lockup" style="margin-bottom:0.5rem;">
+                        <svg width="36" height="36" viewBox="0 0 40 40" fill="none" class="onb-wave-icon" aria-hidden="true">
+                            <path d="M4 14 Q12 8 20 14 T36 14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" fill="none" opacity="0.5"/>
+                            <path d="M4 21 Q12 15 20 21 T36 21" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" fill="none" opacity="0.78"/>
+                            <path d="M4 28 Q12 22 20 28 T36 28" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+                        </svg>
+                    </div>
+
+                    <h1 class="onb-h1" style="font-size:1.85rem;">Create your account</h1>
+                    <p class="onb-tagline">Your focus calendar starts here.</p>
+
+                    <form class="onb-form" onsubmit="handleSignup(event)">
+                        <div class="form-group">
+                            <label class="form-label" for="inp-name">Full name</label>
+                            <input class="form-input" id="inp-name" type="text" placeholder="Anya Sharma" autocomplete="name">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="inp-email">Email or phone</label>
+                            <input class="form-input" id="inp-email" type="email" placeholder="anya@company.com" autocomplete="email">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="inp-password">Password</label>
+                            <input class="form-input" id="inp-password" type="password" placeholder="••••••••" autocomplete="new-password">
+                        </div>
+
+                        <button type="submit" class="onb-primary-btn" style="margin-top:0.5rem;">
+                            <i class="fa-solid fa-arrow-right"></i>
+                            Continue
+                        </button>
+                    </form>
+
+                    <div class="onb-divider"><span>or continue with</span></div>
+
+                    <div class="oauth-buttons">
+                        <button class="oauth-btn" onclick="handleOAuth('Google')">
+                            <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+                            Google
+                        </button>
+                        <button class="oauth-btn" onclick="handleOAuth('Apple')">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                            Apple
+                        </button>
+                    </div>
+
+                    <p class="onb-terms">By continuing you agree to our <a href="#" onclick="return false;">Terms</a> and <a href="#" onclick="return false;">Privacy Policy</a>.</p>
+
+                </main>
+
+                <!-- Step indicators -->
+                <div class="step-dots-wrap">
+                    <div class="step-dots">
+                        <div class="step-dot" onclick="goToStep(1)" aria-label="Step 1"></div>
+                        <div class="step-dot active" onclick="goToStep(2)" aria-label="Step 2"></div>
+                        <div class="step-dot" onclick="goToStep(3)" aria-label="Step 3"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── STEP 3: DASHBOARD PREVIEW (mini) ── -->
+            <div class="phone-screen" id="screen-3">
+                <main class="phone-main phone-main-preview">
+
+                    <div class="preview-header">
+                        <div class="onb-logo-lockup" style="margin-bottom:0;">
+                            <svg width="28" height="28" viewBox="0 0 40 40" fill="none" class="onb-wave-icon" aria-hidden="true">
+                                <path d="M4 14 Q12 8 20 14 T36 14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" fill="none" opacity="0.5"/>
+                                <path d="M4 21 Q12 15 20 21 T36 21" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" fill="none" opacity="0.78"/>
+                                <path d="M4 28 Q12 22 20 28 T36 28" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+                            </svg>
+                            <span class="onb-wordmark" style="font-size:1.1rem;">ebb</span>
+                        </div>
+                        <span class="preview-chip">Preview</span>
+                    </div>
+
+                    <h1 class="onb-h1" style="font-size:1.6rem;margin-top:1rem;">Your energy, mapped.</h1>
+                    <p class="onb-tagline">Here's what your dashboard will look like once connected.</p>
+
+                    <!-- Mini metrics preview -->
+                    <div class="preview-metrics">
+                        <div class="preview-metric">
+                            <span class="preview-metric-val preview-cyan">78 ms</span>
+                            <span class="preview-metric-lbl">HRV</span>
+                        </div>
+                        <div class="preview-metric">
+                            <span class="preview-metric-val preview-green">95%</span>
+                            <span class="preview-metric-lbl">CAS Score</span>
+                        </div>
+                        <div class="preview-metric">
+                            <span class="preview-metric-val">8.2 hrs</span>
+                            <span class="preview-metric-lbl">Sleep</span>
+                        </div>
+                    </div>
+
+                    <!-- Mini calendar blocks -->
+                    <div class="preview-cal">
+                        <div class="preview-cal-block preview-focus">
+                            <span class="preview-cal-title">Deep Work Focus</span>
+                            <span class="preview-cal-time">9:00 – 10:30 AM</span>
+                        </div>
+                        <div class="preview-cal-block preview-meeting">
+                            <span class="preview-cal-title">Architecture Review</span>
+                            <span class="preview-cal-time">10:30 – 11:30 AM</span>
+                        </div>
+                        <div class="preview-cal-block preview-recovery">
+                            <span class="preview-cal-title">Recovery Buffer</span>
+                            <span class="preview-cal-time">11:30 – 12:00 PM</span>
+                        </div>
+                        <div class="preview-cal-block preview-admin">
+                            <span class="preview-cal-title">Backlog Triage</span>
+                            <span class="preview-cal-time">1:00 – 2:00 PM</span>
+                        </div>
+                    </div>
+
+                    <button class="onb-primary-btn" onclick="switchView('dashboard')" style="margin-top:auto;">
+                        <i class="fa-solid fa-arrow-right"></i>
+                        Open full dashboard
+                    </button>
+
+                </main>
+
+                <!-- Step indicators -->
+                <div class="step-dots-wrap">
+                    <div class="step-dots">
+                        <div class="step-dot" onclick="goToStep(1)" aria-label="Step 1"></div>
+                        <div class="step-dot" onclick="goToStep(2)" aria-label="Step 2"></div>
+                        <div class="step-dot active" onclick="goToStep(3)" aria-label="Step 3"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- / .phone-frame -->
+    </div><!-- / .phone-frame-wrapper -->
+</div><!-- / #view-onboarding -->
+
+
+<!-- ============================================================
+     VIEW 2: ORIGINAL INTERACTIVE DASHBOARD
+     ============================================================ -->
+<div id="view-dashboard" class="view view-dashboard">
+
     <div class="app-container">
-        
-        <!-- Sidebar Navigation & Scenario Controller -->
+
+        <!-- Sidebar -->
         <aside class="sidebar">
             <div class="brand">
                 <div class="logo-glow"></div>
                 <i class="fa-solid fa-wind brand-icon"></i>
                 <span class="brand-name">ebb</span>
             </div>
-            
+
+            <!-- Back to Onboarding -->
+            <button class="sidebar-back-btn" onclick="switchView('onboarding')">
+                <i class="fa-solid fa-arrow-left"></i> Back to App
+            </button>
+
             <!-- Simulation Hub Card -->
             <div class="sim-card">
                 <h3><i class="fa-solid fa-sliders"></i> SIMULATION HUB</h3>
                 <p class="sim-instructions">Toggle biological states and times of day to watch Ebb automatically adjust the calendar and recommendations.</p>
-                
+
                 <div class="sim-section">
                     <label class="section-label">Biological State (Anya)</label>
                     <div class="toggle-group">
@@ -97,15 +374,15 @@
                     </li>
                 </ul>
             </div>
-            
+
             <div class="sidebar-footer">
                 <span class="tagline">Work with biology, not calendars.</span>
             </div>
         </aside>
 
-        <!-- Main Content Area -->
+        <!-- Main Content -->
         <main class="main-content">
-            
+
             <!-- Global Header -->
             <header class="header">
                 <div class="tab-navigation">
@@ -116,7 +393,7 @@
                         <i class="fa-solid fa-file-invoice"></i> Written Walkthrough
                     </button>
                 </div>
-                
+
                 <div class="user-profile">
                     <div class="persona-badge">
                         <span class="persona-name">Anya</span>
@@ -128,7 +405,7 @@
 
             <!-- Dashboard Tab -->
             <section id="content-dashboard" class="tab-content active">
-                
+
                 <!-- Metrics Bar -->
                 <div class="metrics-row">
                     <div class="metric-box">
@@ -163,16 +440,14 @@
                     </div>
                 </div>
 
-                <!-- Main Grid Layout -->
+                <!-- Main Grid -->
                 <div class="dashboard-grid">
-                    
-                    <!-- LEFT COLUMN: Biological Focus Coach -->
+                    <!-- Left: Somatic Governor -->
                     <div class="grid-card coach-card">
                         <div class="card-header">
                             <h2>SOMATIC GOVERNOR</h2>
                             <span class="badge" id="recom-time-indicator">9:30 AM</span>
                         </div>
-                        
                         <div class="coach-body">
                             <!-- Battery Ring -->
                             <div class="battery-outer">
@@ -187,7 +462,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <!-- Recommendation Card -->
                             <div id="recom-card" class="recom-card-container focus-theme">
                                 <div class="recom-header">
@@ -196,7 +470,6 @@
                                 </div>
                                 <h3 id="recom-title">Deep Work: Security Specification</h3>
                                 <p id="recom-description">Your morning cognitive capacity is stable. Focus on independent PRD drafting. The automatic calendar protection is currently active.</p>
-                                
                                 <div class="recom-action-area">
                                     <button class="btn-primary" id="recom-action-btn" onclick="triggerAction()">
                                         <i class="fa-solid fa-play"></i> Start 45m Block
@@ -207,7 +480,7 @@
                         </div>
                     </div>
 
-                    <!-- RIGHT COLUMN: Interactive Calendar & Timeline -->
+                    <!-- Right: Timeline -->
                     <div class="grid-card timeline-card">
                         <div class="card-header">
                             <h2>DYNAMIC CALENDAR SHIFTER</h2>
@@ -217,15 +490,11 @@
                                 <span class="legend-item"><span class="color-dot recovery"></span> Recovery</span>
                             </div>
                         </div>
-                        
                         <div class="timeline-body">
-                            <!-- Live Indicator -->
                             <div id="timeline-time-indicator" class="time-marker">
                                 <span class="time-tag">9:30 AM</span>
                                 <div class="marker-line"></div>
                             </div>
-
-                            <!-- Energy Curve Chart Canvas Container -->
                             <div class="energy-chart-container">
                                 <div class="energy-y-axis">
                                     <span>High</span>
@@ -236,16 +505,12 @@
                                     <canvas id="energy-chart-canvas"></canvas>
                                 </div>
                             </div>
-
-                            <!-- Calendar Columns (Timeline Blocks) -->
-                            <div class="calendar-list" id="calendar-list">
-                                <!-- Calendar Items will be inserted here dynamically by JS -->
-                            </div>
+                            <div class="calendar-list" id="calendar-list"></div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Strategic Callouts / PM Highlights -->
+                <!-- PM Insights -->
                 <div class="pm-insights-bar">
                     <div class="insight-badge"><i class="fa-solid fa-lightbulb"></i> PM INSIGHT</div>
                     <p id="pm-insight-text">Anya has stable biometrics today. Ebb schedules a standard morning creative focus block and keeps the scheduled team meeting at 10:00 AM because alertness is high.</p>
@@ -257,20 +522,19 @@
             <section id="content-walkthrough" class="tab-content">
                 <div class="walkthrough-container">
                     <div class="walkthrough-header">
-                        <h1>Product Strategy & Walkthrough</h1>
-                        <p class="subtitle">Ebb: Restructuring corporate calendars around physical & aesthetic stress indicators</p>
+                        <h1>Product Strategy &amp; Walkthrough</h1>
+                        <p class="subtitle">Ebb: Restructuring corporate calendars around physical &amp; aesthetic stress indicators</p>
                     </div>
 
                     <div class="walkthrough-grid">
-                        
-                        <!-- 1. The User & The Moment -->
+
                         <div class="walkthrough-card">
                             <div class="number-bubble">1</div>
-                            <h2>The User & The Moment</h2>
+                            <h2>The User &amp; The Moment</h2>
                             <div class="card-content">
                                 <h3>Target Persona: Anya (29)</h3>
-                                <p>Anya is a Staff AI Engineer at a high-growth San Francisco scale-up. She is highly ambitious and treats her physical body like a high-performance machine to be bio-hacked and optimized. Her raw pain point is that the **sheer cognitive overhead of trying to have it all is the root cause of her biological breakdown**—specifically stress-induced hair loss (telogen effluvium) and cortisol-driven adult cystic acne.</p>
-                                
+                                <p>Anya is a Staff AI Engineer at a high-growth San Francisco scale-up. She is highly ambitious and treats her physical body like a high-performance machine to be bio-hacked and optimized. Her raw pain point is that the <strong>sheer cognitive overhead of trying to have it all is the root cause of her biological breakdown</strong>—specifically stress-induced hair loss (telogen effluvium) and cortisol-driven adult cystic acne.</p>
+
                                 <div class="comparison-block">
                                     <h4>A Typical Tuesday Morning without Ebb</h4>
                                     <ul>
@@ -289,14 +553,13 @@
                             </div>
                         </div>
 
-                        <!-- 2. The Product Itself -->
                         <div class="walkthrough-card">
                             <div class="number-bubble">2</div>
                             <h2>The Product Itself</h2>
                             <div class="card-content">
-                                <h3>Core Value: Passive Sensing & Zero-Log Ledger</h3>
-                                <p>Ebb operates on **90% passive sensing and 10% active input** (morning voice slider). It recognizes that manual logging is the first thing that dies when a user is exhausted. She speaks naturally for 20 seconds to her Luna Ring, and an LLM structures and updates all 8 dimensions of her life ledger.</p>
-                                
+                                <h3>Core Value: Passive Sensing &amp; Zero-Log Ledger</h3>
+                                <p>Ebb operates on <strong>90% passive sensing and 10% active input</strong> (morning voice slider). It recognizes that manual logging is the first thing that dies when a user is exhausted.</p>
+
                                 <div class="table-container">
                                     <table>
                                         <thead>
@@ -308,7 +571,7 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>Sleep & HRV</td>
+                                                <td>Sleep &amp; HRV</td>
                                                 <td>Wearables (Oura Ingestion)</td>
                                                 <td><span class="tag passive">Passive</span></td>
                                             </tr>
@@ -332,56 +595,53 @@
                                 </div>
 
                                 <h3>The Key Interaction: Multi-Person Locked Calendar Shifter</h3>
-                                <p>Ebb respects corporate scheduling constraints. Unilateral calendar moves only apply to **alone working hours** (writing specs, admin triage). Multiplayer meetings are locked in place to avoid team conflicts, and Ebb instead injects **Active Recovery buffers** immediately after these intense sessions to let her recharge.</p>
+                                <p>Ebb respects corporate scheduling constraints. Unilateral calendar moves only apply to <strong>alone working hours</strong> (writing specs, admin triage). Multiplayer meetings are locked in place to avoid team conflicts, and Ebb instead injects <strong>Active Recovery buffers</strong> immediately after these intense sessions.</p>
                             </div>
                         </div>
 
-                        <!-- 3. The Hero Metric -->
                         <div class="walkthrough-card">
                             <div class="number-bubble">3</div>
                             <h2>The Hero Metric</h2>
                             <div class="card-content">
                                 <h3>Cognitive Alignment Score (CAS)</h3>
                                 <p>CAS measures how successfully Anya aligns the complexity of her tasks with her biological capacity, rewarding her for resting when depleted.</p>
-                                
+
                                 <div class="formula-box">
                                     <div class="formula">
-                                        $$\text{CAS} = \frac{\text{Time in Focus (Peak State) + Time in Recovery/Admin (Slump State)}}{\text{Total Working Hours}} \times 100$$
+                                        CAS = (Time in Focus Peak + Time in Recovery) / Total Working Hours × 100
                                     </div>
                                 </div>
 
                                 <div class="key-callout">
                                     <h4>Why CAS Matters</h4>
-                                    <p>Traditional tools measure volume (hours worked). CAS measures decision quality in the context of biology. Anya can earn a 100% CAS on a low-energy day if she reschedules alone deep-work blocks, attends locked meetings, and takes recovery walks during her slumps.</p>
+                                    <p>Traditional tools measure volume (hours worked). CAS measures decision quality in the context of biology. Anya can earn a 100% CAS on a low-energy day if she reschedules alone deep-work blocks and takes recovery walks during slumps.</p>
                                 </div>
 
                                 <div class="warning-callout">
-                                    <h4>Unhealthy Gamification & Mitigation</h4>
-                                    <p><strong>The Risk:</strong> Anya might avoid challenging tasks on low-energy days or decline critical group meetings to keep her CAS perfect.</p>
+                                    <h4>Unhealthy Gamification &amp; Mitigation</h4>
+                                    <p><strong>The Risk:</strong> Anya might avoid challenging tasks on low-energy days to keep her CAS perfect.</p>
                                     <p><strong>The Fix:</strong> Locked team reviews are excluded from CAS penalties, and Ebb caps focus-time scores to reward consistent effort.</p>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- 4. The Retention Problem -->
                         <div class="walkthrough-card">
                             <div class="number-bubble">4</div>
                             <h2>The Retention Problem</h2>
                             <div class="card-content">
                                 <h3>Breaking the 90-Day Churn Cliff</h3>
-                                <p>Most wellness apps lose 80% of users by Day 90. Ebb survives because it operates as a **structural workflow utility, not a tracking habit**.</p>
-                                
+                                <p>Most wellness apps lose 80% of users by Day 90. Ebb survives because it operates as a <strong>structural workflow utility, not a tracking habit</strong>.</p>
+
                                 <div class="mechanism-block">
                                     <i class="fa-solid fa-lock mechanism-icon"></i>
                                     <div class="mechanism-text">
                                         <h4>Workflow Integration vs. Manual Habits</h4>
-                                        <p>Ebb integrates directly with Google Calendar. When Anya wakes up with a cortisol crash, Ebb automatically reschedules her alone blocks and creates recovery slots. She doesn't need to open Ebb to get value. Removing Ebb means losing her calendar assistant and taking back the cognitive load of scheduling, which creates immediate friction.</p>
+                                        <p>Ebb integrates directly with Google Calendar. When Anya wakes up with a cortisol crash, Ebb automatically reschedules her alone blocks and creates recovery slots. She doesn't need to open Ebb to get value.</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- 5. What We Would Build First -->
                         <div class="walkthrough-card full-width">
                             <div class="number-bubble">5</div>
                             <h2>What We Would Build First (v1 MVP)</h2>
@@ -390,15 +650,15 @@
                                     <h3>12-Week Roadmap Scope</h3>
                                     <p>To prove the concept with 1 engineer and 12 weeks, we build the core schedule blocker widget.</p>
                                     <ul>
-                                        <li><strong>Keep:</strong> A macOS/Windows menu bar app that integrates with Google Calendar and prompts a 3-question morning slider (Sleep quality, Fatigue, HRV mock). It blocks out 90 minutes of "Protected Focus" automatically based on morning inputs.</li>
+                                        <li><strong>Keep:</strong> A macOS/Windows menu bar app that integrates with Google Calendar and prompts a 3-question morning slider (Sleep quality, Fatigue, HRV mock). It blocks out 90 minutes of "Protected Focus" automatically.</li>
                                         <li><strong>Cut:</strong> Live Apple Watch API, keystroke activity tracker, team-wide scheduling sync dashboard, and user analytics.</li>
                                     </ul>
                                 </div>
                                 <div class="mvp-validation-box">
                                     <h4>Week 13 Success Metric</h4>
                                     <div class="large-metric">Focus Block Adherence</div>
-                                    <p>The percentage of Ebb-created calendar blocks and recovery buffers that users keep (do not delete or schedule over) over a 4-week trial.</p>
-                                    <div class="target-badge">Target: >70% Adherence</div>
+                                    <p>The percentage of Ebb-created calendar blocks that users keep (do not delete) over a 4-week trial.</p>
+                                    <div class="target-badge">Target: &gt;70% Adherence</div>
                                 </div>
                             </div>
                         </div>
@@ -406,10 +666,13 @@
                     </div>
                 </div>
             </section>
-        </main>
-    </div>
 
-    <!-- Core App Logic -->
-    <script src="app.js"></script>
+        </main>
+    </div><!-- /.app-container -->
+</div><!-- /#view-dashboard -->
+
+<!-- Core App Logic -->
+<script src="app.js"></script>
+
 </body>
 </html>

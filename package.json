@@ -1,0 +1,29 @@
+{
+  "name": "ebb",
+  "version": "1.0.0",
+  "description": "Ebb - Daily Energy Coach",
+  "main": "server/index.mjs",
+  "type": "module",
+  "scripts": {
+    "dev": "node server/index.mjs",
+    "verify:phase1": "node scripts/verify_phase1.mjs",
+    "verify:phase2": "node scripts/verify_phase2.mjs",
+    "verify:phase3": "node scripts/verify_phase3.mjs",
+    "verify:phase4": "node scripts/verify_phase4.mjs",
+    "verify:phase5": "node scripts/verify_phase5.mjs",
+    "verify:phase6": "node scripts/verify_phase6.mjs",
+    "verify:phase7": "node scripts/verify_phase7.mjs"
+  },
+  "dependencies": {
+    "fastify": "^4.25.0",
+    "groq-sdk": "^0.5.0",
+    "@googleapis/calendar": "^9.0.0",
+    "better-sqlite3": "^9.2.0",
+    "zod": "^3.22.0",
+    "date-fns": "^3.0.0",
+    "dotenv": "^16.3.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.0"
+  }
+}
