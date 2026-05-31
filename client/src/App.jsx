@@ -805,11 +805,7 @@ export default function App() {
               <span className="step-pill">STEP 3 OF 3</span>
             </div>
 
-            <div className="shield-logo-wrap" style={{ background: '#EFECE6', marginTop: '0.5rem', marginBottom: '1rem' }}>
-              <i className="fa-solid fa-shield-halved" style={{ fontSize: '2.2rem', color: '#1C1917' }}></i>
-            </div>
-
-            <h1 className="title-serif" style={{ textAlign: 'center', fontSize: '2.1rem', color: '#366A4E', marginBottom: '0.5rem' }}>Deepen Your Shield</h1>
+            <h1 className="title-serif" style={{ textAlign: 'center', fontSize: '2.1rem', color: '#366A4E', marginBottom: '0.5rem', marginTop: '0.5rem' }}>Deepen Your Shield</h1>
             <p className="subtitle" style={{ marginBottom: '1.8rem', maxWidth: '290px' }}>Connect optional sources to measure cognitive load with higher accuracy. Everything is processed locally.</p>
 
             <div className="choices-list">

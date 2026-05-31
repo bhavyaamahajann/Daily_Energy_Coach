@@ -317,11 +317,7 @@ html, body { height:100%; width:100%; background:#F4F4F6; font-family:'Inter',sa
                 <span class="step-pill">STEP 3 OF 3</span>
             </div>
 
-            <div class="shield-logo-wrap" style="background:#EFECE6; margin-top:0.5rem; margin-bottom:1rem;">
-                <i class="fa-solid fa-shield-halved" style="font-size:2.2rem; color:#1C1917;"></i>
-            </div>
-
-            <h1 class="title-serif" style="text-align:center; font-size:2.1rem; color:#366A4E; margin-bottom:0.5rem;">Deepen Your Shield</h1>
+            <h1 class="title-serif" style="text-align:center; font-size:2.1rem; color:#366A4E; margin-bottom:0.5rem; margin-top:0.5rem;">Deepen Your Shield</h1>
             <p class="subtitle" style="margin-bottom:1.8rem; max-width:290px;">Connect optional sources to measure cognitive load with higher accuracy. Everything is processed locally.</p>
 
             <div class="choices-list">
