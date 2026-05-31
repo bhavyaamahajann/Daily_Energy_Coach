@@ -10,6 +10,13 @@ import textwrap
 # Initialize database
 db = SomaticDB()
 
+def st_html(html_str, sidebar=False):
+    cleaned = "\n".join([line.strip() for line in html_str.split("\n") if line.strip() != ""])
+    if sidebar:
+        st.sidebar.markdown(cleaned, unsafe_allow_html=True)
+    else:
+        st.markdown(cleaned, unsafe_allow_html=True)
+
 # Seed mock database calendar cache if empty
 def seed_calendar():
     with db.get_connection() as conn:
@@ -250,7 +257,7 @@ else: # recovery
 btn_text_color = "#ffffff" if state == "redline" else "#07090e"
 
 # Inject Global Page Background and Styles
-st.markdown(f"""
+st_html(f"""
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
@@ -330,61 +337,61 @@ div[data-testid="stSidebar"] {{
     box-shadow: 0 0 8px #10b981;
 }}
 .glass-card {{
-    background: rgba(17, 24, 39, 0.5) !important;
+    background: rgba(18, 24, 38, 0.45) !important;
     border: 1px solid rgba(255, 255, 255, 0.06) !important;
     border-radius: 16px !important;
     padding: 20px !important;
-    backdrop-filter: blur(12px);
-    transition: all 0.3s ease;
-}}
-div[data-testid="stVerticalBlockBorderWrapper"] {{
-    background: rgba(17, 24, 39, 0.5) !important;
-    border: 1px solid rgba(255, 255, 255, 0.06) !important;
-    border-radius: 16px !important;
-    padding: 20px !important;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
     backdrop-filter: blur(12px) !important;
-    margin-bottom: 20px !important;
+    color: #ffffff !important;
 }}
 .card-title {{
-    font-size: 0.85rem;
+    font-size: 0.95rem;
     font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
     color: #9ca3af;
-    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
     display: flex;
     align-items: center;
     gap: 8px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    padding-bottom: 10px;
+    margin-bottom: 15px;
 }}
 .recom-box {{
-    position: relative;
-    padding: 20px 24px;
-    border-radius: 14px;
-    background: rgba(17, 24, 39, 0.4);
-    margin-top: 20px;
-    margin-bottom: 20px;
-    overflow: hidden;
+    border-radius: 14px !important;
+    padding: 24px !important;
+    backdrop-filter: blur(12px) !important;
+    margin-bottom: 25px !important;
 }}
 .badge-status {{
-    font-size: 0.7rem;
+    font-size: 0.72rem;
     font-weight: 700;
-    padding: 3px 8px;
-    border-radius: 4px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}}
+.gcal-timeline-item {{
+    transition: transform 0.2s ease;
+}}
+.gcal-timeline-item:hover {{
+    transform: translateX(4px);
 }}
 button[data-testid="baseButton-primary"] {{
     background: {theme_gradient} !important;
-    color: {btn_text_color} !important;
     border: none !important;
-    font-family: 'Outfit', sans-serif !important;
-    font-weight: 700 !important;
+    color: {btn_text_color} !important;
     border-radius: 8px !important;
-    box-shadow: 0 4px 12px {card_glow} !important;
-    transition: all 0.3s ease !important;
+    padding: 10px 24px !important;
+    font-weight: 700 !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 0.85rem !important;
+    box-shadow: 0 4px 15px {theme_color}33 !important;
+    transition: all 0.2s ease !important;
 }}
 button[data-testid="baseButton-primary"]:hover {{
+    box-shadow: 0 4px 20px {theme_color}55 !important;
     transform: translateY(-1px) !important;
-    box-shadow: 0 4px 20px {theme_color} !important;
 }}
 button[data-testid="baseButton-secondary"] {{
     background: rgba(255, 255, 255, 0.03) !important;
@@ -401,7 +408,7 @@ button[data-testid="baseButton-secondary"]:hover {{
     border-color: rgba(255, 255, 255, 0.15) !important;
 }}
 </style>
-""", unsafe_allow_html=True)
+""")
 
 # Seed biometrics log dynamically
 db_date = datetime.date.today().isoformat()
@@ -415,7 +422,7 @@ with db.get_connection() as conn:
     conn.commit()
 
 # Render PASSIVE SENSORS section in sidebar
-st.sidebar.markdown(f"""
+st_html(f"""
 <div style="margin-top: 25px; margin-bottom: 15px;">
     <span style="font-family: Outfit; font-weight: 700; font-size: 0.85rem; color: #9ca3af; letter-spacing: 0.05em; text-transform: uppercase;">Passive Sensors</span>
     <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px; font-family: Inter;">
@@ -433,7 +440,7 @@ st.sidebar.markdown(f"""
         </div>
     </div>
 </div>
-""", unsafe_allow_html=True)
+""", sidebar=True)
 
 # Custom Telemetry triggers
 col_t1, col_t2 = st.sidebar.columns(2)
@@ -538,7 +545,7 @@ with col1:
         </div>
     </div>
     """
-    st.markdown(textwrap.dedent(card1_html), unsafe_allow_html=True)
+    st_html(card1_html)
 
 # 2. Battery Ring Card
 with col2:
@@ -565,7 +572,7 @@ with col2:
         </div>
     </div>
     """
-    st.markdown(textwrap.dedent(card2_html), unsafe_allow_html=True)
+    st_html(card2_html)
 
 # 3. Circadian Curves Card
 with col3:
@@ -602,7 +609,7 @@ with col3:
         </div>
     </div>
     """
-    st.markdown(textwrap.dedent(card3_html), unsafe_allow_html=True)
+    st_html(card3_html)
 
 # ---------------------------------------------------------
 # Dynamic Adaptive Coach Recommendations
@@ -619,7 +626,7 @@ recom_html = f"""
     <p style="margin-bottom: 10px; font-size: 0.9rem; color: #9ca3af; line-height: 1.5; font-family: Inter;">{recom_desc}</p>
 </div>
 """
-st.markdown(textwrap.dedent(recom_html), unsafe_allow_html=True)
+st_html(recom_html)
 
 # Confirmation Action buttons
 is_low_state = state in ["compressed", "redline"]
@@ -649,10 +656,10 @@ with col_btn2:
 # ---------------------------------------------------------
 # Voice Pipeline Trigger - Placed below recommendations
 # ---------------------------------------------------------
-st.markdown("<div style='margin-top: 25px;'></div>", unsafe_allow_html=True)
+st_html("<div style='margin-top: 25px;'></div>")
 
 with st.container(border=True):
-    st.markdown(f'<div class="card-title" style="margin-bottom: 12px;"><i class="fa-solid fa-microphone" style="color: {theme_color};"></i> Vent-to-Adjust Voice Pipeline</div>', unsafe_allow_html=True)
+    st_html(f'<div class="card-title" style="margin-bottom: 12px;"><i class="fa-solid fa-microphone" style="color: {theme_color};"></i> Vent-to-Adjust Voice Pipeline</div>')
     voice_text = st.text_input(
         "Describe physical symptoms (e.g. breakouts, hair shedding, exhaustion)",
         placeholder="Woke up with heavy hair shedding and jawline acne breakouts...",
@@ -683,10 +690,10 @@ with st.container(border=True):
 # ---------------------------------------------------------
 # Calendar Cached Timeline list
 # ---------------------------------------------------------
-st.markdown("<div style='margin-top: 25px;'></div>", unsafe_allow_html=True)
+st_html("<div style='margin-top: 25px;'></div>")
 
 with st.container(border=True):
-    st.markdown(f'<div class="card-title" style="margin-bottom: 15px;"><i class="fa-solid fa-calendar-check" style="color: {theme_color};"></i> GCAL Local SQL Cache (Today)</div>', unsafe_allow_html=True)
+    st_html(f'<div class="card-title" style="margin-bottom: 15px;"><i class="fa-solid fa-calendar-check" style="color: {theme_color};"></i> GCAL Local SQL Cache (Today)</div>')
     
     # Time markers bar matching Figma layout
     highlighted_time = "9:00"
@@ -702,7 +709,7 @@ with st.container(border=True):
         else:
             time_markers_html += f'<div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); padding: 6px 16px; border-radius: 8px; font-size: 0.75rem; color: #9ca3af; font-weight: 500;">{t}</div>'
     time_markers_html += "</div>"
-    st.markdown(time_markers_html, unsafe_allow_html=True)
+    st_html(time_markers_html)
 
     # Fetch current events
     with db.get_connection() as conn:
@@ -768,7 +775,7 @@ with st.container(border=True):
             badge_text = "#00f2fe"
             status_label = "PROTECTED"
 
-        st.markdown(textwrap.dedent(f"""
+        st_html(f"""
             <div class="gcal-timeline-item" style="border-left: 4px {border_style} {border_color}; background: {item_bg} !important; display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-radius: 10px; margin-bottom: 10px; border-top: 1px solid rgba(255,255,255,0.02); border-right: 1px solid rgba(255,255,255,0.02); border-bottom: 1px solid rgba(255,255,255,0.02); font-family: Inter;">
                 <div>
                     <strong style="color: #ffffff; font-size: 0.95rem;">{title}</strong><br/>
@@ -776,4 +783,4 @@ with st.container(border=True):
                 </div>
                 <span class="badge-status" style="background: {badge_bg}; color: {badge_text}; border: 1px solid {border_color}33; font-weight: 600; font-family: Inter;">{status_label}</span>
             </div>
-        """), unsafe_allow_html=True)
+        """)
