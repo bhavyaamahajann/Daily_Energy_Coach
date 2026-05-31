@@ -63,14 +63,6 @@ html, body { height:100%; width:100%; background:#F4F4F6; font-family:'Inter',sa
 .action-item { display:flex; align-items:flex-start; gap:0.65rem; font-size:0.88rem; line-height:1.45; color:#52525B; margin-bottom:0.75rem; }
 .action-item:last-child { margin-bottom:0; }
 .action-item-bullet { color:#366A4E; font-size:0.95rem; margin-top:2px; }
-.success-icon-wrap { width:80px; height:80px; border-radius:50%; background:#DCEFE0; display:flex; align-items:center; justify-content:center; margin:3rem auto 2rem auto; }
-.success-icon { font-size:2.5rem; color:#366A4E; }
-.success-list { background:#FFFFFF; border-radius:1.5rem; padding:1.25rem 1.5rem; margin-bottom:2rem; text-align:left; box-shadow:0 2px 10px rgba(0,0,0,0.02); }
-.success-title-text { font-weight:700; font-size:0.9rem; color:#366A4E; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:0.85rem; }
-.success-item { display:flex; align-items:center; gap:0.75rem; font-size:0.9rem; color:#1C1917; margin-bottom:0.85rem; }
-.success-item:last-child { margin-bottom:0; }
-.success-item-check { color:#366A4E; font-size:0.95rem; }
-.success-item-del { text-decoration:line-through; color:#A1A1AA; }
 
 /* Navigation & Elements matching images */
 .back-btn { background:transparent; border:none; color:#366A4E; font-size:1.2rem; cursor:pointer; align-self:flex-start; margin-bottom:0.5rem; }
@@ -92,6 +84,33 @@ html, body { height:100%; width:100%; background:#F4F4F6; font-family:'Inter',sa
 .choice-details { flex:1; text-align:left; }
 .choice-title { font-family:'DM Serif Display',Georgia,serif; font-weight:700; font-size:1.15rem; color:#1C1917; }
 .choice-sub { font-size:0.78rem; color:#71717A; }
+
+/* Focus Protected / Timeline / Graph Page styles */
+.header-bar { display:flex; justify-content:space-between; align-items:center; width:100%; margin-bottom:1.5rem; }
+.header-bar span { font-family:'DM Serif Display',Georgia,serif; font-size:1.25rem; color:#366A4E; font-weight:700; }
+.header-close { background:transparent; border:none; font-size:1.25rem; color:#71717A; cursor:pointer; }
+.round-shield-container { width:90px; height:90px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0.5rem auto 1rem auto; }
+.cas-badge { background:#F2ECE1; color:#366A4E; font-size:0.82rem; font-weight:700; padding:0.4rem 0.9rem; border-radius:2rem; display:inline-flex; align-items:center; gap:0.25rem; margin:0.25rem auto 1.5rem auto; }
+.draft-card { background:#FDFBF7; border-radius:1.5rem; padding:1.25rem; text-align:left; margin-bottom:1.5rem; border:1px solid rgba(0,0,0,0.04); box-shadow:0 4px 15px rgba(0,0,0,0.02); }
+.draft-quote { font-size:0.85rem; font-style:italic; line-height:1.45; color:#52525B; margin:0.6rem 0 1rem 0; }
+.draft-btn-outline { width:100%; border-radius:1.25rem; padding:0.9rem; font-weight:600; font-size:0.9rem; border:1px solid #EFECE6; background:#FDFBF7; color:#366A4E; cursor:pointer; margin-top:0.6rem; display:flex; align-items:center; justify-content:center; gap:0.5rem; }
+.flow-card { background:#FDFBF7; border-radius:1.75rem; padding:1.5rem; border:1px solid rgba(0,0,0,0.04); box-shadow:0 4px 15px rgba(0,0,0,0.02); text-align:left; }
+.timeline { position:relative; padding-left:1.8rem; border-left:1.5px solid #EFECE6; margin-top:1.2rem; }
+.timeline-item { position:relative; margin-bottom:1.5rem; }
+.timeline-item:last-child { margin-bottom:0; }
+.timeline-dot { position:absolute; left:-2.35rem; top:0.25rem; width:12px; height:12px; border-radius:50%; background:#E4E4E7; border:2px solid #FDFBF7; }
+.timeline-dot.active { background:#4A7C59; }
+.timeline-time { font-size:0.8rem; color:#71717A; margin-bottom:0.15rem; font-weight:500; }
+.timeline-title { font-family:'DM Serif Display',Georgia,serif; font-size:1.08rem; color:#1C1917; font-weight:700; }
+.timeline-title.crossed { text-decoration:line-through; color:#A1A1AA; }
+.timeline-sub { font-size:0.78rem; color:#71717A; }
+.buffer-box { background:#EDF4EE; border-radius:1.25rem; padding:1rem; margin-top:0.5rem; }
+.buffer-title { font-family:'DM Serif Display',Georgia,serif; color:#366A4E; font-weight:700; font-size:1.05rem; display:flex; align-items:center; gap:0.4rem; }
+.buffer-desc { font-size:0.8rem; color:#52525B; line-height:1.4; margin-top:0.35rem; margin-bottom:0.75rem; }
+.badge-pill { background:#FFFFFF; color:#4A7C59; font-weight:700; font-size:0.72rem; padding:0.25rem 0.65rem; border-radius:1rem; display:inline-block; }
+.see-review-link { display:block; text-align:center; color:#366A4E; font-weight:600; font-size:0.88rem; text-decoration:underline; margin:1.5rem auto 0 auto; cursor:pointer; }
+.report-card { background:#FDFBF7; border-radius:2rem; padding:1.5rem; border:1px solid rgba(0,0,0,0.04); margin-bottom:1.25rem; text-align:left; }
+.report-subcard { background:#FDFBF7; border-radius:1.5rem; padding:1.2rem; border:1px solid rgba(0,0,0,0.04); }
 </style>
 </head>
 <body>
@@ -360,31 +379,234 @@ html, body { height:100%; width:100%; background:#F4F4F6; font-family:'Inter',sa
                     <i class="fa-regular fa-shield-halved"></i> Yes, Shield Me
                 </button>
 
-                <button onclick="goToStep(6)" style="width: 100%; border-radius: 1.25rem; padding: 1.1rem; font-weight: 600; font-size: 0.95rem; border: none; background: #F5F1E9; color: #8C7853; margin-top: 0.85rem; cursor: pointer; transition:all 0.2s ease;">
+                <button onclick="goToStep(7)" style="width: 100%; border-radius: 1.25rem; padding: 1.1rem; font-weight: 600; font-size: 0.95rem; border: none; background: #F5F1E9; color: #8C7853; margin-top: 0.85rem; cursor: pointer; transition:all 0.2s ease;">
                     Push Through
                 </button>
             </div>
         </div>
 
-        <!-- Screen 6: Success -->
-        <div id="step-6" class="screen" style="display:none;">
-            <div class="success-icon-wrap">
-                <i class="fa-solid fa-calendar-check success-icon"></i>
+        <!-- Screen 6: State Protected (Focus Protected) -->
+        <div id="step-6" class="screen" style="display:none; padding:1.8rem 1.4rem;">
+            <div class="header-bar">
+                <button class="back-btn" onclick="goToStep(5)" style="margin:0;"><i class="fa-solid fa-arrow-left"></i></button>
+                <span>State Protected</span>
+                <button class="header-close" onclick="goToStep(1)"><i class="fa-solid fa-xmark"></i></button>
             </div>
-            
-            <h1 class="title-serif" style="text-align:center;">Calendar Protected</h1>
-            <p class="subtitle" style="max-width:280px; margin-bottom:1.5rem;">Somatic boundaries applied. We successfully adjusted your agenda based on your morning readiness baseline.</p>
-            
-            <div class="success-list">
-                <div class="success-title-text">Today's Schedule Mutations</div>
-                <div class="success-item">
-                    <i class="fa-solid fa-check success-item-check"></i>
-                    <span class="success-item-del">Spec Drafting (Moved to tomorrow)</span>
+
+            <div class="round-shield-container" style="background:#DCEFE0;">
+                <i class="fa-regular fa-shield-halved" style="font-size:2.8rem; color:#366A4E;"></i>
+            </div>
+
+            <h1 class="title-serif" style="text-align:center; font-size:2rem; color:#1C1917; margin-bottom:0.4rem;">Focus Protected</h1>
+            <p style="font-size:0.9rem; color:#71717A; text-align:center; margin-bottom:1rem; max-width:320px;">Your timeline has been adjusted to preserve your cognitive load.</p>
+
+            <div class="cas-badge">
+                <span>CAS Score</span> <strong>79%</strong> <i class="fa-solid fa-arrow-trend-up"></i>
+            </div>
+
+            <!-- Draft Card -->
+            <div class="draft-card" style="border-left: 4px solid #EC4899;">
+                <div style="font-family:'DM Serif Display',Georgia,serif; font-size:1.15rem; color:#1C1917; font-weight:700;">Draft created for #product</div>
+                <p class="draft-quote">"Hey team, just an update: I'm currently in a deep focus block. The architecture review draft is ready, but I'll be reviewing specs tomorrow. Let me know if anything is urgent."</p>
+                <button class="btn-green-link" style="padding:0.8rem; font-size:0.88rem;" onclick="alert('Notification sent!')">
+                    <i class="fa-regular fa-paper-plane"></i> Send Now
+                </button>
+                <button class="draft-btn-outline" onclick="alert('Draft opened for editing')">
+                    <i class="fa-regular fa-pen-to-square"></i> Edit Draft
+                </button>
+            </div>
+
+            <!-- Flow Card -->
+            <div class="flow-card">
+                <div style="display:flex; justify-content:between; align-items:center; width:100%; margin-bottom:0.75rem;">
+                    <span style="font-family:'DM Serif Display',Georgia,serif; font-size:1.2rem; color:#1C1917; font-weight:700;">Updated Flow</span>
+                    <span style="background:#EFECE6; color:#71717A; font-size:0.72rem; font-weight:700; padding:0.25rem 0.6rem; border-radius:1rem; margin-left:auto; letter-spacing:0.05em;">TODAY</span>
+                </div>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">10:00</div>
+                        <div class="timeline-title crossed">Architecture Review</div>
+                        <div class="timeline-sub"><i class="fa-solid fa-lock" style="font-size:0.75rem; color:#71717A; margin-right:0.2rem;"></i> Locked by protocol</div>
+                    </div>
+
+                    <div class="timeline-item" style="margin-bottom:1rem;">
+                        <div class="timeline-dot active"></div>
+                        <div class="buffer-box">
+                            <div class="buffer-title">
+                                <i class="fa-solid fa-feather-pointed"></i> Zero-Stimulus Buffer
+                            </div>
+                            <div class="buffer-desc">Reclaiming cognitive capacity. All non-essential notifications silenced.</div>
+                            <div style="display:flex; justify-content:space-between; align-items:center;">
+                                <strong style="font-size:0.85rem; color:#366A4E;">11:00 – 13:00</strong>
+                                <span class="badge-pill">Active</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">14:00</div>
+                        <div class="timeline-title crossed">Spec Drafting</div>
+                        <div style="background:#F2ECE1; color:#8C7853; font-size:0.72rem; font-weight:700; padding:0.25rem 0.6rem; border-radius:0.5rem; display:inline-block; margin-top:0.25rem;">
+                            <i class="fa-solid fa-arrow-trend-up"></i> Moved to Tomorrow, 09:00
+                        </div>
+                    </div>
                 </div>
             </div>
-            
+
+            <span class="see-review-link" onclick="goToStep(8)">See this month's review &nbsp;<i class="fa-solid fa-arrow-right"></i></span>
+        </div>
+
+        <!-- Screen 7: State Overridden (Push Through Screen) -->
+        <div id="step-7" class="screen" style="display:none; padding:1.8rem 1.4rem;">
+            <div class="header-bar">
+                <button class="back-btn" onclick="goToStep(5)" style="margin:0;"><i class="fa-solid fa-arrow-left"></i></button>
+                <span>State Overridden</span>
+                <button class="header-close" onclick="goToStep(1)"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <div class="round-shield-container" style="background:#FDF0EE;">
+                <i class="fa-solid fa-bolt" style="font-size:2.8rem; color:#D4443F;"></i>
+            </div>
+
+            <h1 class="title-serif" style="text-align:center; font-size:2rem; color:#1C1917; margin-bottom:0.4rem;">Pushing Through</h1>
+            <p style="font-size:0.9rem; color:#71717A; text-align:center; margin-bottom:1rem; max-width:320px;">Timeline kept. Be mindful of your battery limit as you execute today's schedule.</p>
+
+            <div class="cas-badge" style="background:#FDF0EE; color:#D4443F;">
+                <span>CAS Score</span> <strong>55%</strong> <i class="fa-solid fa-arrow-trend-down"></i>
+            </div>
+
+            <!-- Draft Card -->
+            <div class="draft-card" style="border-left: 4px solid #F59E0B;">
+                <div style="font-family:'DM Serif Display',Georgia,serif; font-size:1.15rem; color:#1C1917; font-weight:700;">Alert drafted for #product</div>
+                <p class="draft-quote">"Hey team, just an update: I am operating at 31% energy today. I'm pushing through to complete the spec drafting at 2 PM, but responses will be delayed."</p>
+                <button class="btn-green-link" style="padding:0.8rem; font-size:0.88rem; background:#D4443F;" onclick="alert('Alert broadcasted to team!')">
+                    <i class="fa-solid fa-tower-broadcast"></i> Broadcast Alert
+                </button>
+                <button class="draft-btn-outline" style="color:#D4443F;" onclick="alert('Draft opened for editing')">
+                    <i class="fa-regular fa-pen-to-square"></i> Edit Alert
+                </button>
+            </div>
+
+            <!-- Flow Card -->
+            <div class="flow-card">
+                <div style="display:flex; justify-content:between; align-items:center; width:100%; margin-bottom:0.75rem;">
+                    <span style="font-family:'DM Serif Display',Georgia,serif; font-size:1.2rem; color:#1C1917; font-weight:700;">Active Flow</span>
+                    <span style="background:#FDF0EE; color:#D4443F; font-size:0.72rem; font-weight:700; padding:0.25rem 0.6rem; border-radius:1rem; margin-left:auto; letter-spacing:0.05em;">TODAY</span>
+                </div>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">10:00</div>
+                        <div class="timeline-title crossed">Architecture Review</div>
+                        <div class="timeline-sub"><i class="fa-solid fa-lock" style="font-size:0.75rem; color:#71717A; margin-right:0.2rem;"></i> Locked by protocol</div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot active" style="background:#D4443F;"></div>
+                        <div class="timeline-time">14:00</div>
+                        <div class="timeline-title">Spec Drafting</div>
+                        <div style="background:#FDF0EE; color:#D4443F; font-size:0.72rem; font-weight:700; padding:0.25rem 0.6rem; border-radius:0.5rem; display:inline-block; margin-top:0.25rem;">
+                            <i class="fa-solid fa-triangle-exclamation"></i> High Cognitive Demand (31% Energy)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <span class="see-review-link" onclick="goToStep(8)">See this month's review &nbsp;<i class="fa-solid fa-arrow-right"></i></span>
+        </div>
+
+        <!-- Screen 8: May Review -->
+        <div id="step-8" class="screen" style="display:none; padding:1.8rem 1.4rem;">
+            <button class="back-btn" onclick="goToStep(6)">
+                <i class="fa-solid fa-arrow-left"></i>
+            </button>
+
+            <div style="display:flex; align-items:center; gap:0.4rem; font-size:0.75rem; font-weight:700; color:#8C7853; letter-spacing:0.05em; text-transform:uppercase; margin-bottom:0.5rem;">
+                <i class="fa-regular fa-calendar"></i> MAY REVIEW
+            </div>
+
+            <h1 class="title-serif" style="font-size:2.2rem; color:#366A4E; line-height:1.2; margin-bottom:1.5rem; text-align:left;">You found your rhythm this month.</h1>
+
+            <!-- Score Graph Card -->
+            <div class="report-card" style="margin-bottom:1.5rem;">
+                <div style="font-size:0.85rem; color:#71717A; margin-bottom:0.25rem; font-weight:500;">Cognitive Alignment Score</div>
+                <div style="display:flex; align-items:baseline; gap:0.5rem; margin-bottom:1.2rem;">
+                    <span style="font-family:'DM Serif Display',Georgia,serif; font-size:2.2rem; color:#366A4E; font-weight:700;">78%</span>
+                    <span style="font-size:0.9rem; color:#366A4E; font-weight:700;"><i class="fa-solid fa-arrow-up"></i> 17 pts</span>
+                </div>
+
+                <!-- SVG line graph -->
+                <div style="width:100%; height:120px; position:relative; margin-bottom:0.5rem;">
+                    <svg viewBox="0 0 300 100" style="width:100%; height:100%;">
+                        <!-- Grids -->
+                        <line x1="0" y1="20" x2="300" y2="20" stroke="#F5F1E9" stroke-dasharray="4" />
+                        <line x1="0" y1="50" x2="300" y2="50" stroke="#F5F1E9" stroke-dasharray="4" />
+                        <line x1="0" y1="80" x2="300" y2="80" stroke="#F5F1E9" stroke-dasharray="4" />
+                        
+                        <!-- Area gradient under curve -->
+                        <defs>
+                            <linearGradient id="grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#366A4E" stop-opacity="0.12" />
+                                <stop offset="100%" stop-color="#366A4E" stop-opacity="0.0" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M 0 80 Q 75 75 150 45 T 300 20 L 300 100 L 0 100 Z" fill="url(#grad)" />
+                        
+                        <!-- Line curve -->
+                        <path d="M 0 80 Q 75 75 150 45 T 300 20" fill="none" stroke="#366A4E" stroke-width="2.5" stroke-linecap="round" />
+                        
+                        <!-- Dot tags -->
+                        <circle cx="0" cy="80" r="4" fill="#366A4E" />
+                        <circle cx="300" cy="20" r="4" fill="#366A4E" />
+                        
+                        <!-- Labels inside graph -->
+                        <text x="5" y="93" font-size="7" fill="#A1A1AA" font-family="sans-serif">61%</text>
+                        <text x="282" y="13" font-size="7" fill="#366A4E" font-weight="700" font-family="sans-serif">78%</text>
+                    </svg>
+                </div>
+                <div style="display:flex; justify-content:space-between; font-size:0.75rem; color:#A1A1AA; font-weight:600;">
+                    <span>May 1</span>
+                    <span>May 15</span>
+                    <span>May 31</span>
+                </div>
+            </div>
+
+            <!-- Approvals & Overrides row -->
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.85rem; margin-bottom:1.5rem;">
+                <div class="report-subcard" style="background:#DCEFE0;">
+                    <div style="width:36px; height:36px; border-radius:50%; background:#366A4E; display:flex; align-items:center; justify-content:center; margin-bottom:1rem;">
+                        <i class="fa-regular fa-shield-halved" style="color:#FFFFFF; font-size:0.95rem;"></i>
+                    </div>
+                    <div style="font-family:'DM Serif Display',Georgia,serif; font-size:1.8rem; color:#1C1917; line-height:1; margin-bottom:0.25rem;">23</div>
+                    <div style="font-size:0.8rem; color:#52525B;">Shields approved</div>
+                </div>
+
+                <div class="report-subcard" style="background:#F5ECE0;">
+                    <div style="width:36px; height:36px; border-radius:50%; background:#8C7853; display:flex; align-items:center; justify-content:center; margin-bottom:1rem;">
+                        <i class="fa-solid fa-bolt" style="color:#FFFFFF; font-size:0.95rem;"></i>
+                    </div>
+                    <div style="font-family:'DM Serif Display',Georgia,serif; font-size:1.8rem; color:#1C1917; line-height:1; margin-bottom:0.25rem;">4</div>
+                    <div style="font-size:0.8rem; color:#52525B;">Overrides required</div>
+                </div>
+            </div>
+
+            <!-- Insight card -->
+            <div style="background:#F8F5EE; border-radius:1.5rem; padding:1.25rem; display:flex; gap:0.85rem; text-align:left; margin-bottom:1.5rem;">
+                <div style="width:36px; height:36px; border-radius:50%; background:#F2ECE1; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                    <i class="fa-regular fa-lightbulb" style="font-size:1.1rem; color:#71717A;"></i>
+                </div>
+                <div style="color:#1C1917;">
+                    <div style="font-family:'DM Serif Display',Georgia,serif; font-size:1.05rem; margin-bottom:0.35rem; font-weight:700;">Key Insight</div>
+                    <div style="font-size:0.82rem; line-height:1.45; color:#52525B;">Your best weeks had <strong>4+ morning shields accepted</strong>. Establishing boundaries early seems to set a positive tone for your day.</div>
+                </div>
+            </div>
+
             <button class="btn-green-link" onclick="goToStep(1)" style="margin-top:auto;">
-                Reset Prototype <i class="fa-solid fa-rotate-right"></i>
+                Start June &nbsp;<i class="fa-solid fa-arrow-right"></i>
             </button>
         </div>
 
@@ -392,14 +614,27 @@ html, body { height:100%; width:100%; background:#F4F4F6; font-family:'Inter',sa
 </div>
 
 <script>
+var lastVisitedStep = 6;
 function goToStep(num) {
+    // Record trace for back button from step 8 review screen
+    if (num === 6 || num === 7) {
+        lastVisitedStep = num;
+    }
+
     document.getElementById('step-1').style.display = 'none';
     document.getElementById('step-2').style.display = 'none';
     document.getElementById('step-3').style.display = 'none';
     document.getElementById('step-4').style.display = 'none';
     document.getElementById('step-5').style.display = 'none';
     document.getElementById('step-6').style.display = 'none';
+    document.getElementById('step-7').style.display = 'none';
+    document.getElementById('step-8').style.display = 'none';
     
+    // Set custom back button trace for Step 8
+    if (num === 8) {
+        document.querySelector('#step-8 .back-btn').setAttribute('onclick', 'goToStep(' + lastVisitedStep + ')');
+    }
+
     document.getElementById('step-' + num).style.display = 'flex';
 }
 </script>

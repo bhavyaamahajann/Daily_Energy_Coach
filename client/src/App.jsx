@@ -3,6 +3,15 @@ import './index.css';
 
 export default function App() {
   const [step, setStep] = useState(1);
+  const [lastVisitedStep, setLastVisitedStep] = useState(6);
+
+  // Navigate step
+  const handleGoToStep = (num) => {
+    if (num === 6 || num === 7) {
+      setLastVisitedStep(num);
+    }
+    setStep(num);
+  };
 
   // Restart flow
   const handleReset = () => {
@@ -258,69 +267,6 @@ export default function App() {
           margin-bottom: 0;
         }
 
-        .action-item-bullet {
-          color: #366A4E;
-          font-size: 0.95rem;
-          margin-top: 2px;
-        }
-
-        .success-icon-wrap {
-          width: 80px;
-          height: 80px;
-          border-radius: 50%;
-          background: #DCEFE0;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          margin: 3rem auto 2rem auto;
-        }
-
-        .success-icon {
-          font-size: 2.5rem;
-          color: #366A4E;
-        }
-
-        .success-list {
-          background: #FFFFFF;
-          border-radius: 1.5rem;
-          padding: 1.25rem 1.5rem;
-          margin-bottom: 2rem;
-          text-align: left;
-          box-shadow: 0 2px 10px rgba(0,0,0,0.02);
-        }
-
-        .success-title-text {
-          font-weight: 700;
-          font-size: 0.9rem;
-          color: #366A4E;
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-          margin-bottom: 0.85rem;
-        }
-
-        .success-item {
-          display: flex;
-          align-items: center;
-          gap: 0.75rem;
-          font-size: 0.9rem;
-          color: #1C1917;
-          margin-bottom: 0.85rem;
-        }
-
-        .success-item:last-child {
-          margin-bottom: 0;
-        }
-
-        .success-item-check {
-          color: #366A4E;
-          font-size: 0.95rem;
-        }
-
-        .success-item-del {
-          text-decoration: line-through;
-          color: #A1A1AA;
-        }
-
         .back-btn {
           background: transparent;
           border: none;
@@ -469,6 +415,190 @@ export default function App() {
           font-size: 0.78rem;
           color: #71717A;
         }
+
+        /* Focus Protected / Timeline / Graph styles */
+        .header-bar {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          width: 100%;
+          margin-bottom: 1.5rem;
+        }
+        .header-bar span {
+          font-family: 'DM Serif Display', Georgia, serif;
+          font-size: 1.25rem;
+          color: #366A4E;
+          font-weight: 700;
+        }
+        .header-close {
+          background: transparent;
+          border: none;
+          font-size: 1.25rem;
+          color: #71717A;
+          cursor: pointer;
+        }
+        .round-shield-container {
+          width: 90px;
+          height: 90px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 0.5rem auto 1rem auto;
+        }
+        .cas-badge {
+          background: #F2ECE1;
+          color: #366A4E;
+          font-size: 0.82rem;
+          font-weight: 700;
+          padding: 0.4rem 0.9rem;
+          border-radius: 2rem;
+          display: inline-flex;
+          align-items: center;
+          gap: 0.25rem;
+          margin: 0.25rem auto 1.5rem auto;
+        }
+        .draft-card {
+          background: #FDFBF7;
+          border-radius: 1.5rem;
+          padding: 1.25rem;
+          text-align: left;
+          margin-bottom: 1.5rem;
+          border: 1px solid rgba(0,0,0,0.04);
+          box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+        }
+        .draft-quote {
+          font-size: 0.85rem;
+          font-style: italic;
+          line-height: 1.45;
+          color: #52525B;
+          margin: 0.6rem 0 1rem 0;
+        }
+        .draft-btn-outline {
+          width: 100%;
+          border-radius: 1.25rem;
+          padding: 0.9rem;
+          font-weight: 600;
+          font-size: 0.9rem;
+          border: 1px solid #EFECE6;
+          background: #FDFBF7;
+          color: #366A4E;
+          cursor: pointer;
+          margin-top: 0.6rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.5rem;
+        }
+        .flow-card {
+          background: #FDFBF7;
+          border-radius: 1.75rem;
+          padding: 1.5rem;
+          border: 1px solid rgba(0,0,0,0.04);
+          box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+          text-align: left;
+        }
+        .timeline {
+          position: relative;
+          padding-left: 1.8rem;
+          border-left: 1.5px solid #EFECE6;
+          margin-top: 1.2rem;
+        }
+        .timeline-item {
+          position: relative;
+          margin-bottom: 1.5rem;
+        }
+        .timeline-item:last-child {
+          margin-bottom: 0;
+        }
+        .timeline-dot {
+          position: absolute;
+          left: -2.35rem;
+          top: 0.25rem;
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+          background: #E4E4E7;
+          border: 2px solid #FDFBF7;
+        }
+        .timeline-dot.active {
+          background: #4A7C59;
+        }
+        .timeline-time {
+          font-size: 0.8rem;
+          color: #71717A;
+          margin-bottom: 0.15rem;
+          font-weight: 500;
+        }
+        .timeline-title {
+          font-family: 'DM Serif Display', Georgia, serif;
+          font-size: 1.08rem;
+          color: #1C1917;
+          font-weight: 700;
+        }
+        .timeline-title.crossed {
+          text-decoration: line-through;
+          color: #A1A1AA;
+        }
+        .timeline-sub {
+          font-size: 0.78rem;
+          color: #71717A;
+        }
+        .buffer-box {
+          background: #EDF4EE;
+          border-radius: 1.25rem;
+          padding: 1rem;
+          margin-top: 0.5rem;
+        }
+        .buffer-title {
+          font-family: 'DM Serif Display', Georgia, serif;
+          color: #366A4E;
+          font-weight: 700;
+          font-size: 1.05rem;
+          display: flex;
+          align-items: center;
+          gap: 0.4rem;
+        }
+        .buffer-desc {
+          font-size: 0.8rem;
+          color: #52525B;
+          line-height: 1.4;
+          margin-top: 0.35rem;
+          margin-bottom: 0.75rem;
+        }
+        .badge-pill {
+          background: #FFFFFF;
+          color: #4A7C59;
+          font-weight: 700;
+          font-size: 0.72rem;
+          padding: 0.25rem 0.65rem;
+          border-radius: 1rem;
+          display: inline-block;
+        }
+        .see-review-link {
+          display: block;
+          text-align: center;
+          color: #366A4E;
+          font-weight: 600;
+          font-size: 0.88rem;
+          text-decoration: underline;
+          margin: 1.5rem auto 0 auto;
+          cursor: pointer;
+        }
+        .report-card {
+          background: #FDFBF7;
+          border-radius: 2rem;
+          padding: 1.5rem;
+          border: 1px solid rgba(0,0,0,0.04);
+          margin-bottom: 1.25rem;
+          text-align: left;
+        }
+        .report-subcard {
+          background: #FDFBF7;
+          border-radius: 1.5rem;
+          padding: 1.2rem;
+          border: 1px solid rgba(0,0,0,0.04);
+        }
       `}</style>
 
       <div className="phone-container">
@@ -491,7 +621,7 @@ export default function App() {
               <i className="fa-regular fa-calendar welcome-card-icon"></i>
               <div className="welcome-card-title">Sync Your Calendar</div>
               
-              <button className="btn-green-link" onClick={() => setStep(2)}>
+              <button className="btn-green-link" onClick={() => handleGoToStep(2)}>
                 <i className="fa-regular fa-calendar-check"></i> Sign up with email or phone
               </button>
               
@@ -504,7 +634,7 @@ export default function App() {
               </div>
             </div>
 
-            <button style={{ background: 'transparent', border: 'none', fontSize: '0.85rem', color: '#366A4E', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.4rem', justifyContent: 'center', margin: '1.5rem auto 0 auto', cursor: 'pointer' }} onClick={() => setStep(5)}>
+            <button style={{ background: 'transparent', border: 'none', fontSize: '0.85rem', color: '#366A4E', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.4rem', justifyContent: 'center', margin: '1.5rem auto 0 auto', cursor: 'pointer' }} onClick={() => handleGoToStep(5)}>
               <i className="fa-solid fa-table-cells-large"></i> Preview the dashboard
             </button>
 
@@ -519,7 +649,7 @@ export default function App() {
         {/* Screen 2: Create Account */}
         {step === 2 && (
           <div className="screen animate-fade">
-            <button className="back-btn" onClick={() => setStep(1)}>
+            <button className="back-btn" onClick={() => handleGoToStep(1)}>
               <i className="fa-solid fa-arrow-left"></i>
             </button>
 
@@ -554,7 +684,7 @@ export default function App() {
               <input type="password" defaultValue="At least 6 characters" style={{ color: '#71717A' }} />
             </div>
 
-            <button className="btn-green-link" onClick={() => setStep(3)} style={{ marginTop: '0.5rem' }}>
+            <button className="btn-green-link" onClick={() => handleGoToStep(3)} style={{ marginTop: '0.5rem' }}>
               Create account &nbsp;<i className="fa-solid fa-arrow-right"></i>
             </button>
 
@@ -567,7 +697,7 @@ export default function App() {
         {/* Screen 3: Connect Energy Source */}
         {step === 3 && (
           <div className="screen animate-fade">
-            <button className="back-btn" onClick={() => setStep(2)}>
+            <button className="back-btn" onClick={() => handleGoToStep(2)}>
               <i className="fa-solid fa-arrow-left"></i>
             </button>
 
@@ -616,7 +746,7 @@ export default function App() {
               <span style={{ fontSize: '0.85rem', color: '#8C7853', fontWeight: 600, textDecoration: 'underline', cursor: 'pointer' }}>No wearable? Use the morning slider instead</span>
             </div>
 
-            <button className="btn-green-link" onClick={() => setStep(4)}>
+            <button className="btn-green-link" onClick={() => handleGoToStep(4)}>
               Continue &nbsp;<i className="fa-solid fa-arrow-right"></i>
             </button>
 
@@ -631,7 +761,7 @@ export default function App() {
         {/* Screen 4: Deepen Your Shield */}
         {step === 4 && (
           <div className="screen animate-fade">
-            <button className="back-btn" onClick={() => setStep(3)}>
+            <button className="back-btn" onClick={() => handleGoToStep(3)}>
               <i className="fa-solid fa-arrow-left"></i>
             </button>
 
@@ -677,12 +807,12 @@ export default function App() {
               </div>
             </div>
 
-            <button className="btn-green-link" onClick={() => setStep(5)} style={{ marginTop: '1.5rem' }}>
+            <button className="btn-green-link" onClick={() => handleGoToStep(5)} style={{ marginTop: '1.5rem' }}>
               Continue
             </button>
 
             <div style={{ textAlign: 'center', marginTop: '0.8rem', marginBottom: '1.5rem' }}>
-              <span style={{ fontSize: '0.85rem', color: '#71717A', textDecoration: 'underline', cursor: 'pointer', fontWeight: 600 }} onClick={() => setStep(5)}>Skip for now</span>
+              <span style={{ fontSize: '0.85rem', color: '#71717A', textDecoration: 'underline', cursor: 'pointer', fontWeight: 600 }} onClick={() => handleGoToStep(5)}>Skip for now</span>
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.4rem', fontSize: '0.75rem', fontWeight: 700, color: '#8C7853', letterSpacing: '0.05em', transform: 'uppercase', marginTop: 'auto' }}>
@@ -700,7 +830,7 @@ export default function App() {
         {/* Screen 5: Morning Shield Propose */}
         {step === 5 && (
           <div className="screen animate-fade">
-            <button className="back-btn" onClick={() => setStep(4)}>
+            <button className="back-btn" onClick={() => handleGoToStep(4)}>
               <i className="fa-solid fa-arrow-left"></i>
             </button>
 
@@ -739,39 +869,239 @@ export default function App() {
                 </div>
               </div>
 
-              <button className="btn-green-link" onClick={() => setStep(6)}>
+              <button className="btn-green-link" onClick={() => handleGoToStep(6)}>
                 <i className="fa-regular fa-shield-halved"></i> Yes, Shield Me
               </button>
 
-              <button onClick={() => setStep(6)} style={{ width: '100%', borderRadius: '1.25rem', padding: '1.1rem', fontWeight: 600, fontSize: '0.95rem', border: 'none', background: '#F5F1E9', color: '#8C7853', marginTop: '0.85rem', cursor: 'pointer' }}>
+              <button onClick={() => handleGoToStep(7)} style={{ width: '100%', borderRadius: '1.25rem', padding: '1.1rem', fontWeight: 600, fontSize: '0.95rem', border: 'none', background: '#F5F1E9', color: '#8C7853', marginTop: '0.85rem', cursor: 'pointer' }}>
                 Push Through
               </button>
             </div>
           </div>
         )}
 
-        {/* Screen 6: Success */}
+        {/* Screen 6: State Protected (Focus Protected) */}
         {step === 6 && (
-          <div className="screen animate-fade">
-            <div className="success-icon-wrap">
-              <i className="fa-solid fa-calendar-check success-icon"></i>
+          <div className="screen animate-fade" style={{ padding: '1.8rem 1.4rem' }}>
+            <div className="header-bar">
+              <button className="back-btn" onClick={() => handleGoToStep(5)} style={{ margin: 0 }}><i className="fa-solid fa-arrow-left"></i></button>
+              <span>State Protected</span>
+              <button className="header-close" onClick={handleReset}><i class="fa-solid fa-xmark"></i></button>
             </div>
-            
-            <h1 className="title-serif" style={{ textAlign: 'center' }}>Calendar Protected</h1>
-            <p className="subtitle" style={{ maxWidth: '280px', marginBottom: '1.5rem' }}>
-              Somatic boundaries applied. We successfully adjusted your agenda based on your morning readiness baseline.
-            </p>
-            
-            <div className="success-list">
-              <div className="success-title-text">Today's Schedule Mutations</div>
-              <div className="success-item">
-                <i className="fa-solid fa-check success-item-check"></i>
-                <span className="success-item-del">Spec Drafting (Moved to tomorrow)</span>
+
+            <div className="round-shield-container" style={{ background: '#DCEFE0' }}>
+              <i className="fa-regular fa-shield-halved" style={{ fontSize: '2.8rem', color: '#366A4E' }}></i>
+            </div>
+
+            <h1 className="title-serif" style={{ textAlign: 'center', fontSize: '2rem', color: '#1C1917', marginBottom: '0.4rem' }}>Focus Protected</h1>
+            <p style={{ fontSize: '0.9rem', color: '#71717A', textAlign: 'center', marginBottom: '1rem', maxWidth: '320px' }}>Your timeline has been adjusted to preserve your cognitive load.</p>
+
+            <div className="cas-badge">
+              <span>CAS Score</span> <strong>79%</strong> <i className="fa-solid fa-arrow-trend-up"></i>
+            </div>
+
+            {/* Draft Card */}
+            <div className="draft-card" style={{ borderLeft: '4px solid #EC4899' }}>
+              <div style={{ fontFamily: 'DM Serif Display, Georgia, serif', fontSize: '1.15rem', color: '#1C1917', fontWeight: 700 }}>Draft created for #product</div>
+              <p className="draft-quote">"Hey team, just an update: I'm currently in a deep focus block. The architecture review draft is ready, but I'll be reviewing specs tomorrow. Let me know if anything is urgent."</p>
+              <button className="btn-green-link" style={{ padding: '0.8rem', fontSize: '0.88rem' }} onClick={() => alert('Notification sent!')}>
+                <i className="fa-regular fa-paper-plane"></i> Send Now
+              </button>
+              <button className="draft-btn-outline" onClick={() => alert('Draft opened for editing')}>
+                <i className="fa-regular fa-pen-to-square"></i> Edit Draft
+              </button>
+            </div>
+
+            {/* Flow Card */}
+            <div className="flow-card">
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', marginBottom: '0.75rem' }}>
+                <span style={{ fontFamily: 'DM Serif Display, Georgia, serif', fontSize: '1.2rem', color: '#1C1917', fontWeight: 700 }}>Updated Flow</span>
+                <span style={{ background: '#EFECE6', color: '#71717A', fontSize: '0.72rem', fontWeight: 700, padding: '0.25rem 0.6rem', borderRadius: '1rem', letterSpacing: '0.05em' }}>TODAY</span>
+              </div>
+
+              <div className="timeline">
+                <div className="timeline-item">
+                  <div className="timeline-dot"></div>
+                  <div className="timeline-time">10:00</div>
+                  <div className="timeline-title crossed">Architecture Review</div>
+                  <div className="timeline-sub"><i className="fa-solid fa-lock" style={{ fontSize: '0.75rem', color: '#71717A', marginRight: '0.2rem' }}></i> Locked by protocol</div>
+                </div>
+
+                <div className="timeline-item" style={{ marginBottom: '1rem' }}>
+                  <div className="timeline-dot active"></div>
+                  <div className="buffer-box">
+                    <div className="buffer-title">
+                      <i className="fa-solid fa-feather-pointed"></i> Zero-Stimulus Buffer
+                    </div>
+                    <div className="buffer-desc">Reclaiming cognitive capacity. All non-essential notifications silenced.</div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <strong style={{ fontSize: '0.85rem', color: '#366A4E' }}>11:00 – 13:00</strong>
+                      <span className="badge-pill">Active</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="timeline-item">
+                  <div className="timeline-dot"></div>
+                  <div className="timeline-time">14:00</div>
+                  <div className="timeline-title crossed">Spec Drafting</div>
+                  <div style={{ background: '#F2ECE1', color: '#8C7853', fontSize: '0.72rem', fontWeight: 700, padding: '0.25rem 0.6rem', borderRadius: '0.5rem', display: 'inline-block', marginTop: '0.25rem' }}>
+                    <i className="fa-solid fa-arrow-trend-up"></i> Moved to Tomorrow, 09:00
+                  </div>
+                </div>
               </div>
             </div>
-            
+
+            <span className="see-review-link" onClick={() => handleGoToStep(8)}>See this month's review &nbsp;<i className="fa-solid fa-arrow-right"></i></span>
+          </div>
+        )}
+
+        {/* Screen 7: State Overridden (Push Through) */}
+        {step === 7 && (
+          <div className="screen animate-fade" style={{ padding: '1.8rem 1.4rem' }}>
+            <div className="header-bar">
+              <button className="back-btn" onClick={() => handleGoToStep(5)} style={{ margin: 0 }}><i className="fa-solid fa-arrow-left"></i></button>
+              <span>State Overridden</span>
+              <button className="header-close" onClick={handleReset}><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <div className="round-shield-container" style={{ background: '#FDF0EE' }}>
+              <i className="fa-solid fa-bolt" style={{ fontSize: '2.8rem', color: '#D4443F' }}></i>
+            </div>
+
+            <h1 className="title-serif" style={{ textAlign: 'center', fontSize: '2rem', color: '#1C1917', marginBottom: '0.4rem' }}>Pushing Through</h1>
+            <p style={{ fontSize: '0.9rem', color: '#71717A', textAlign: 'center', marginBottom: '1rem', maxWidth: '320px' }}>Timeline kept. Be mindful of your battery limit as you execute today's schedule.</p>
+
+            <div className="cas-badge" style={{ background: '#FDF0EE', color: '#D4443F' }}>
+              <span>CAS Score</span> <strong>55%</strong> <i className="fa-solid fa-arrow-trend-down"></i>
+            </div>
+
+            {/* Draft Card */}
+            <div className="draft-card" style={{ borderLeft: '4px solid #F59E0B' }}>
+              <div style={{ fontFamily: 'DM Serif Display, Georgia, serif', fontSize: '1.15rem', color: '#1C1917', fontWeight: 700 }}>Alert drafted for #product</div>
+              <p className="draft-quote">"Hey team, just an update: I am operating at 31% energy today. I'm pushing through to complete the spec drafting at 2 PM, but responses will be delayed."</p>
+              <button className="btn-green-link" style={{ padding: '0.8rem', fontSize: '0.88rem', background: '#D4443F' }} onClick={() => alert('Alert broadcasted to team!')}>
+                <i className="fa-solid fa-tower-broadcast"></i> Broadcast Alert
+              </button>
+              <button className="draft-btn-outline" style={{ color: '#D4443F' }} onClick={() => alert('Draft opened for editing')}>
+                <i className="fa-regular fa-pen-to-square"></i> Edit Alert
+              </button>
+            </div>
+
+            {/* Flow Card */}
+            <div className="flow-card">
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', marginBottom: '0.75rem' }}>
+                <span style={{ fontFamily: 'DM Serif Display, Georgia, serif', fontSize: '1.2rem', color: '#1C1917', fontWeight: 700 }}>Active Flow</span>
+                <span style={{ background: '#FDF0EE', color: '#D4443F', fontSize: '0.72rem', fontWeight: 700, padding: '0.25rem 0.6rem', borderRadius: '1rem', letterSpacing: '0.05em' }}>TODAY</span>
+              </div>
+
+              <div className="timeline">
+                <div className="timeline-item">
+                  <div className="timeline-dot"></div>
+                  <div className="timeline-time">10:00</div>
+                  <div className="timeline-title crossed">Architecture Review</div>
+                  <div className="timeline-sub"><i className="fa-solid fa-lock" style={{ fontSize: '0.75rem', color: '#71717A', marginRight: '0.2rem' }}></i> Locked by protocol</div>
+                </div>
+
+                <div className="timeline-item">
+                  <div className="timeline-dot active" style={{ background: '#D4443F' }}></div>
+                  <div className="timeline-time">14:00</div>
+                  <div className="timeline-title">Spec Drafting</div>
+                  <div style={{ background: '#FDF0EE', color: '#D4443F', fontSize: '0.72rem', fontWeight: 700, padding: '0.25rem 0.6rem', borderRadius: '0.5rem', display: 'inline-block', marginTop: '0.25rem' }}>
+                    <i className="fa-solid fa-triangle-exclamation"></i> High Cognitive Demand (31% Energy)
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <span className="see-review-link" onClick={() => handleGoToStep(8)}>See this month's review &nbsp;<i className="fa-solid fa-arrow-right"></i></span>
+          </div>
+        )}
+
+        {/* Screen 8: May Review */}
+        {step === 8 && (
+          <div className="screen animate-fade" style={{ padding: '1.8rem 1.4rem' }}>
+            <button className="back-btn" onClick={() => handleGoToStep(lastVisitedStep)}>
+              <i className="fa-solid fa-arrow-left"></i>
+            </button>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.75rem', fontWeight: 700, color: '#8C7853', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
+              <i className="fa-regular fa-calendar"></i> MAY REVIEW
+            </div>
+
+            <h1 className="title-serif" style={{ fontSize: '2.2rem', color: '#366A4E', lineHeight: 1.2, marginBottom: '1.5rem', textAlign: 'left' }}>You found your rhythm this month.</h1>
+
+            {/* Score Graph Card */}
+            <div className="report-card" style={{ marginBottom: '1.5rem' }}>
+              <div style={{ fontSize: '0.85rem', color: '#71717A', marginBottom: '0.25rem', fontWeight: 500 }}>Cognitive Alignment Score</div>
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem', marginBottom: '1.2rem' }}>
+                <span style={{ fontFamily: 'DM Serif Display, Georgia, serif', fontSize: '2.2rem', color: '#366A4E', fontWeight: 700 }}>78%</span>
+                <span style={{ fontSize: '0.9rem', color: '#366A4E', fontWeight: 700 }}><i className="fa-solid fa-arrow-up"></i> 17 pts</span>
+              </div>
+
+              {/* SVG line graph */}
+              <div style={{ width: '100%', height: '120px', position: 'relative', marginBottom: '0.5rem' }}>
+                <svg viewBox="0 0 300 100" style={{ width: '100%', height: '100%' }}>
+                  <line x1="0" y1="20" x2="300" y2="20" stroke="#F5F1E9" strokeDasharray="4" />
+                  <line x1="0" y1="50" x2="300" y2="50" stroke="#F5F1E9" strokeDasharray="4" />
+                  <line x1="0" y1="80" x2="300" y2="80" stroke="#F5F1E9" stroke-dasharray="4" />
+                  
+                  <defs>
+                    <linearGradient id="grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" stopColor="#366A4E" stopOpacity="0.12" />
+                      <stop offset="100%" stopColor="#366A4E" stopOpacity="0.0" />
+                    </linearGradient>
+                  </defs>
+                  <path d="M 0 80 Q 75 75 150 45 T 300 20 L 300 100 L 0 100 Z" fill="url(#grad)" />
+                  
+                  <path d="M 0 80 Q 75 75 150 45 T 300 20" fill="none" stroke="#366A4E" strokeWidth="2.5" strokeLinecap="round" />
+                  
+                  <circle cx="0" cy="80" r="4" fill="#366A4E" />
+                  <circle cx="300" cy="20" r="4" fill="#366A4E" />
+                  
+                  <text x="5" y="93" fontSize="7" fill="#A1A1AA" fontFamily="sans-serif">61%</text>
+                  <text x="282" y="13" fontSize="7" fill="#366A4E" fontWeight="700" fontFamily="sans-serif">78%</text>
+                </svg>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', color: '#A1A1AA', fontWeight: 600 }}>
+                <span>May 1</span>
+                <span>May 15</span>
+                <span>May 31</span>
+              </div>
+            </div>
+
+            {/* Approvals & Overrides row */}
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.85rem', marginBottom: '1.5rem' }}>
+              <div className="report-subcard" style={{ background: '#DCEFE0' }}>
+                <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: '#366A4E', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem' }}>
+                  <i className="fa-regular fa-shield-halved" style={{ color: '#FFFFFF', fontSize: '0.95rem' }}></i>
+                </div>
+                <div style={{ fontFamily: 'DM Serif Display, Georgia, serif', fontSize: '1.8rem', color: '#1C1917', lineHeight: 1, marginBottom: '0.25rem' }}>23</div>
+                <div style={{ fontSize: '0.8rem', color: '#52525B' }}>Shields approved</div>
+              </div>
+
+              <div className="report-subcard" style={{ background: '#F5ECE0' }}>
+                <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: '#8C7853', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem' }}>
+                  <i className="fa-solid fa-bolt" style={{ color: '#FFFFFF', fontSize: '0.95rem' }}></i>
+                </div>
+                <div style={{ fontFamily: 'DM Serif Display, Georgia, serif', fontSize: '1.8rem', color: '#1C1917', lineHeight: 1, marginBottom: '0.25rem' }}>4</div>
+                <div style={{ fontSize: '0.8rem', color: '#52525B' }}>Overrides required</div>
+              </div>
+            </div>
+
+            {/* Insight card */}
+            <div style={{ background: '#F8F5EE', borderRadius: '1.5rem', padding: '1.25rem', display: 'flex', gap: '0.85rem', textAlign: 'left', marginBottom: '1.5rem' }}>
+              <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: '#F2ECE1', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                <i className="fa-regular fa-lightbulb" style={{ fontSize: '1.1rem', color: '#71717A' }}></i>
+              </div>
+              <div style={{ color: '#1C1917' }}>
+                <div style={{ fontFamily: 'DM Serif Display, Georgia, serif', fontSize: '1.05rem', marginBottom: '0.35rem', fontWeight: 700 }}>Key Insight</div>
+                <div style={{ fontSize: '0.82rem', lineHeight: 1.45, color: '#52525B' }}>Your best weeks had <strong>4+ morning shields accepted</strong>. Establishing boundaries early seems to set a positive tone for your day.</div>
+              </div>
+            </div>
+
             <button className="btn-green-link" onClick={handleReset} style={{ marginTop: 'auto' }}>
-              Reset Prototype <i className="fa-solid fa-rotate-right"></i>
+              Start June &nbsp;<i className="fa-solid fa-arrow-right"></i>
             </button>
           </div>
         )}
