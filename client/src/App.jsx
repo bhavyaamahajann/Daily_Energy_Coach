@@ -18,7 +18,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0F0F10] flex justify-center items-center py-8 px-4">
+    <div style={{ minHeight: '100vh', backgroundColor: '#0F0F10', display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '2rem 1rem' }}>
       {/* Dynamic styling loaded inline */}
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap');
@@ -958,15 +958,15 @@ export default function App() {
             <div className="success-list">
               <div className="success-title-text">Today's Schedule Mutations</div>
               <div className="success-item">
-                <i class="fa-solid fa-check success-item-check"></i>
+                <i className="fa-solid fa-check success-item-check"></i>
                 <span className="success-item-del">Roadmap Planning (Moved to tomorrow)</span>
               </div>
               <div className="success-item">
-                <i class="fa-solid fa-check success-item-check"></i>
+                <i className="fa-solid fa-check success-item-check"></i>
                 <span>Focus Block Protected (2:00 – 4:00 PM)</span>
               </div>
               <div className="success-item">
-                <i class="fa-solid fa-check success-item-check"></i>
+                <i className="fa-solid fa-check success-item-check"></i>
                 <span>Recovery Decompression Block (12:30 PM)</span>
               </div>
             </div>
