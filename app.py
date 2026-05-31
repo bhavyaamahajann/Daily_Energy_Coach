@@ -31,10 +31,13 @@ full_page = """<!DOCTYPE html>
 * { margin:0; padding:0; box-sizing:border-box; }
 html, body { height:100%; width:100%; background:#F4F4F6; font-family:'Inter',sans-serif; color:#1C1917; }
 .phone-wrapper { display:flex; justify-content:center; align-items:center; min-height:100%; padding:2rem 1rem; }
-.phone-container { width:390px; min-height:820px; background:#FDFBF7; border-radius:3rem; border: 1px solid rgba(0,0,0,0.08); box-shadow:0 25px 50px -12px rgba(0,0,0,0.12); overflow-y:auto; position:relative; display:flex; flex-direction:column; }
+.phone-container { width:390px; height:820px; background:#FDFBF7; border-radius:3rem; border: 1px solid rgba(0,0,0,0.08); box-shadow:0 25px 50px -12px rgba(0,0,0,0.12); overflow-y:auto; position:relative; display:flex; flex-direction:column; }
 .phone-container::-webkit-scrollbar { display:none; }
 .phone-container { -ms-overflow-style:none; scrollbar-width:none; }
-.screen { display:flex; flex-direction:column; flex:1; padding:2.2rem 1.8rem; }
+.screen { display:flex; flex-direction:column; flex:1; padding:2.2rem 1.8rem; height:100%; overflow-y:auto; }
+.screen::-webkit-scrollbar { display:none; }
+.screen { -ms-overflow-style:none; scrollbar-width:none; }
+
 .title-serif { font-family:'DM Serif Display',Georgia,serif; font-size:2.25rem; font-weight:400; color:#366A4E; line-height:1.15; margin:0 0 0.75rem 0; }
 .subtitle { font-size:0.95rem; color:#71717A; line-height:1.5; margin:0 auto 1.5rem auto; max-width:280px; text-align:center; }
 .shield-logo-wrap { width:80px; height:80px; border-radius:50%; background:#EFECE6; display:flex; align-items:center; justify-content:center; margin:2rem auto 1.5rem auto; }
@@ -48,21 +51,6 @@ html, body { height:100%; width:100%; background:#F4F4F6; font-family:'Inter',sa
 .privacy-icon { color:#8C7853; font-size:0.95rem; margin-top:2px; }
 .privacy-title { font-weight:600; font-size:0.8rem; color:#1C1917; margin-bottom:0.15rem; }
 .privacy-body { font-size:0.75rem; color:#71717A; line-height:1.4; }
-.alert-card { background:#FDFBF7; border-radius:2rem; padding:2.2rem 1.8rem; margin-top:auto; margin-bottom:auto; box-shadow:0 4px 20px rgba(0,0,0,0.05); text-align:center; color:#1C1917; }
-.alert-label { display:inline-flex; align-items:center; gap:0.5rem; color:#D4443F; font-weight:700; font-size:0.78rem; letter-spacing:0.05em; margin-bottom:0.85rem; }
-.alert-title { font-family:'DM Serif Display',Georgia,serif; font-size:1.95rem; line-height:1.2; color:#1C1917; margin:0 0 1.5rem 0; font-weight:400; }
-.alert-metrics { display:grid; grid-template-columns:repeat(3,1fr); gap:0.65rem; margin-bottom:1.5rem; }
-.alert-metric-item { background:#F5F1E9; border-radius:1.25rem; padding:0.85rem 0.5rem; display:flex; flex-direction:column; align-items:center; }
-.alert-metric-item.red-tint { background:#FDF0EE; }
-.alert-metric-icon { font-size:1.1rem; margin-bottom:0.4rem; }
-.alert-metric-item.red-tint .alert-metric-icon { color:#D4443F; }
-.alert-metric-val { font-weight:700; font-size:0.95rem; margin-bottom:0.15rem; }
-.alert-metric-lbl { font-size:0.7rem; color:#71717A; }
-.action-list-card { background:#F5F1E9; border-radius:1.25rem; padding:1.25rem; text-align:left; margin-bottom:1.5rem; }
-.action-list-header { font-size:0.78rem; font-weight:700; color:#8C7853; letter-spacing:0.05em; text-transform:uppercase; margin-bottom:0.85rem; display:flex; align-items:center; gap:0.5rem; }
-.action-item { display:flex; align-items:flex-start; gap:0.65rem; font-size:0.88rem; line-height:1.45; color:#52525B; margin-bottom:0.75rem; }
-.action-item:last-child { margin-bottom:0; }
-.action-item-bullet { color:#366A4E; font-size:0.95rem; margin-top:2px; }
 
 /* Navigation & Elements matching images */
 .back-btn { background:transparent; border:none; color:#366A4E; font-size:1.2rem; cursor:pointer; align-self:flex-start; margin-bottom:0.5rem; }
@@ -70,20 +58,55 @@ html, body { height:100%; width:100%; background:#F4F4F6; font-family:'Inter',sa
 .dot { width:8px; height:8px; border-radius:50%; background:#E4E4E7; }
 .dot.active { background:#4A7C59; }
 .step-pill { background:#F2ECE1; color:#8C7853; font-size:0.75rem; font-weight:600; padding:0.35rem 0.85rem; border-radius:1rem; display:inline-block; }
+
 .toggle-tabs { display:flex; background:#EFECE6; padding:0.25rem; border-radius:1rem; margin-bottom:1.5rem; }
-.tab-btn { flex:1; background:transparent; border:none; border-radius:0.85rem; padding:0.6rem 0; font-weight:600; color:#71717A; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:0.4rem; }
+.tab-btn { flex:1; background:transparent; border:none; border-radius:0.85rem; padding:0.6rem 0; font-weight:600; color:#71717A; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:0.4rem; transition: all 0.2s ease; }
 .tab-btn.active { background:#FFFFFF; color:#1C1917; box-shadow:0 2px 4px rgba(0,0,0,0.05); }
+
 .input-group { margin-bottom:1.2rem; text-align:left; width:100%; }
 .input-group label { font-size:0.72rem; font-weight:700; color:#8C7853; letter-spacing:0.05em; text-transform:uppercase; margin-bottom:0.4rem; display:block; }
 .input-group input { width:100%; border:1px solid #E4E4E7; background:#F8F5EE; border-radius:1rem; padding:0.9rem 1.1rem; font-size:0.95rem; color:#1C1917; outline:none; }
+
 .choices-list { display:flex; flex-direction:column; gap:0.85rem; width:100%; }
-.choice-card { background:#F8F5EE; border:1px solid transparent; border-radius:1.5rem; padding:1rem 1.25rem; display:flex; align-items:center; gap:1rem; cursor:pointer; }
+.choice-card { background:#F8F5EE; border:1px solid transparent; border-radius:1.5rem; padding:1rem 1.25rem; display:flex; align-items:center; gap:1rem; cursor:pointer; transition: all 0.2s ease; }
 .choice-card.selected { background:#EDF4EE; border:1px solid #4A7C59; }
 .choice-icon-wrap { width:44px; height:44px; border-radius:50%; background:#EFECE6; display:flex; align-items:center; justify-content:center; }
 .choice-card.selected .choice-icon-wrap { background:#DCEFE0; }
 .choice-details { flex:1; text-align:left; }
 .choice-title { font-family:'DM Serif Display',Georgia,serif; font-weight:700; font-size:1.15rem; color:#1C1917; }
 .choice-sub { font-size:0.78rem; color:#71717A; }
+
+/* Lock Screen Alert Card Styles */
+.lockscreen-bg {
+    background: linear-gradient(135deg, #182e22 0%, #0F0F10 100%);
+    width: 100%;
+    height: 100%;
+    position: relative;
+    padding: 2.2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    color: #FFFFFF;
+}
+.lockscreen-time-wrap { text-align: center; margin-top: 2rem; margin-bottom: 2rem; }
+.lockscreen-time { font-size: 3.5rem; font-weight: 300; letter-spacing: -0.02em; color: #FFFFFF; }
+.lockscreen-date { font-size: 0.95rem; font-weight: 500; color: #A1A1AA; letter-spacing: 0.05em; margin-top: 0.25rem; }
+
+.notification-banner {
+    background: rgba(253, 251, 247, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 1.75rem;
+    padding: 1.25rem;
+    color: #1C1917;
+    text-align: left;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    margin-top: 1rem;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+.notification-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; }
+.notification-appname { font-size: 0.75rem; font-weight: 700; color: #8C7853; letter-spacing: 0.05em; display: flex; align-items: center; gap: 0.35rem; }
+.notification-time { font-size: 0.72rem; color: #71717A; }
+.notification-title { font-family: 'DM Serif Display', Georgia, serif; font-size: 1.35rem; color: #1C1917; line-height: 1.2; margin-bottom: 0.6rem; }
+.notification-desc { font-size: 0.85rem; color: #52525B; line-height: 1.45; margin-bottom: 1.2rem; }
 
 /* Focus Protected / Timeline / Graph Page styles */
 .header-bar { display:flex; justify-content:space-between; align-items:center; width:100%; margin-bottom:1.5rem; }
@@ -92,7 +115,8 @@ html, body { height:100%; width:100%; background:#F4F4F6; font-family:'Inter',sa
 .round-shield-container { width:90px; height:90px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0.5rem auto 1rem auto; }
 .cas-badge { background:#F2ECE1; color:#366A4E; font-size:0.82rem; font-weight:700; padding:0.4rem 0.9rem; border-radius:2rem; display:inline-flex; align-items:center; gap:0.25rem; margin:0.25rem auto 1.5rem auto; }
 .draft-card { background:#FDFBF7; border-radius:1.5rem; padding:1.25rem; text-align:left; margin-bottom:1.5rem; border:1px solid rgba(0,0,0,0.04); box-shadow:0 4px 15px rgba(0,0,0,0.02); }
-.draft-quote { font-size:0.85rem; font-style:italic; line-height:1.45; color:#52525B; margin:0.6rem 0 1rem 0; }
+.draft-quote { font-size:0.85rem; font-style:italic; line-height:1.45; color:#52525B; margin:0.6rem 0 1rem 0; width: 100%; border: none; background: transparent; resize: none; outline: none; font-family: inherit; }
+.draft-quote:focus { background: #F5F1E9; border-radius: 0.5rem; padding: 0.25rem; }
 .draft-btn-outline { width:100%; border-radius:1.25rem; padding:0.9rem; font-weight:600; font-size:0.9rem; border:1px solid #EFECE6; background:#FDFBF7; color:#366A4E; cursor:pointer; margin-top:0.6rem; display:flex; align-items:center; justify-content:center; gap:0.5rem; }
 .flow-card { background:#FDFBF7; border-radius:1.75rem; padding:1.5rem; border:1px solid rgba(0,0,0,0.04); box-shadow:0 4px 15px rgba(0,0,0,0.02); text-align:left; }
 .timeline { position:relative; padding-left:1.8rem; border-left:1.5px solid #EFECE6; margin-top:1.2rem; }
@@ -178,17 +202,17 @@ html, body { height:100%; width:100%; background:#F4F4F6; font-family:'Inter',sa
             <p class="subtitle" style="margin-bottom:1.5rem;">Sign up with your email or phone to start protecting your focus.</p>
 
             <div class="toggle-tabs">
-                <button class="tab-btn active">
+                <button id="email-tab" class="tab-btn active" onclick="toggleAuthMethod('email')">
                     <i class="fa-regular fa-envelope"></i> Email
                 </button>
-                <button class="tab-btn">
+                <button id="phone-tab" class="tab-btn" onclick="toggleAuthMethod('phone')">
                     <i class="fa-solid fa-phone"></i> Phone
                 </button>
             </div>
 
-            <div class="input-group">
-                <label>Email</label>
-                <input type="email" value="you@calm.com">
+            <div class="input-group" id="email-input-group">
+                <label id="auth-label">Email</label>
+                <input id="auth-input" type="email" value="you@calm.com">
             </div>
 
             <div class="input-group">
@@ -221,7 +245,7 @@ html, body { height:100%; width:100%; background:#F4F4F6; font-family:'Inter',sa
             <p class="subtitle" style="margin-bottom:1.8rem;">Sync your wearable to automatically track your daily flow and recovery rhythms.</p>
 
             <div class="choices-list">
-                <div class="choice-card selected">
+                <div class="choice-card selected" id="wearable-oura" onclick="selectWearable('oura')">
                     <div class="choice-icon-wrap">
                         <i class="fa-solid fa-circle-dot" style="font-size:1.1rem; color:#366A4E;"></i>
                     </div>
@@ -231,7 +255,7 @@ html, body { height:100%; width:100%; background:#F4F4F6; font-family:'Inter',sa
                     </div>
                 </div>
 
-                <div class="choice-card">
+                <div class="choice-card" id="wearable-luna" onclick="selectWearable('luna')">
                     <div class="choice-icon-wrap">
                         <i class="fa-regular fa-circle" style="font-size:1.1rem; color:#366A4E;"></i>
                     </div>
@@ -241,7 +265,7 @@ html, body { height:100%; width:100%; background:#F4F4F6; font-family:'Inter',sa
                     </div>
                 </div>
 
-                <div class="choice-card">
+                <div class="choice-card" id="wearable-apple" onclick="selectWearable('apple')">
                     <div class="choice-icon-wrap">
                         <i class="fa-regular fa-heart" style="font-size:1.1rem; color:#366A4E;"></i>
                     </div>
@@ -274,14 +298,14 @@ html, body { height:100%; width:100%; background:#F4F4F6; font-family:'Inter',sa
             </button>
 
             <div class="shield-logo-wrap" style="background:#EFECE6; margin-top:0.5rem; margin-bottom:1rem;">
-                <i class="fa-regular fa-shield-halved" style="font-size:2.2rem; color:#1C1917;"></i>
+                <i class="fa-solid fa-shield-halved" style="font-size:2.2rem; color:#1C1917;"></i>
             </div>
 
             <h1 class="title-serif" style="text-align:center; font-size:2.1rem; color:#366A4E; margin-bottom:0.5rem;">Deepen Your Shield</h1>
             <p class="subtitle" style="margin-bottom:1.8rem; max-width:290px;">Connect optional sources to measure cognitive load with higher accuracy. Everything is processed locally.</p>
 
             <div class="choices-list">
-                <div class="choice-card selected">
+                <div class="choice-card selected" id="shield-meeting" onclick="toggleShieldOpt('meeting')">
                     <div class="choice-icon-wrap">
                         <i class="fa-regular fa-file-lines" style="font-size:1.1rem; color:#366A4E;"></i>
                     </div>
@@ -289,10 +313,10 @@ html, body { height:100%; width:100%; background:#F4F4F6; font-family:'Inter',sa
                         <div class="choice-title">Meeting Insights</div>
                         <div class="choice-sub">Identify urgent work in transcripts (e.g. Tactiq)</div>
                     </div>
-                    <i class="fa-solid fa-circle-check" style="color:#366A4E; font-size:1.2rem;"></i>
+                    <i class="fa-solid fa-circle-check check-icon" style="color:#366A4E; font-size:1.2rem;"></i>
                 </div>
 
-                <div class="choice-card">
+                <div class="choice-card" id="shield-workplace" onclick="toggleShieldOpt('workplace')">
                     <div class="choice-icon-wrap">
                         <i class="fa-regular fa-comment" style="font-size:1.1rem; color:#366A4E;"></i>
                     </div>
@@ -300,10 +324,10 @@ html, body { height:100%; width:100%; background:#F4F4F6; font-family:'Inter',sa
                         <div class="choice-title">Workplace Context</div>
                         <div class="choice-sub">Detect urgent pings via Slack or Teams (MCP)</div>
                     </div>
-                    <i class="fa-regular fa-circle" style="color:#D1D1D6; font-size:1.2rem;"></i>
+                    <i class="fa-regular fa-circle check-icon" style="color:#D1D1D6; font-size:1.2rem;"></i>
                 </div>
 
-                <div class="choice-card">
+                <div class="choice-card" id="shield-focus" onclick="toggleShieldOpt('focus')">
                     <div class="choice-icon-wrap">
                         <i class="fa-regular fa-clock" style="font-size:1.1rem; color:#366A4E;"></i>
                     </div>
@@ -311,7 +335,7 @@ html, body { height:100%; width:100%; background:#F4F4F6; font-family:'Inter',sa
                         <div class="choice-title">Focus Data</div>
                         <div class="choice-sub">Measure cognitive load via Screen Time (MCP)</div>
                     </div>
-                    <i class="fa-regular fa-circle" style="color:#D1D1D6; font-size:1.2rem;"></i>
+                    <i class="fa-regular fa-circle check-icon" style="color:#D1D1D6; font-size:1.2rem;"></i>
                 </div>
             </div>
 
@@ -334,54 +358,44 @@ html, body { height:100%; width:100%; background:#F4F4F6; font-family:'Inter',sa
             </div>
         </div>
 
-        <!-- Screen 5: Morning Shield Propose -->
-        <div id="step-5" class="screen" style="display:none;">
-            <button class="back-btn" onclick="goToStep(4)">
-                <i class="fa-solid fa-arrow-left"></i>
-            </button>
-
-            <div class="alert-card" style="width:100%; border:none; box-shadow:none; padding:0; background:transparent;">
-                <div class="alert-label" style="margin-bottom:0.5rem;">
-                    <i class="fa-solid fa-battery-quarter" style="transform:rotate(270deg); color:#D4443F; font-size:1rem;"></i>
-                    <span style="color:#52525B; font-weight:700; font-size:0.75rem; letter-spacing:0.05em;">MORNING SHIELD</span>
-                </div>
+        <!-- Screen 5: Morning Shield Propose (Renders like iOS/Mobile Lock Screen notification) -->
+        <div id="step-5" class="screen" style="display:none; padding:0;">
+            <div class="lockscreen-bg">
+                <button class="back-btn" onclick="goToStep(4)" style="color:#FFFFFF; margin-bottom:0; z-index:10;"><i class="fa-solid fa-arrow-left"></i></button>
                 
-                <h1 class="alert-title" style="font-size:2.2rem; text-align:left; color:#1C1917; margin-bottom:1.5rem;">Your energy is low this morning</h1>
-                
-                <div class="alert-metrics">
-                    <div class="alert-metric-item red-tint" style="border:1px solid rgba(212,68,63,0.1);">
-                        <i class="fa-solid fa-battery-quarter alert-metric-icon" style="transform:rotate(270deg); color:#D4443F;"></i>
-                        <div class="alert-metric-val" style="font-size:1.1rem; font-weight:800; color:#1C1917;">31<span style="font-size:0.75rem; font-weight:600;">%</span></div>
-                        <div class="alert-metric-lbl">Energy</div>
-                    </div>
-                    <div class="alert-metric-item">
-                        <i class="fa-regular fa-heart alert-metric-icon" style="color:#71717A;"></i>
-                        <div class="alert-metric-val" style="font-size:1.1rem; font-weight:800; color:#1C1917;">24<span style="font-size:0.75rem; font-weight:600;">ms</span></div>
-                        <div class="alert-metric-lbl">HRV</div>
-                    </div>
-                    <div class="alert-metric-item">
-                        <i class="fa-regular fa-moon alert-metric-icon" style="color:#8C7853;"></i>
-                        <div class="alert-metric-val" style="font-size:1.1rem; font-weight:800; color:#1C1917;">5.2<span style="font-size:0.75rem; font-weight:600;">h</span></div>
-                        <div class="alert-metric-lbl">Sleep</div>
-                    </div>
+                <div class="lockscreen-time-wrap">
+                    <div class="lockscreen-time">08:30</div>
+                    <div class="lockscreen-date">Monday, May 31</div>
                 </div>
 
-                <div class="action-list-card" style="background:#F8F5EE; padding:1.5rem; border-radius:1.5rem; text-align:left; margin-bottom:2rem; border:1px solid rgba(0,0,0,0.02);">
-                    <div style="font-size:0.75rem; font-weight:700; color:#8C7853; letter-spacing:0.05em; text-transform:uppercase; margin-bottom:1rem; display:flex; align-items:center; gap:0.5rem;">
-                        <i class="fa-regular fa-calendar-plus" style="font-size:0.95rem;"></i> PROPOSED ACTION
+                <!-- Notification Banner -->
+                <div class="notification-banner">
+                    <div class="notification-header">
+                        <span class="notification-appname">
+                            <svg width="14" height="14" viewBox="0 0 40 40" fill="none" style="color: #366A4E;">
+                                <path d="M4 14 Q12 8 20 14 T36 14" stroke="currentColor" stroke-width="3" stroke-linecap="round" fill="none"/>
+                                <path d="M4 21 Q12 15 20 21 T36 21" stroke="currentColor" stroke-width="3" stroke-linecap="round" fill="none"/>
+                                <path d="M4 28 Q12 22 20 28 T36 28" stroke="currentColor" stroke-width="3" stroke-linecap="round" fill="none"/>
+                            </svg>
+                            EBB ALERT
+                        </span>
+                        <span class="notification-time">now</span>
                     </div>
-                    <div style="font-size:0.98rem; line-height:1.5; color:#1C1917;">
-                        Moving <strong>Spec Drafting</strong> to tomorrow at <strong>9:00 AM</strong> when your readiness is predicted to be higher.
+
+                    <div class="notification-title">Your energy is low today</div>
+                    <div class="notification-desc">
+                        Somatic recovery is low (24ms HRV). You have a locked 10:00 AM Architecture Review. Protect your energy?
+                    </div>
+
+                    <div style="display:flex; flex-direction:column; gap:0.6rem;">
+                        <button class="btn-green-link" onclick="goToStep(6)" style="padding:0.9rem; border-radius:0.9rem;">
+                            <i class="fa-solid fa-shield-halved"></i> Yes, Shield Me
+                        </button>
+                        <button onclick="goToStep(7)" style="width:100%; border-radius:0.9rem; padding:0.9rem; font-weight:600; font-size:0.95rem; border:none; background:#EFECE6; color:#8C7853; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:0.5rem;">
+                            <i class="fa-solid fa-bolt"></i> Push Through
+                        </button>
                     </div>
                 </div>
-
-                <button class="btn-green-link" onclick="goToStep(6)">
-                    <i class="fa-regular fa-shield-halved"></i> Yes, Shield Me
-                </button>
-
-                <button onclick="goToStep(7)" style="width: 100%; border-radius: 1.25rem; padding: 1.1rem; font-weight: 600; font-size: 0.95rem; border: none; background: #F5F1E9; color: #8C7853; margin-top: 0.85rem; cursor: pointer; transition:all 0.2s ease;">
-                    Push Through
-                </button>
             </div>
         </div>
 
@@ -394,7 +408,7 @@ html, body { height:100%; width:100%; background:#F4F4F6; font-family:'Inter',sa
             </div>
 
             <div class="round-shield-container" style="background:#DCEFE0;">
-                <i class="fa-regular fa-shield-halved" style="font-size:2.8rem; color:#366A4E;"></i>
+                <i class="fa-solid fa-shield-halved" style="font-size:2.8rem; color:#366A4E;"></i>
             </div>
 
             <h1 class="title-serif" style="text-align:center; font-size:2rem; color:#1C1917; margin-bottom:0.4rem;">Focus Protected</h1>
@@ -407,20 +421,22 @@ html, body { height:100%; width:100%; background:#F4F4F6; font-family:'Inter',sa
             <!-- Draft Card -->
             <div class="draft-card" style="border-left: 4px solid #EC4899;">
                 <div style="font-family:'DM Serif Display',Georgia,serif; font-size:1.15rem; color:#1C1917; font-weight:700;">Draft created for #product</div>
-                <p class="draft-quote">"Hey team, just an update: I'm currently in a deep focus block. The architecture review draft is ready, but I'll be reviewing specs tomorrow. Let me know if anything is urgent."</p>
+                
+                <textarea id="protected-draft-text" class="draft-quote" rows="4">"Hey team, just an update: I'm currently in a deep focus block. The architecture review draft is ready, but I'll be reviewing specs tomorrow. Let me know if anything is urgent."</textarea>
+                
                 <button class="btn-green-link" style="padding:0.8rem; font-size:0.88rem;" onclick="alert('Notification sent!')">
                     <i class="fa-regular fa-paper-plane"></i> Send Now
                 </button>
-                <button class="draft-btn-outline" onclick="alert('Draft opened for editing')">
-                    <i class="fa-regular fa-pen-to-square"></i> Edit Draft
+                <button class="draft-btn-outline" onclick="focusDraftText('protected-draft-text')">
+                    <i class="fa-regular fa-edit"></i> Edit Draft
                 </button>
             </div>
 
             <!-- Flow Card -->
             <div class="flow-card">
-                <div style="display:flex; justify-content:between; align-items:center; width:100%; margin-bottom:0.75rem;">
+                <div style="display:flex; justify-content:space-between; align-items:center; width:100%; margin-bottom:0.75rem;">
                     <span style="font-family:'DM Serif Display',Georgia,serif; font-size:1.2rem; color:#1C1917; font-weight:700;">Updated Flow</span>
-                    <span style="background:#EFECE6; color:#71717A; font-size:0.72rem; font-weight:700; padding:0.25rem 0.6rem; border-radius:1rem; margin-left:auto; letter-spacing:0.05em;">TODAY</span>
+                    <span style="background:#EFECE6; color:#71717A; font-size:0.72rem; font-weight:700; padding:0.25rem 0.6rem; border-radius:1rem; letter-spacing:0.05em;">TODAY</span>
                 </div>
 
                 <div class="timeline">
@@ -481,20 +497,22 @@ html, body { height:100%; width:100%; background:#F4F4F6; font-family:'Inter',sa
             <!-- Draft Card -->
             <div class="draft-card" style="border-left: 4px solid #F59E0B;">
                 <div style="font-family:'DM Serif Display',Georgia,serif; font-size:1.15rem; color:#1C1917; font-weight:700;">Alert drafted for #product</div>
-                <p class="draft-quote">"Hey team, just an update: I am operating at 31% energy today. I'm pushing through to complete the spec drafting at 2 PM, but responses will be delayed."</p>
+                
+                <textarea id="overridden-draft-text" class="draft-quote" rows="4">"Hey team, just an update: I am operating at 31% energy today. I'm pushing through to complete the spec drafting at 2 PM, but responses will be delayed."</textarea>
+                
                 <button class="btn-green-link" style="padding:0.8rem; font-size:0.88rem; background:#D4443F;" onclick="alert('Alert broadcasted to team!')">
                     <i class="fa-solid fa-tower-broadcast"></i> Broadcast Alert
                 </button>
-                <button class="draft-btn-outline" style="color:#D4443F;" onclick="alert('Draft opened for editing')">
-                    <i class="fa-regular fa-pen-to-square"></i> Edit Alert
+                <button class="draft-btn-outline" style="color:#D4443F;" onclick="focusDraftText('overridden-draft-text')">
+                    <i class="fa-regular fa-edit"></i> Edit Alert
                 </button>
             </div>
 
             <!-- Flow Card -->
             <div class="flow-card">
-                <div style="display:flex; justify-content:between; align-items:center; width:100%; margin-bottom:0.75rem;">
+                <div style="display:flex; justify-content:space-between; align-items:center; width:100%; margin-bottom:0.75rem;">
                     <span style="font-family:'DM Serif Display',Georgia,serif; font-size:1.2rem; color:#1C1917; font-weight:700;">Active Flow</span>
-                    <span style="background:#FDF0EE; color:#D4443F; font-size:0.72rem; font-weight:700; padding:0.25rem 0.6rem; border-radius:1rem; margin-left:auto; letter-spacing:0.05em;">TODAY</span>
+                    <span style="background:#FDF0EE; color:#D4443F; font-size:0.72rem; font-weight:700; padding:0.25rem 0.6rem; border-radius:1rem; letter-spacing:0.05em;">TODAY</span>
                 </div>
 
                 <div class="timeline">
@@ -615,8 +633,8 @@ html, body { height:100%; width:100%; background:#F4F4F6; font-family:'Inter',sa
 
 <script>
 var lastVisitedStep = 6;
+
 function goToStep(num) {
-    // Record trace for back button from step 8 review screen
     if (num === 6 || num === 7) {
         lastVisitedStep = num;
     }
@@ -630,12 +648,73 @@ function goToStep(num) {
     document.getElementById('step-7').style.display = 'none';
     document.getElementById('step-8').style.display = 'none';
     
-    // Set custom back button trace for Step 8
     if (num === 8) {
         document.querySelector('#step-8 .back-btn').setAttribute('onclick', 'goToStep(' + lastVisitedStep + ')');
     }
 
     document.getElementById('step-' + num).style.display = 'flex';
+}
+
+function toggleAuthMethod(method) {
+    var emailTab = document.getElementById('email-tab');
+    var phoneTab = document.getElementById('phone-tab');
+    var label = document.getElementById('auth-label');
+    var input = document.getElementById('auth-input');
+
+    if (method === 'email') {
+        emailTab.classList.add('active');
+        phoneTab.classList.remove('active');
+        label.innerText = 'Email';
+        input.type = 'email';
+        input.value = 'you@calm.com';
+    } else {
+        phoneTab.classList.add('active');
+        emailTab.classList.remove('active');
+        label.innerText = 'Phone';
+        input.type = 'tel';
+        input.value = '+1 (555) 019-2834';
+    }
+}
+
+function selectWearable(choice) {
+    document.getElementById('wearable-oura').classList.remove('selected');
+    document.getElementById('wearable-luna').classList.remove('selected');
+    document.getElementById('wearable-apple').classList.remove('selected');
+
+    document.querySelector('#wearable-oura .choice-icon-wrap i').className = 'fa-regular fa-circle';
+    document.querySelector('#wearable-luna .choice-icon-wrap i').className = 'fa-regular fa-circle';
+    document.querySelector('#wearable-apple .choice-icon-wrap i').className = 'fa-regular fa-circle';
+
+    var activeCard = document.getElementById('wearable-' + choice);
+    activeCard.classList.add('selected');
+    
+    var icon = activeCard.querySelector('.choice-icon-wrap i');
+    if (choice === 'oura') {
+        icon.className = 'fa-solid fa-circle-dot';
+    } else if (choice === 'luna') {
+        icon.className = 'fa-solid fa-circle-dot';
+    } else {
+        icon.className = 'fa-solid fa-heart';
+    }
+}
+
+function toggleShieldOpt(option) {
+    var card = document.getElementById('shield-' + option);
+    var isSelected = card.classList.toggle('selected');
+    var checkIcon = card.querySelector('.check-icon');
+
+    if (isSelected) {
+        checkIcon.className = 'fa-solid fa-circle-check check-icon';
+        checkIcon.style.color = '#366A4E';
+    } else {
+        checkIcon.className = 'fa-regular fa-circle check-icon';
+        checkIcon.style.color = '#D1D1D6';
+    }
+}
+
+function focusDraftText(id) {
+    var txt = document.getElementById(id);
+    txt.focus();
 }
 </script>
 </body>

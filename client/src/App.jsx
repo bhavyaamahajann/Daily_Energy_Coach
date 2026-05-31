@@ -1,9 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import './index.css';
 
 export default function App() {
   const [step, setStep] = useState(1);
   const [lastVisitedStep, setLastVisitedStep] = useState(6);
+  const [authMethod, setAuthMethod] = useState('email'); // 'email' or 'phone'
+  const [wearable, setWearable] = useState('oura'); // 'oura', 'luna', 'apple'
+  const [shieldOptions, setShieldOptions] = useState({
+    meeting: true,
+    workplace: false,
+    focus: false
+  });
+  
+  // Draft texts
+  const [protectedDraft, setProtectedDraft] = useState(
+    `"Hey team, just an update: I'm currently in a deep focus block. The architecture review draft is ready, but I'll be reviewing specs tomorrow. Let me know if anything is urgent."`
+  );
+  const [overriddenDraft, setOverriddenDraft] = useState(
+    `"Hey team, just an update: I am operating at 31% energy today. I'm pushing through to complete the spec drafting at 2 PM, but responses will be delayed."`
+  );
+
+  const protectedDraftRef = useRef(null);
+  const overriddenDraftRef = useRef(null);
 
   // Navigate step
   const handleGoToStep = (num) => {
@@ -16,6 +34,13 @@ export default function App() {
   // Restart flow
   const handleReset = () => {
     setStep(1);
+  };
+
+  const toggleShieldOpt = (opt) => {
+    setShieldOptions(prev => ({
+      ...prev,
+      [opt]: !prev[opt]
+    }));
   };
 
   return (
@@ -51,6 +76,12 @@ export default function App() {
           flex: 1;
           padding: 2.2rem 1.8rem;
           box-sizing: border-box;
+          height: 100%;
+          overflow-y: auto;
+        }
+        
+        .screen::-webkit-scrollbar {
+          display: none;
         }
 
         .title-serif {
@@ -162,111 +193,6 @@ export default function App() {
           line-height: 1.4;
         }
 
-        .alert-card {
-          background: #FDFBF7;
-          border-radius: 2rem;
-          padding: 2.2rem 1.8rem;
-          margin-top: auto;
-          margin-bottom: auto;
-          box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-          text-align: center;
-          color: #1C1917;
-        }
-
-        .alert-label {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.5rem;
-          color: #D4443F;
-          font-weight: 700;
-          font-size: 0.78rem;
-          letter-spacing: 0.05em;
-          margin-bottom: 0.85rem;
-        }
-
-        .alert-title {
-          font-family: 'DM Serif Display', Georgia, serif;
-          font-size: 1.95rem;
-          line-height: 1.2;
-          color: #1C1917;
-          margin: 0 0 1.5rem 0;
-          font-weight: 400;
-        }
-
-        .alert-metrics {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 0.65rem;
-          margin-bottom: 1.5rem;
-        }
-
-        .alert-metric-item {
-          background: #F5F1E9;
-          border-radius: 1.25rem;
-          padding: 0.85rem 0.5rem;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-        }
-
-        .alert-metric-item.red-tint {
-          background: #FDF0EE;
-        }
-
-        .alert-metric-icon {
-          font-size: 1.1rem;
-          margin-bottom: 0.4rem;
-        }
-
-        .alert-metric-item.red-tint .alert-metric-icon {
-          color: #D4443F;
-        }
-
-        .alert-metric-val {
-          font-weight: 700;
-          font-size: 0.95rem;
-          margin-bottom: 0.15rem;
-        }
-
-        .alert-metric-lbl {
-          font-size: 0.7rem;
-          color: #71717A;
-        }
-
-        .action-list-card {
-          background: #F5F1E9;
-          border-radius: 1.25rem;
-          padding: 1.25rem;
-          text-align: left;
-          margin-bottom: 1.5rem;
-        }
-
-        .action-list-header {
-          font-size: 0.78rem;
-          font-weight: 700;
-          color: #8C7853;
-          letter-spacing: 0.05em;
-          text-transform: uppercase;
-          margin-bottom: 0.85rem;
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-        }
-
-        .action-item {
-          display: flex;
-          align-items: flex-start;
-          gap: 0.65rem;
-          font-size: 0.88rem;
-          line-height: 1.45;
-          color: #52525B;
-          margin-bottom: 0.75rem;
-        }
-
-        .action-item:last-child {
-          margin-bottom: 0;
-        }
-
         .back-btn {
           background: transparent;
           border: none;
@@ -327,6 +253,7 @@ export default function App() {
           align-items: center;
           justify-content: center;
           gap: 0.4rem;
+          transition: all 0.2s ease;
         }
 
         .tab-btn.active {
@@ -378,6 +305,7 @@ export default function App() {
           align-items: center;
           gap: 1rem;
           cursor: pointer;
+          transition: all 0.2s ease;
         }
 
         .choice-card.selected {
@@ -414,6 +342,79 @@ export default function App() {
         .choice-sub {
           font-size: 0.78rem;
           color: #71717A;
+        }
+
+        /* Lock Screen notification layout styles */
+        .lockscreen-bg {
+          background: linear-gradient(135deg, #182e22 0%, #0F0F10 100%);
+          width: 100%;
+          height: 100%;
+          position: relative;
+          padding: 2.2rem 1.5rem;
+          display: flex;
+          flex-direction: column;
+          color: #FFFFFF;
+        }
+        .lockscreen-time-wrap {
+          text-align: center;
+          margin-top: 2rem;
+          margin-bottom: 2rem;
+        }
+        .lockscreen-time {
+          font-size: 3.5rem;
+          font-weight: 300;
+          letter-spacing: -0.02em;
+          color: #FFFFFF;
+        }
+        .lockscreen-date {
+          font-size: 0.95rem;
+          font-weight: 500;
+          color: #A1A1AA;
+          letter-spacing: 0.05em;
+          margin-top: 0.25rem;
+        }
+        .notification-banner {
+          background: rgba(253, 251, 247, 0.95);
+          backdrop-filter: blur(20px);
+          border-radius: 1.75rem;
+          padding: 1.25rem;
+          color: #1C1917;
+          text-align: left;
+          box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+          margin-top: 1rem;
+          border: 1px solid rgba(255,255,255,0.1);
+        }
+        .notification-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 0.75rem;
+        }
+        .notification-appname {
+          font-size: 0.75rem;
+          font-weight: 700;
+          color: #8C7853;
+          letter-spacing: 0.05em;
+          display: flex;
+          align-items: center;
+          gap: 0.35rem;
+        }
+        .notification-time {
+          font-size: 0.72rem;
+          color: #71717A;
+        }
+        .notification-title {
+          font-family: 'DM Serif Display', Georgia, serif;
+          font-size: 1.35rem;
+          color: #1C1917;
+          line-height: 1.2;
+          margin-bottom: 0.6rem;
+        }
+        .notification-desc {
+          font-size: 0.85rem;
+          color: #52525B;
+          line-height: 1.45;
+          margin-bottom: 1.2rem;
         }
 
         /* Focus Protected / Timeline / Graph styles */
@@ -473,6 +474,17 @@ export default function App() {
           line-height: 1.45;
           color: #52525B;
           margin: 0.6rem 0 1rem 0;
+          width: 100%;
+          border: none;
+          background: transparent;
+          resize: none;
+          outline: none;
+          font-family: inherit;
+        }
+        .draft-quote:focus {
+          background: #F5F1E9;
+          border-radius: 0.5rem;
+          padding: 0.25rem;
         }
         .draft-btn-outline {
           width: 100%;
@@ -666,17 +678,21 @@ export default function App() {
             <p className="subtitle" style={{ marginBottom: '1.5rem' }}>Sign up with your email or phone to start protecting your focus.</p>
 
             <div className="toggle-tabs">
-              <button className="tab-btn active">
+              <button className={`tab-btn ${authMethod === 'email' ? 'active' : ''}`} onClick={() => setAuthMethod('email')}>
                 <i className="fa-regular fa-envelope"></i> Email
               </button>
-              <button className="tab-btn">
+              <button className={`tab-btn ${authMethod === 'phone' ? 'active' : ''}`} onClick={() => setAuthMethod('phone')}>
                 <i className="fa-solid fa-phone"></i> Phone
               </button>
             </div>
 
             <div className="input-group">
-              <label>Email</label>
-              <input type="email" defaultValue="you@calm.com" />
+              <label>{authMethod === 'email' ? 'Email' : 'Phone'}</label>
+              <input 
+                type={authMethod === 'email' ? 'email' : 'tel'} 
+                defaultValue={authMethod === 'email' ? 'you@calm.com' : '+1 (555) 019-2834'} 
+                key={authMethod}
+              />
             </div>
 
             <div className="input-group">
@@ -711,9 +727,9 @@ export default function App() {
             <p className="subtitle" style={{ marginBottom: '1.8rem' }}>Sync your wearable to automatically track your daily flow and recovery rhythms.</p>
 
             <div className="choices-list">
-              <div className="choice-card selected">
+              <div className={`choice-card ${wearable === 'oura' ? 'selected' : ''}`} onClick={() => setWearable('oura')}>
                 <div className="choice-icon-wrap">
-                  <i className="fa-solid fa-circle-dot" style={{ fontSize: '1.1rem', color: '#366A4E' }}></i>
+                  <i className={wearable === 'oura' ? "fa-solid fa-circle-dot" : "fa-regular fa-circle"} style={{ fontSize: '1.1rem', color: '#366A4E' }}></i>
                 </div>
                 <div className="choice-details">
                   <div className="choice-title">Oura Ring</div>
@@ -721,9 +737,9 @@ export default function App() {
                 </div>
               </div>
 
-              <div className="choice-card">
+              <div className={`choice-card ${wearable === 'luna' ? 'selected' : ''}`} onClick={() => setWearable('luna')}>
                 <div className="choice-icon-wrap">
-                  <i className="fa-regular fa-circle" style={{ fontSize: '1.1rem', color: '#366A4E' }}></i>
+                  <i className={wearable === 'luna' ? "fa-solid fa-circle-dot" : "fa-regular fa-circle"} style={{ fontSize: '1.1rem', color: '#366A4E' }}></i>
                 </div>
                 <div className="choice-details">
                   <div className="choice-title">Luna Ring</div>
@@ -731,9 +747,9 @@ export default function App() {
                 </div>
               </div>
 
-              <div className="choice-card">
+              <div className={`choice-card ${wearable === 'apple' ? 'selected' : ''}`} onClick={() => setWearable('apple')}>
                 <div className="choice-icon-wrap">
-                  <i className="fa-regular fa-heart" style={{ fontSize: '1.1rem', color: '#366A4E' }}></i>
+                  <i className={wearable === 'apple' ? "fa-solid fa-heart" : "fa-regular fa-circle"} style={{ fontSize: '1.1rem', color: '#366A4E' }}></i>
                 </div>
                 <div className="choice-details">
                   <div className="choice-title">Apple Health</div>
@@ -766,14 +782,14 @@ export default function App() {
             </button>
 
             <div className="shield-logo-wrap" style={{ background: '#EFECE6', marginTop: '0.5rem', marginBottom: '1rem' }}>
-              <i className="fa-regular fa-shield-halved" style={{ fontSize: '2.2rem', color: '#1C1917' }}></i>
+              <i className="fa-solid fa-shield-halved" style={{ fontSize: '2.2rem', color: '#1C1917' }}></i>
             </div>
 
             <h1 className="title-serif" style={{ textAlign: 'center', fontSize: '2.1rem', color: '#366A4E', marginBottom: '0.5rem' }}>Deepen Your Shield</h1>
             <p className="subtitle" style={{ marginBottom: '1.8rem', maxWidth: '290px' }}>Connect optional sources to measure cognitive load with higher accuracy. Everything is processed locally.</p>
 
             <div className="choices-list">
-              <div className="choice-card selected">
+              <div className={`choice-card ${shieldOptions.meeting ? 'selected' : ''}`} onClick={() => toggleShieldOpt('meeting')}>
                 <div className="choice-icon-wrap">
                   <i className="fa-regular fa-file-lines" style={{ fontSize: '1.1rem', color: '#366A4E' }}></i>
                 </div>
@@ -781,10 +797,10 @@ export default function App() {
                   <div className="choice-title">Meeting Insights</div>
                   <div className="choice-sub">Identify urgent work in transcripts (e.g. Tactiq)</div>
                 </div>
-                <i className="fa-solid fa-circle-check" style={{ color: '#366A4E', fontSize: '1.2rem' }}></i>
+                <i className={shieldOptions.meeting ? "fa-solid fa-circle-check" : "fa-regular fa-circle"} style={{ color: shieldOptions.meeting ? '#366A4E' : '#D1D1D6', fontSize: '1.2rem' }}></i>
               </div>
 
-              <div className="choice-card">
+              <div className={`choice-card ${shieldOptions.workplace ? 'selected' : ''}`} onClick={() => toggleShieldOpt('workplace')}>
                 <div className="choice-icon-wrap">
                   <i className="fa-regular fa-comment" style={{ fontSize: '1.1rem', color: '#366A4E' }}></i>
                 </div>
@@ -792,10 +808,10 @@ export default function App() {
                   <div className="choice-title">Workplace Context</div>
                   <div className="choice-sub">Detect urgent pings via Slack or Teams (MCP)</div>
                 </div>
-                <i className="fa-regular fa-circle" style={{ color: '#D1D1D6', fontSize: '1.2rem' }}></i>
+                <i className={shieldOptions.workplace ? "fa-solid fa-circle-check" : "fa-regular fa-circle"} style={{ color: shieldOptions.workplace ? '#366A4E' : '#D1D1D6', fontSize: '1.2rem' }}></i>
               </div>
 
-              <div className="choice-card">
+              <div className={`choice-card ${shieldOptions.focus ? 'selected' : ''}`} onClick={() => toggleShieldOpt('focus')}>
                 <div className="choice-icon-wrap">
                   <i className="fa-regular fa-clock" style={{ fontSize: '1.1rem', color: '#366A4E' }}></i>
                 </div>
@@ -803,7 +819,7 @@ export default function App() {
                   <div className="choice-title">Focus Data</div>
                   <div className="choice-sub">Measure cognitive load via Screen Time (MCP)</div>
                 </div>
-                <i className="fa-regular fa-circle" style={{ color: '#D1D1D6', fontSize: '1.2rem' }}></i>
+                <i className={shieldOptions.focus ? "fa-solid fa-circle-check" : "fa-regular fa-circle"} style={{ color: shieldOptions.focus ? '#366A4E' : '#D1D1D6', fontSize: '1.2rem' }}></i>
               </div>
             </div>
 
@@ -827,55 +843,46 @@ export default function App() {
           </div>
         )}
 
-        {/* Screen 5: Morning Shield Propose */}
+        {/* Screen 5: Morning Shield Propose (Renders like lockscreen overlay) */}
         {step === 5 && (
-          <div className="screen animate-fade">
-            <button className="back-btn" onClick={() => handleGoToStep(4)}>
-              <i className="fa-solid fa-arrow-left"></i>
-            </button>
-
-            <div className="alert-card" style={{ width: '100%', border: 'none', boxShadow: 'none', padding: 0, background: 'transparent' }}>
-              <div className="alert-label" style={{ marginBottom: '0.5rem' }}>
-                <i className="fa-solid fa-battery-quarter" style={{ transform: 'rotate(270deg)', color: '#D4443F', fontSize: '1rem' }}></i>
-                <span style={{ color: '#52525B', fontWeight: 700, fontSize: '0.75rem', letterSpacing: '0.05em' }}>MORNING SHIELD</span>
-              </div>
-              
-              <h1 className="alert-title" style={{ fontSize: '2.2rem', textAlign: 'left', color: '#1C1917', marginBottom: '1.5rem' }}>Your energy is low this morning</h1>
-              
-              <div className="alert-metrics">
-                <div className="alert-metric-item red-tint" style={{ border: '1px solid rgba(212,68,63,0.1)' }}>
-                  <i className="fa-solid fa-battery-quarter alert-metric-icon" style={{ transform: 'rotate(270deg)', color: '#D4443F' }}></i>
-                  <div className="alert-metric-val" style={{ fontSize: '1.1rem', fontWeight: 800, color: '#1C1917' }}>31<span style={{ fontSize: '0.75rem', fontWeight: 600 }}>%</span></div>
-                  <div className="alert-metric-lbl">Energy</div>
-                </div>
-                <div className="alert-metric-item">
-                  <i className="fa-regular fa-heart alert-metric-icon" style={{ color: '#71717A' }}></i>
-                  <div className="alert-metric-val" style={{ fontSize: '1.1rem', fontWeight: 800, color: '#1C1917' }}>24<span style={{ fontSize: '0.75rem', fontWeight: 600 }}>ms</span></div>
-                  <div className="alert-metric-lbl">HRV</div>
-                </div>
-                <div className="alert-metric-item">
-                  <i className="fa-regular fa-moon alert-metric-icon" style={{ color: '#8C7853' }}></i>
-                  <div className="alert-metric-val" style={{ fontSize: '1.1rem', fontWeight: 800, color: '#1C1917' }}>5.2<span style={{ fontSize: '0.75rem', fontWeight: 600 }}>h</span></div>
-                  <div className="alert-metric-lbl">Sleep</div>
-                </div>
-              </div>
-
-              <div className="action-list-card" style={{ background: '#F8F5EE', padding: '1.5rem', borderRadius: '1.5rem', textAlign: 'left', marginBottom: '2rem', border: '1px solid rgba(0,0,0,0.02)' }}>
-                <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#8C7853', letterSpacing: '0.05em', transform: 'uppercase', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <i className="fa-regular fa-calendar-plus" style={{ fontSize: '0.95rem' }}></i> PROPOSED ACTION
-                </div>
-                <div style={{ fontSize: '0.98rem', lineHeight: 1.5, color: '#1C1917' }}>
-                  Moving <strong>Spec Drafting</strong> to tomorrow at <strong>9:00 AM</strong> when your readiness is predicted to be higher.
-                </div>
-              </div>
-
-              <button className="btn-green-link" onClick={() => handleGoToStep(6)}>
-                <i className="fa-regular fa-shield-halved"></i> Yes, Shield Me
+          <div className="screen animate-fade" style={{ padding: 0 }}>
+            <div className="lockscreen-bg">
+              <button className="back-btn" onClick={() => handleGoToStep(4)} style={{ color: '#FFFFFF', marginBottom: 0, zIndex: 10 }}>
+                <i className="fa-solid fa-arrow-left"></i>
               </button>
+              
+              <div className="lockscreen-time-wrap">
+                <div className="lockscreen-time">08:30</div>
+                <div className="lockscreen-date">Monday, May 31</div>
+              </div>
 
-              <button onClick={() => handleGoToStep(7)} style={{ width: '100%', borderRadius: '1.25rem', padding: '1.1rem', fontWeight: 600, fontSize: '0.95rem', border: 'none', background: '#F5F1E9', color: '#8C7853', marginTop: '0.85rem', cursor: 'pointer' }}>
-                Push Through
-              </button>
+              <div className="notification-banner">
+                <div className="notification-header">
+                  <span className="notification-appname">
+                    <svg width="14" height="14" viewBox="0 0 40 40" fill="none" style={{ color: '#366A4E', marginRight: '0.1rem' }}>
+                      <path d="M4 14 Q12 8 20 14 T36 14" stroke="currentColor" strokeWidth="3" strokeLinecap="round" fill="none"/>
+                      <path d="M4 21 Q12 15 20 21 T36 21" stroke="currentColor" strokeWidth="3" strokeLinecap="round" fill="none"/>
+                      <path d="M4 28 Q12 22 20 28 T36 28" stroke="currentColor" stroke-width="3" strokeLinecap="round" fill="none"/>
+                    </svg>
+                    EBB ALERT
+                  </span>
+                  <span className="notification-time">now</span>
+                </div>
+
+                <div className="notification-title">Your energy is low today</div>
+                <div className="notification-desc">
+                  Somatic recovery is low (24ms HRV). You have a locked 10:00 AM Architecture Review. Protect your energy?
+                </div>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+                  <button className="btn-green-link" onClick={() => handleGoToStep(6)} style={{ padding: '0.9rem', borderRadius: '0.9rem' }}>
+                    <i className="fa-solid fa-shield-halved"></i> Yes, Shield Me
+                  </button>
+                  <button onClick={() => handleGoToStep(7)} style={{ width: '100%', borderRadius: '0.9rem', padding: '0.9rem', fontWeight: 600, fontSize: '0.95rem', border: 'none', background: '#EFECE6', color: '#8C7853', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
+                    <i className="fa-solid fa-bolt"></i> Push Through
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         )}
@@ -886,11 +893,11 @@ export default function App() {
             <div className="header-bar">
               <button className="back-btn" onClick={() => handleGoToStep(5)} style={{ margin: 0 }}><i className="fa-solid fa-arrow-left"></i></button>
               <span>State Protected</span>
-              <button className="header-close" onClick={handleReset}><i class="fa-solid fa-xmark"></i></button>
+              <button className="header-close" onClick={handleReset}><i className="fa-solid fa-xmark"></i></button>
             </div>
 
             <div className="round-shield-container" style={{ background: '#DCEFE0' }}>
-              <i className="fa-regular fa-shield-halved" style={{ fontSize: '2.8rem', color: '#366A4E' }}></i>
+              <i className="fa-solid fa-shield-halved" style={{ fontSize: '2.8rem', color: '#366A4E' }}></i>
             </div>
 
             <h1 className="title-serif" style={{ textAlign: 'center', fontSize: '2rem', color: '#1C1917', marginBottom: '0.4rem' }}>Focus Protected</h1>
@@ -903,12 +910,20 @@ export default function App() {
             {/* Draft Card */}
             <div className="draft-card" style={{ borderLeft: '4px solid #EC4899' }}>
               <div style={{ fontFamily: 'DM Serif Display, Georgia, serif', fontSize: '1.15rem', color: '#1C1917', fontWeight: 700 }}>Draft created for #product</div>
-              <p className="draft-quote">"Hey team, just an update: I'm currently in a deep focus block. The architecture review draft is ready, but I'll be reviewing specs tomorrow. Let me know if anything is urgent."</p>
+              
+              <textarea 
+                ref={protectedDraftRef}
+                className="draft-quote" 
+                rows="4" 
+                value={protectedDraft}
+                onChange={(e) => setProtectedDraft(e.target.value)}
+              />
+              
               <button className="btn-green-link" style={{ padding: '0.8rem', fontSize: '0.88rem' }} onClick={() => alert('Notification sent!')}>
                 <i className="fa-regular fa-paper-plane"></i> Send Now
               </button>
-              <button className="draft-btn-outline" onClick={() => alert('Draft opened for editing')}>
-                <i className="fa-regular fa-pen-to-square"></i> Edit Draft
+              <button className="draft-btn-outline" onClick={() => protectedDraftRef.current?.focus()}>
+                <i className="fa-regular fa-edit"></i> Edit Draft
               </button>
             </div>
 
@@ -962,7 +977,7 @@ export default function App() {
             <div className="header-bar">
               <button className="back-btn" onClick={() => handleGoToStep(5)} style={{ margin: 0 }}><i className="fa-solid fa-arrow-left"></i></button>
               <span>State Overridden</span>
-              <button className="header-close" onClick={handleReset}><i class="fa-solid fa-xmark"></i></button>
+              <button className="header-close" onClick={handleReset}><i className="fa-solid fa-xmark"></i></button>
             </div>
 
             <div className="round-shield-container" style={{ background: '#FDF0EE' }}>
@@ -979,12 +994,20 @@ export default function App() {
             {/* Draft Card */}
             <div className="draft-card" style={{ borderLeft: '4px solid #F59E0B' }}>
               <div style={{ fontFamily: 'DM Serif Display, Georgia, serif', fontSize: '1.15rem', color: '#1C1917', fontWeight: 700 }}>Alert drafted for #product</div>
-              <p className="draft-quote">"Hey team, just an update: I am operating at 31% energy today. I'm pushing through to complete the spec drafting at 2 PM, but responses will be delayed."</p>
+              
+              <textarea 
+                ref={overriddenDraftRef}
+                className="draft-quote" 
+                rows="4" 
+                value={overriddenDraft}
+                onChange={(e) => setOverriddenDraft(e.target.value)}
+              />
+              
               <button className="btn-green-link" style={{ padding: '0.8rem', fontSize: '0.88rem', background: '#D4443F' }} onClick={() => alert('Alert broadcasted to team!')}>
                 <i className="fa-solid fa-tower-broadcast"></i> Broadcast Alert
               </button>
-              <button className="draft-btn-outline" style={{ color: '#D4443F' }} onClick={() => alert('Draft opened for editing')}>
-                <i className="fa-regular fa-pen-to-square"></i> Edit Alert
+              <button className="draft-btn-outline" style={{ color: '#D4443F' }} onClick={() => overriddenDraftRef.current?.focus()}>
+                <i className="fa-regular fa-edit"></i> Edit Alert
               </button>
             </div>
 
@@ -1025,7 +1048,7 @@ export default function App() {
               <i className="fa-solid fa-arrow-left"></i>
             </button>
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.75rem', fontWeight: 700, color: '#8C7853', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.75rem', fontWeight: 700, color: '#8C7853', letterSpacing: '0.05em', transform: 'uppercase', marginBottom: '0.5rem' }}>
               <i className="fa-regular fa-calendar"></i> MAY REVIEW
             </div>
 
