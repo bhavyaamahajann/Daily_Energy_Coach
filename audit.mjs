@@ -50,7 +50,7 @@ export function calculateCAS(userId, dateStr, db) {
     
     // Default to high energy if no biometrics synced
     const hrv = bio ? bio.hrv_ms : 70;
-    const isLowEnergy = hrv < 45;
+    const isLowEnergy = hrv < 65;
 
     // 2. Fetch all events for today
     const events = db.prepare('SELECT * FROM calendar_cache WHERE user_id = ?').all(userId);

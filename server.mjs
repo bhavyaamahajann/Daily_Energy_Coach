@@ -220,6 +220,8 @@ function seedCalendarCache(db, userId) {
 db.prepare('DELETE FROM calendar_cache WHERE user_id = ?').run(ANYA_ID);
 db.prepare('DELETE FROM telemetry_log WHERE user_id = ?').run(ANYA_ID);
 db.prepare('DELETE FROM calibration_logs WHERE user_id = ?').run(ANYA_ID);
+db.prepare('DELETE FROM somatic_shifts_log WHERE user_id = ?').run(ANYA_ID);
+db.prepare('DELETE FROM biometrics_log WHERE user_id = ?').run(ANYA_ID);
 seedCalendarCache(db, ANYA_ID);
 
 async function dispatchSlackDnd(statusText, dndEnabled) {
@@ -336,14 +338,14 @@ const server = http.createServer(async (req, res) => {
                 68,
                 hrv,
                 subjective_alertness || null,
-                hrv < 30 ? 45 : 85
+                hrv < 65 ? 45 : 85
             );
 
             res.writeHead(200, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify({
                 status: 'INGEST_SUCCESS',
                 confidence_score: confidence,
-                somatic_battery_percentage: hrv < 30 ? 45 : 85,
+                somatic_battery_percentage: hrv < 65 ? 45 : 85,
                 dimensions_written: dimensions.map(d => d.name)
             }));
             return;
@@ -579,6 +581,14 @@ const server = http.createServer(async (req, res) => {
                 shield_adherence: adherence,
                 cognitive_alignment: cas
             }));
+            return;
+        }
+
+        // --- 12. Fetch Calendar Events ---
+        else if (pathname === '/api/v1/calendar/events' && req.method === 'GET') {
+            const rows = db.prepare('SELECT event_title, start_time, end_time, classification FROM calendar_cache ORDER BY start_time').all();
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ events: rows }));
             return;
         }
 
