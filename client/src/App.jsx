@@ -713,11 +713,20 @@ export default function App() {
         {/* Screen 3: Connect Energy Source */}
         {step === 3 && (
           <div className="screen animate-fade">
-            <button className="back-btn" onClick={() => handleGoToStep(2)}>
-              <i className="fa-solid fa-arrow-left"></i>
-            </button>
-
-            <div style={{ fontFamily: 'DM Serif Display, Georgia, serif', fontSize: '1.25rem', color: '#366A4E', textAlign: 'center', marginTop: '0.5rem', fontWeight: 700 }}>Ebb</div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', marginBottom: '1rem' }}>
+              <button className="back-btn" onClick={() => handleGoToStep(2)} style={{ margin: 0, width: '32px', textAlign: 'left' }}>
+                <i className="fa-solid fa-arrow-left"></i>
+              </button>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                <svg width="24" height="24" viewBox="0 0 40 40" fill="none" style={{ color: '#366A4E' }}>
+                  <path d="M4 14 Q12 8 20 14 T36 14" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" fill="none" opacity="0.5" />
+                  <path d="M4 21 Q12 15 20 21 T36 21" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" fill="none" opacity="0.75" />
+                  <path d="M4 28 Q12 22 20 28 T36 28" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" fill="none" />
+                </svg>
+                <span style={{ fontFamily: 'DM Serif Display, Georgia, serif', fontSize: '1.4rem', color: '#366A4E', fontWeight: 700 }}>ebb</span>
+              </div>
+              <div style={{ width: '32px' }}></div>
+            </div>
 
             <div style={{ textAlign: 'center', marginTop: '0.8rem', marginBottom: '1.2rem' }}>
               <span className="step-pill">STEP 2 OF 3</span>
@@ -777,9 +786,24 @@ export default function App() {
         {/* Screen 4: Deepen Your Shield */}
         {step === 4 && (
           <div className="screen animate-fade">
-            <button className="back-btn" onClick={() => handleGoToStep(3)}>
-              <i className="fa-solid fa-arrow-left"></i>
-            </button>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', marginBottom: '1rem' }}>
+              <button className="back-btn" onClick={() => handleGoToStep(3)} style={{ margin: 0, width: '32px', textAlign: 'left' }}>
+                <i className="fa-solid fa-arrow-left"></i>
+              </button>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                <svg width="24" height="24" viewBox="0 0 40 40" fill="none" style={{ color: '#366A4E' }}>
+                  <path d="M4 14 Q12 8 20 14 T36 14" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" fill="none" opacity="0.5" />
+                  <path d="M4 21 Q12 15 20 21 T36 21" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" fill="none" opacity="0.75" />
+                  <path d="M4 28 Q12 22 20 28 T36 28" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" fill="none" />
+                </svg>
+                <span style={{ fontFamily: 'DM Serif Display, Georgia, serif', fontSize: '1.4rem', color: '#366A4E', fontWeight: 700 }}>ebb</span>
+              </div>
+              <div style={{ width: '32px' }}></div>
+            </div>
+
+            <div style={{ textAlign: 'center', marginTop: '0.8rem', marginBottom: '1.2rem' }}>
+              <span className="step-pill">STEP 3 OF 3</span>
+            </div>
 
             <div className="shield-logo-wrap" style={{ background: '#EFECE6', marginTop: '0.5rem', marginBottom: '1rem' }}>
               <i className="fa-solid fa-shield-halved" style={{ fontSize: '2.2rem', color: '#1C1917' }}></i>
@@ -831,7 +855,7 @@ export default function App() {
               <span style={{ fontSize: '0.85rem', color: '#71717A', textDecoration: 'underline', cursor: 'pointer', fontWeight: 600 }} onClick={() => handleGoToStep(5)}>Skip for now</span>
             </div>
 
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.4rem', fontSize: '0.75rem', fontWeight: 700, color: '#8C7853', letterSpacing: '0.05em', transform: 'uppercase', marginTop: 'auto' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.4rem', fontSize: '0.75rem', fontWeight: 700, color: '#8C7853', letterSpacing: '0.05em', textTransform: 'uppercase', marginTop: 'auto' }}>
               <i className="fa-solid fa-lock"></i> Local-first & private
             </div>
 

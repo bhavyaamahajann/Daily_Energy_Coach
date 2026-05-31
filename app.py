@@ -134,7 +134,7 @@ html, body { height:100%; width:100%; background:#F4F4F6; font-family:'Inter',sa
 .badge-pill { background:#FFFFFF; color:#4A7C59; font-weight:700; font-size:0.72rem; padding:0.25rem 0.65rem; border-radius:1rem; display:inline-block; }
 .see-review-link { display:block; text-align:center; color:#366A4E; font-weight:600; font-size:0.88rem; text-decoration:underline; margin:1.5rem auto 0 auto; cursor:pointer; }
 .report-card { background:#FDFBF7; border-radius:2rem; padding:1.5rem; border:1px solid rgba(0,0,0,0.04); margin-bottom:1.25rem; text-align:left; }
-.report-subcard { background:#FDFBF7; border-radius:1.5rem; padding:1.2rem; border:1px solid rgba(0,0,0,0.04); }
+.report-subcard { background:#FDFBF7; border-radius:1.5rem; padding:1.25rem; border:1px solid rgba(0,0,0,0.04); }
 </style>
 </head>
 <body>
@@ -231,11 +231,18 @@ html, body { height:100%; width:100%; background:#F4F4F6; font-family:'Inter',sa
 
         <!-- Screen 3: Connect Energy Source -->
         <div id="step-3" class="screen" style="display:none;">
-            <button class="back-btn" onclick="goToStep(2)">
-                <i class="fa-solid fa-arrow-left"></i>
-            </button>
-
-            <div style="font-family:'DM Serif Display',Georgia,serif; font-size:1.25rem; color:#366A4E; text-align:center; margin-top:0.5rem; font-weight:700;">Ebb</div>
+            <div style="display:flex; justify-content:space-between; align-items:center; width:100%; margin-bottom:1rem;">
+                <button class="back-btn" onclick="goToStep(2)" style="margin:0; width:32px; text-align:left;"><i class="fa-solid fa-arrow-left"></i></button>
+                <div style="display:flex; align-items:center; gap:0.35rem;">
+                    <svg width="24" height="24" viewBox="0 0 40 40" fill="none" style="color:#366A4E;">
+                        <path d="M4 14 Q12 8 20 14 T36 14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" fill="none" opacity="0.5"/>
+                        <path d="M4 21 Q12 15 20 21 T36 21" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" fill="none" opacity="0.75"/>
+                        <path d="M4 28 Q12 22 20 28 T36 28" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+                    </svg>
+                    <span style="font-family:'DM Serif Display',Georgia,serif; font-size:1.4rem; color:#366A4E; font-weight:700;">ebb</span>
+                </div>
+                <div style="width:32px;"></div>
+            </div>
 
             <div style="text-align:center; margin-top:0.8rem; margin-bottom:1.2rem;">
                 <span class="step-pill">STEP 2 OF 3</span>
@@ -293,9 +300,22 @@ html, body { height:100%; width:100%; background:#F4F4F6; font-family:'Inter',sa
 
         <!-- Screen 4: Deepen Your Shield -->
         <div id="step-4" class="screen" style="display:none;">
-            <button class="back-btn" onclick="goToStep(3)">
-                <i class="fa-solid fa-arrow-left"></i>
-            </button>
+            <div style="display:flex; justify-content:space-between; align-items:center; width:100%; margin-bottom:1rem;">
+                <button class="back-btn" onclick="goToStep(3)" style="margin:0; width:32px; text-align:left;"><i class="fa-solid fa-arrow-left"></i></button>
+                <div style="display:flex; align-items:center; gap:0.35rem;">
+                    <svg width="24" height="24" viewBox="0 0 40 40" fill="none" style="color:#366A4E;">
+                        <path d="M4 14 Q12 8 20 14 T36 14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" fill="none" opacity="0.5"/>
+                        <path d="M4 21 Q12 15 20 21 T36 21" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" fill="none" opacity="0.75"/>
+                        <path d="M4 28 Q12 22 20 28 T36 28" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+                    </svg>
+                    <span style="font-family:'DM Serif Display',Georgia,serif; font-size:1.4rem; color:#366A4E; font-weight:700;">ebb</span>
+                </div>
+                <div style="width:32px;"></div>
+            </div>
+
+            <div style="text-align:center; margin-top:0.8rem; margin-bottom:1.2rem;">
+                <span class="step-pill">STEP 3 OF 3</span>
+            </div>
 
             <div class="shield-logo-wrap" style="background:#EFECE6; margin-top:0.5rem; margin-bottom:1rem;">
                 <i class="fa-solid fa-shield-halved" style="font-size:2.2rem; color:#1C1917;"></i>
@@ -498,7 +518,7 @@ html, body { height:100%; width:100%; background:#F4F4F6; font-family:'Inter',sa
             <div class="flow-card">
                 <div style="display:flex; justify-content:space-between; align-items:center; width:100%; margin-bottom:0.75rem;">
                     <span style="font-family:'DM Serif Display',Georgia,serif; font-size:1.2rem; color:#1C1917; font-weight:700;">Active Flow</span>
-                    <span style="background:#FDF0EE; color:#D4443F; font-size:0.72rem; font-weight:700; padding:0.25rem 0.6rem; border-radius:1rem; letter-spacing:0.05em;">TODAY</span>
+                    <span style="background:#FDF0EE; color:#D4443F; font-size:0.72rem; font-weight:700; padding:0.25rem 0.6rem; border-radius:1rem; margin-left:auto; letter-spacing:0.05em;">TODAY</span>
                 </div>
 
                 <div class="timeline">
