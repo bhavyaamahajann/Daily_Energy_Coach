@@ -112,7 +112,7 @@ html, body { height:100%; width:100%; background:#F4F4F6; font-family:'Inter',sa
 .header-bar { display:flex; justify-content:space-between; align-items:center; width:100%; margin-bottom:1.5rem; }
 .header-bar span { font-family:'DM Serif Display',Georgia,serif; font-size:1.25rem; color:#366A4E; font-weight:700; }
 .header-close { background:transparent; border:none; font-size:1.25rem; color:#71717A; cursor:pointer; }
-.round-shield-container { width:90px; height:90px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0.5rem auto 1rem auto; }
+.round-shield-container { width:90px; height:90px; min-width:90px; min-height:90px; max-width:90px; max-height:90px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0.5rem auto 1rem auto; flex-shrink:0; }
 .cas-badge { background:#F2ECE1; color:#366A4E; font-size:0.82rem; font-weight:700; padding:0.4rem 0.9rem; border-radius:2rem; display:inline-flex; align-items:center; gap:0.25rem; margin:0.25rem auto 1.5rem auto; }
 .draft-card { background:#FDFBF7; border-radius:1.5rem; padding:1.25rem; text-align:left; margin-bottom:1.5rem; border:1px solid rgba(0,0,0,0.04); box-shadow:0 4px 15px rgba(0,0,0,0.02); }
 .draft-quote { font-size:0.85rem; font-style:italic; line-height:1.45; color:#52525B; margin:0.6rem 0 1rem 0; width: 100%; border: none; background: transparent; resize: none; outline: none; font-family: inherit; }

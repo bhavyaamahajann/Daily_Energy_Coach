@@ -441,11 +441,16 @@ export default function App() {
         .round-shield-container {
           width: 90px;
           height: 90px;
+          min-width: 90px;
+          min-height: 90px;
+          max-width: 90px;
+          max-height: 90px;
           border-radius: 50%;
           display: flex;
           align-items: center;
           justify-content: center;
           margin: 0.5rem auto 1rem auto;
+          flex-shrink: 0;
         }
         .cas-badge {
           background: #F2ECE1;
