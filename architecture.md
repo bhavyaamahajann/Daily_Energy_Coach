@@ -537,7 +537,7 @@ WHERE user_id = ?
 |---|---|---|
 | Shield Adherence Rate (30-day) | > 60% | < 35% |
 | Day-7 Retention | > 65% | < 40% |
-| Override Recovery Rate | > 50% | < 25% |
+| Notification Open Rate (within 1 hr) | > 55% | < 30% |
 | GCal mutation success rate | > 90% | < 75% |
 
 ---

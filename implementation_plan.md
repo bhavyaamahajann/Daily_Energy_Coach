@@ -177,7 +177,7 @@ Three numbers. That's it.
 |---|---|---|---|
 | **Shield Adherence Rate** (% of proposals approved and not manually overridden within 24hrs) | Whether the proposals are trusted and accurate | > 60% | < 35% |
 | **Day-7 Retention** (% of beta users who received and acted on a shield in their first 7 days) | Whether structural habit is forming before motivation wears off | > 65% | < 40% |
-| **Override Recovery Rate** (% of users who declined a shield and then approved the next one) | Whether a decline is healthy disagreement or the start of abandonment | > 50% | < 25% |
+| **Notification Open Rate within 1 hr** (% of 8:30 AM notifications tapped within 60 minutes of delivery) | Whether the core daily touchpoint is reaching and engaging users — if this is low, nothing downstream matters | > 55% | < 30% |
 
 **If keep thresholds are met**: open a waitlist, add Luna Ring + voice pipeline, scope Team plan.
 
