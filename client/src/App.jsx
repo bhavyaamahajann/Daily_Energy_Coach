@@ -670,13 +670,17 @@ export default function App() {
               <i className="fa-solid fa-arrow-left"></i>
             </button>
 
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '0.5rem', marginBottom: '1.5rem' }}>
+             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '0.5rem', marginBottom: '1.5rem' }}>
               <svg width="36" height="36" viewBox="0 0 40 40" fill="none" style={{ color: '#366A4E', marginBottom: '0.25rem' }}>
                 <path d="M4 14 Q12 8 20 14 T36 14" stroke="currentColor" stroke-width="2.2" strokeLinecap="round" fill="none" opacity="0.5"/>
                 <path d="M4 21 Q12 15 20 21 T36 21" stroke="currentColor" stroke-width="2.2" strokeLinecap="round" fill="none" opacity="0.75"/>
                 <path d="M4 28 Q12 22 20 28 T36 28" stroke="currentColor" stroke-width="2.2" strokeLinecap="round" fill="none"/>
               </svg>
               <span style={{ fontFamily: 'DM Serif Display, Georgia, serif', fontSize: '1.4rem', color: '#366A4E', fontWeight: 700 }}>ebb</span>
+            </div>
+
+            <div style={{ textAlign: 'center', marginTop: '0.8rem', marginBottom: '1.2rem' }}>
+              <span className="step-pill">STEP 1 OF 3</span>
             </div>
 
             <h1 className="title-serif" style={{ textAlign: 'center', fontSize: '2rem', marginBottom: '0.5rem' }}>Create your account</h1>

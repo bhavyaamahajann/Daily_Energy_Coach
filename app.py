@@ -198,6 +198,10 @@ html, body { height:100%; width:100%; background:#F4F4F6; font-family:'Inter',sa
                 <span style="font-family:'DM Serif Display',Georgia,serif; font-size:1.4rem; color:#366A4E; font-weight:700;">ebb</span>
             </div>
 
+            <div style="text-align:center; margin-top:0.8rem; margin-bottom:1.2rem;">
+                <span class="step-pill">STEP 1 OF 3</span>
+            </div>
+
             <h1 class="title-serif" style="text-align:center; font-size:2rem; margin-bottom:0.5rem;">Create your account</h1>
             <p class="subtitle" style="margin-bottom:1.5rem;">Sign up with your email or phone to start protecting your focus.</p>
 
