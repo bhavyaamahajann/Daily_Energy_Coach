@@ -278,10 +278,46 @@ div[data-testid="stAppViewContainer"] {{
     background: {theme_bg_gradient}, #07090e !important;
     background-attachment: fixed !important;
 }}
-div[data-testid="stSidebar"] {{
-    background-color: rgba(10, 15, 25, 0.95) !important;
+section[data-testid="stSidebar"] {{
+    background-color: #0a0f19 !important;
     border-right: 1px solid rgba(255, 255, 255, 0.05) !important;
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px) !important;
+}}
+section[data-testid="stSidebar"] h2, 
+section[data-testid="stSidebar"] h3 {{
+    font-family: 'Outfit', sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 0.95rem !important;
+    letter-spacing: 0.05em !important;
+    text-transform: uppercase !important;
+    color: #ffffff !important;
+    margin-top: 15px !important;
+    margin-bottom: 12px !important;
+}}
+section[data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p {{
+    font-size: 0.85rem !important;
+    color: #9ca3af !important;
+    line-height: 1.4 !important;
+}}
+section[data-testid="stSidebar"] [data-testid="stWidgetLabel"] p {{
+    font-weight: 700 !important;
+    font-family: 'Outfit', sans-serif !important;
+    letter-spacing: 0.05em !important;
+    text-transform: uppercase !important;
+    font-size: 0.8rem !important;
+    color: #9ca3af !important;
+}}
+section[data-testid="stSidebar"] label {{
+    color: #ffffff !important;
+    font-size: 0.85rem !important;
+}}
+section[data-testid="stSidebar"] [data-testid="stSlider"] div {{
+    color: #ffffff !important;
+}}
+section[data-testid="stSidebar"] .stButton button {{
+    font-family: 'Inter', sans-serif !important;
+    font-size: 0.82rem !important;
+    font-weight: 600 !important;
 }}
 .brand-title {{
     font-family: 'Outfit', sans-serif;
@@ -470,9 +506,6 @@ st.markdown(textwrap.dedent(f"""
         <div style="display: flex; gap: 16px; align-items: center;">
             <div style="background: linear-gradient(135deg, #00f2fe 0%, #a855f7 100%); padding: 8px 16px; border-radius: 8px; font-weight: 700; color: #07090e; font-family: Outfit; font-size: 0.9rem; display: flex; align-items: center; gap: 6px; box-shadow: 0 4px 10px rgba(0,242,254,0.15);">
                 <i class="fa-solid fa-gauge-high"></i> Dashboard
-            </div>
-            <div style="color: #9ca3af; font-weight: 600; font-family: Outfit; font-size: 0.9rem;">
-                Written Walkthrough
             </div>
         </div>
         <div style="display: flex; align-items: center; gap: 16px;">

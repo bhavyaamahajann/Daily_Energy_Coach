@@ -928,18 +928,10 @@ export default function App() {
                 <header className="header">
                     <nav className="tab-navigation">
                         <button 
-                            className={`tab-btn ${activeTab === 'dashboard' ? 'active' : ''}`}
-                            onClick={() => setActiveTab('dashboard')}
-                            style={activeTab === 'dashboard' ? { color: activeState.themeColor, background: `${activeState.themeColor}12` } : {}}
+                            className="tab-btn active"
+                            style={{ color: activeState.themeColor, background: `${activeState.themeColor}12` }}
                         >
-                            <i className="fa-solid fa-gauge-high"></i> Interactive Dashboard
-                        </button>
-                        <button 
-                            className={`tab-btn ${activeTab === 'walkthrough' ? 'active' : ''}`}
-                            onClick={() => setActiveTab('walkthrough')}
-                            style={activeTab === 'walkthrough' ? { color: activeState.themeColor, background: `${activeState.themeColor}12` } : {}}
-                        >
-                            <i className="fa-solid fa-file-invoice"></i> Written Walkthrough
+                            <i className="fa-solid fa-gauge-high"></i> Dashboard
                         </button>
                     </nav>
 
