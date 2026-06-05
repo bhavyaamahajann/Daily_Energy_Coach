@@ -488,6 +488,14 @@ Menu bar widget shows CAS for the day: 78%
 | Notification copy generation | GPT-4o-mini | Low latency, low cost, high quality for short outputs |
 | Somatic voice parsing (v2) | Groq Whisper + Llama-3.3-70B | Fastest transcription available; 70B for CoT signal extraction |
 | Slack draft generation | GPT-4o-mini | Short, templated output |
+
+### Text Processing & Recursive Chunking Model
+
+For features requiring analysis of long-form, unstructured text (such as meeting transcripts from Tactiq or workplace chat history from Slack/Teams to determine cognitive load), Ebb utilizes a **Recursive Character/Token Chunking Model**:
+
+* **Semantic Integrity**: Rather than splitting text at arbitrary limits (which cuts words/sentences in half), it splits recursively down a prioritized list of delimiters (`\n\n`, `\n`, ` `, `""`). This preserves full context of threads, dialogue, and complete sentences for LLM ingestion.
+* **Context Overlap**: Implements a sliding overlap window (e.g., 100–150 tokens) between consecutive chunks, preventing critical semantic action items that cross chunk boundaries from being lost.
+* **Local Processing Efficiency**: Creates small, highly dense semantic chunks (500–1,000 tokens) that can be handled quickly by local models via MCP. This enforces Ebb's privacy-first architecture while preventing high battery/resource drain.
 | Task complexity classification (v2) | Local Llama-3B (on-device) | Privacy-sensitive; ticket/doc text stays on device |
 
 ### Compliance: Trade-offs & Risks
