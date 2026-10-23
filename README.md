@@ -1,6 +1,6 @@
 # Ebb 🛡️ — Daily Energy Coach
 
-[Live Demo](https://dailyenergycoach-uzbjymmxrmp2hrolc9b5bj.streamlit.app/)
+🔗 Live Application URL: https://dailyenergycoach-uzbjymmxrmp2hrolc9b5bj.streamlit.app/
 
 Ebb is a privacy-first, somatic-aware daily energy coaching application designed specifically for knowledge workers. It bridges the gap between biological state (wearable telemetry) and workplace productivity (calendar events/task execution), helping users protect their focus hours, prevent burnout, and manage cognitive load.
 
